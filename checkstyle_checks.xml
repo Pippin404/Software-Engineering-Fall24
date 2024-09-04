@@ -193,5 +193,18 @@
       <!-- The check is suppressed in the next line of code after the comment -->
       <property name="influenceFormat" value="1"/>
     </module>
+
+          <!-- Added modules: -->
+            
+    <module name="Indentation">
+          <property name="basicOffset" value="4"/>
+          <property name="tabWidth" value="2"/>
+    </module>
+            <!-- ^ sets tabs to 2 spaces and makes all indentation 4 -->
+
+    <module name="MissingOverride"/>
+          <!-- ^ forces all code that overrides a super class to have the @Override annotation -->
+
+            
   </module>
 </module>
