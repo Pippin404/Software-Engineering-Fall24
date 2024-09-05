@@ -1,7 +1,7 @@
 class{
   public static void main(String[] args){
-      SystemPrint(wjkahdkjsaaihwds)
+      System.out.println("Hello");
     
   }
-
+}
   
