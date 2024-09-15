@@ -20,10 +20,10 @@ interface dataPackage{
 	
 	public string getMessage() {
 		if(message==null) {
-			var n="Default Message"
+			var n="Default Message";
 			return n;
 		}else{
-			return message
+			return message;
 		}
 	}
 }
