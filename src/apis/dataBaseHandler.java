@@ -1,4 +1,4 @@
-public class dataBaseHandler implements dataPackage(){
+public class dataBaseHandler implements dataPackage{
 		
 		public int writingNumber();
 		
