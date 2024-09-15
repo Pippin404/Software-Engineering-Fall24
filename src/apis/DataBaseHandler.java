@@ -1,20 +1,44 @@
-public class DataBaseHandler implements dataPackage{
-		
-	public int writingNumber();
-		
-	public void storedData(dataPackage d){
-		//Prints out the d.getMessage
-		//stores it to a print writer file? probably
+public class DataBaseHandler implements DataPackage{
+
+	// Placeholder Values
+	private Integer data = null;
+	private String message = null;
+
+	@Override
+	public void setData(int i) {
+        	data = i;
+    	}
+
+	@Override
+    	public int getData() {
+		if (data != null) {
+            	return data;
+        	}
+        return 0;
+    	}
+
+	@Override
+    	public void setMessage(String s) {
+        	message = s;
+    	}
+
+	@Override
+    	public String getMessage() {
+        	if (message == null) {
+            	String n = "Default Message";
+            	return n;
+        	} else {
+            	return message;
+        	}
+    	}
+
+	// implement later
+    	public int writingNumber() {
+        return 0; // Placeholder return value
 	}
+
 	
-	public dataPackage sendData(){
-		//gets the data from the file (if there is any)
-		//parses it to an int
-		//adds it to a new datapackage
-		//adds a message to the datapackage like "returning data"
-		//sends it back
 	
-		
-	}
+
 		
 }
