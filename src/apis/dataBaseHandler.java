@@ -1,6 +1,6 @@
 public class dataBaseHandler implements dataPackage{
 	
-	public int writingNumber;
+	public int writingNumber();
 	
 	public void storedData(dataPackage D){
 		//Prints out the d.getMessage

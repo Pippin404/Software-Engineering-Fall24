@@ -1,6 +1,6 @@
 interface dataPackage{
-	private void data;
-	private void message;
+	private void data();
+	private void message();
 	
 	
 	public void setData(int i) {
