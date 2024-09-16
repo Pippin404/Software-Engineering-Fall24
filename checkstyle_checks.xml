@@ -196,10 +196,7 @@
 
           <!-- Added modules: -->
             
-    <module name="Indentation">
-          <property name="tabWidth" value="4"/>
-    </module>
-            <!-- ^ sets tabs to 2 spaces and makes all indentation 4 -->
+
 
     <module name="MissingOverride"/>
           <!-- ^ forces all code that overrides a super class to have the @Override annotation -->
