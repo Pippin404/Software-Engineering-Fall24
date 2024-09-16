@@ -1,4 +1,4 @@
-public class InternalComputeEngine implements ComputeEngineInterface {
+public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
