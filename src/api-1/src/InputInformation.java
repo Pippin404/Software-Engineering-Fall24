@@ -7,5 +7,5 @@ public interface InputInformation {
 
     ChooseDefaultDelimitersResponse chooseDelimiters(ChooseDefaultDelimitersRequest chooseDefaultDelimitersRequest);
 
-    SendDelimitersResponse sendDelimiters( SendDelimitersRequest sendDelimitersRequest);
+    SendDelimitersResponse sendDelimiters(SendDelimitersRequest sendDelimitersRequest);
 }
