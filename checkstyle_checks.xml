@@ -197,8 +197,7 @@
           <!-- Added modules: -->
             
     <module name="Indentation">
-          <property name="basicOffset" value="4"/>
-          <property name="tabWidth" value="2"/>
+          <property name="tabWidth" value="4"/>
     </module>
             <!-- ^ sets tabs to 2 spaces and makes all indentation 4 -->
 
