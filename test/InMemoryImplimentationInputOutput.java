@@ -1,5 +1,5 @@
 package apis;
 
-public class InMemoryImplimentationInputOutput.java {
+public class InMemoryImplimentationInputOutput{
 
 }
