@@ -1,5 +1,5 @@
 package apis;
 
-public class InMemoryImplimentation1 {
+public class InMemoryImplimentation2 {
 
 }

@@ -1,5 +1,5 @@
 package apis;
 
-public class ApiTest1 {
+public class SmokeTest1 {
 
 }
