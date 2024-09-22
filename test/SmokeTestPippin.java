@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 public class SmokeTestPippin{
     
     DataBaseHandler DataBaseHandler;
-    Data = Mockito.mock(DataBaseHandler.class);
+    Mockito.mock(DataBaseHandler.class);
     
     
     
