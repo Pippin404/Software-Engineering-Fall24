@@ -10,8 +10,8 @@ import static org.mockito.Mockito.mock;
 public class SmokeTestDataStore {
 
     private static DataStore DataStore;
-    private apis.datastore.ChooseDefaultDelimitersRequest ChooseDefaultDelimitersRequest;
-    private Class<? extends apis.datastore.SendSourceRequest> SendSourceRequest;
+    private apis.datastore.ChooseDefaultDelimitersRequest chooseDefaultDelimitersRequest;
+    private Class<? extends apis.datastore.SendSourceRequest> sendSourceRequest;
 
 
     @Test
