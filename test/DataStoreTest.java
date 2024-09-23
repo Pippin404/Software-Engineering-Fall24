@@ -1,5 +1,5 @@
-import apis.datastore.DataStorePrototype;
-import apis.datastore.DataStore;
+import apis.data_store.DataStorePrototype;
+import apis.data_store.DataStore;
 import org.mockito.Mockito;
 
 
