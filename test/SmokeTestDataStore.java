@@ -1,40 +1,44 @@
-import apis.data_store.*;
-import apis.data_store.DataStore;
+import apis.datastore.ChooseDefaultDelimitersRequest;
+import apis.datastore.DataStorePrototype;
+import apis.datastore.SendSourceRequest;
+import apis.datastore.SendDestinationRequest;
+import apis.datastore.SendDelimitersRequest;
+import apis.datastore.DataStore;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import static org.mockito.Mockito.mock;
 
 public class SmokeTestDataStore {
 
     private static DataStore DataStore;
-    private apis.data_store.ChooseDefaultDelimitersRequest ChooseDefaultDelimitersRequest;
-    private Class<? extends apis.data_store.SendSourceRequest> SendSourceRequest;
+    private apis.datastore.ChooseDefaultDelimitersRequest ChooseDefaultDelimitersRequest;
+    private Class<? extends apis.datastore.SendSourceRequest> SendSourceRequest;
 
 
     @Test
     public void dataStoreTest() {
-        DataStore dataStore = Mockito.mock(DataStore.class);
+        DataStore mockDataStore = mock(DataStore.class);
 
         DataStorePrototype dataStorePrototype = new DataStorePrototype();
-        DataStorePrototype.prototypeCode(dataStore);
+        DataStorePrototype.prototypeCode(mockDataStore);
     }
 
     @Test
     public void chooseDelimitersTest() {
-        ChooseDefaultDelimitersRequest mockChooseDelimitersRequest = Mockito.mock(ChooseDefaultDelimitersRequest.class);
+        ChooseDefaultDelimitersRequest mockChooseDelimitersRequest = mock(ChooseDefaultDelimitersRequest.class);
 
         DataStore.chooseDelimiters(mockChooseDelimitersRequest);
     }
 
     @Test
     public void sendSourceTest() {
-        SendSourceRequest mockSendSourceRequest = Mockito.mock(SendSourceRequest.class);
+        SendSourceRequest mockSendSourceRequest = mock(SendSourceRequest.class);
 
         DataStore.sendSource(mockSendSourceRequest);
     }
 
     @Test
     public void sendDestinationTest() {
-        SendDestinationRequest mockSendDestinationRequest = Mockito.mock(SendDestinationRequest.class);
+        SendDestinationRequest mockSendDestinationRequest = mock(SendDestinationRequest.class);
 
         DataStore.sendDestination(mockSendDestinationRequest);
     }
@@ -46,7 +50,7 @@ public class SmokeTestDataStore {
 
     @Test
     public void sendDelimitersTest() {
-        SendDelimitersRequest mockSendDelimitersRequest = Mockito.mock(SendDelimitersRequest.class);
+        SendDelimitersRequest mockSendDelimitersRequest = mock(SendDelimitersRequest.class);
 
         DataStore.sendDelimiters(mockSendDelimitersRequest);
     }
