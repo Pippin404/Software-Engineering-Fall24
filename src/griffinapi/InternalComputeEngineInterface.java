@@ -5,6 +5,8 @@ interface InternalComputeEngineInterface {
     void setData(int i);
     int getData();
     int compute(int i);
+    int readInData(String i);
+
     
 }
  
