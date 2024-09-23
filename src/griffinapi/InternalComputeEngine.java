@@ -7,9 +7,11 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     private String message = null;
     private InternalComputeReadingInterface reader;
 
-    // Constructor accepting the reader dependency
-    public InternalComputeEngine(InternalComputeReadingInterface reader) {
-        this.reader = reader;
+    
+	
+    @Override
+    public int readInData(String i) {
+    return 0;
     }
 
     @Override
