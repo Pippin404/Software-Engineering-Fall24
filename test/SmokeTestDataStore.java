@@ -12,10 +12,10 @@ public class SmokeTestDataStore {
 
     @Test
     public void dataStoreTest() {
-        DataStore mockInput = Mockito.mock(DataStore);
+        DataStore dataStore = Mockito.mock(DataStore.class);
 
-        DataStorePrototype dataStore = new DataStorePrototype();
-        DataStorePrototype.prototypeCode(mockInput);
+        DataStorePrototype dataStorePrototype = new DataStorePrototype();
+        DataStorePrototype.prototypeCode(dataStore);
     }
 
     @Test
