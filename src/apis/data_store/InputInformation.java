@@ -1,3 +1,5 @@
+package apis.data_store;
+
 public interface InputInformation {
     SendSourceResponse sendSource(SendSourceRequest sendSourceRequest);
 

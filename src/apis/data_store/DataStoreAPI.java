@@ -1,4 +1,6 @@
-public class Prototype {
+package apis.data_store;
+
+public class DataStoreAPI {
     public static void prototypeCode(InputInformation input) {
 
 //        send source directory
