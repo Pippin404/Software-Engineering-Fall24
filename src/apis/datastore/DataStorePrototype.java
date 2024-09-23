@@ -1,4 +1,4 @@
-package apis.data_store;
+package apis.datastore;
 
 public class DataStorePrototype {
     public static void prototypeCode(DataStore dataStore) {
