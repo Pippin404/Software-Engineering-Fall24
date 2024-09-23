@@ -1,4 +1,4 @@
-package apis;
+package griffinapi;
 
 public class SmokeTestGriffin {
     public static void main(String[] args) {
