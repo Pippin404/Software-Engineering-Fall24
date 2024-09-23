@@ -1,54 +1,54 @@
 import apis.data_store.*;
-import apis.data_store.InputInformation;
+import apis.data_store.DataStore;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class SmokeTestDataStore {
 
-    private static apis.data_store.InputInformation InputInformation;
+    private static DataStore DataStore;
     private apis.data_store.ChooseDefaultDelimitersRequest ChooseDefaultDelimitersRequest;
     private Class<? extends apis.data_store.SendSourceRequest> SendSourceRequest;
 
 
     @Test
     public void dataStoreTest() {
-        InputInformation mockInput = Mockito.mock(InputInformation);
+        DataStore mockInput = Mockito.mock(DataStore);
 
-        DataStoreAPI dataStore = new DataStoreAPI();
-        DataStoreAPI.prototypeCode(mockInput);
+        DataStorePrototype dataStore = new DataStorePrototype();
+        DataStorePrototype.prototypeCode(mockInput);
     }
 
     @Test
     public void chooseDelimitersTest() {
         ChooseDefaultDelimitersRequest mockChooseDelimitersRequest = Mockito.mock(ChooseDefaultDelimitersRequest.class);
 
-        InputInformation.chooseDelimiters(mockChooseDelimitersRequest);
+        DataStore.chooseDelimiters(mockChooseDelimitersRequest);
     }
 
     @Test
     public void sendSourceTest() {
         SendSourceRequest mockSendSourceRequest = Mockito.mock(SendSourceRequest.class);
 
-        InputInformation.sendSource(mockSendSourceRequest);
+        DataStore.sendSource(mockSendSourceRequest);
     }
 
     @Test
     public void sendDestinationTest() {
         SendDestinationRequest mockSendDestinationRequest = Mockito.mock(SendDestinationRequest.class);
 
-        InputInformation.sendDestination(mockSendDestinationRequest);
+        DataStore.sendDestination(mockSendDestinationRequest);
     }
 
     @Test
     public void getDelimiterTypeTest() {
-        InputInformation.getDelimiterType();
+        DataStore.getDelimiterType();
     }
 
     @Test
     public void sendDelimitersTest() {
         SendDelimitersRequest mockSendDelimitersRequest = Mockito.mock(SendDelimitersRequest.class);
 
-        InputInformation.sendDelimiters(mockSendDelimitersRequest);
+        DataStore.sendDelimiters(mockSendDelimitersRequest);
     }
 
 
