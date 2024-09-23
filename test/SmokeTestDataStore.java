@@ -23,14 +23,14 @@ public class SmokeTestDataStore {
     }
 
     @Test
-    public void ChooseDelimitersTest() {
+    public void chooseDelimitersTest() {
         ChooseDefaultDelimitersRequest mockChooseDelimitersRequest = mock(ChooseDefaultDelimitersRequest.class);
 
         DataStore.chooseDelimiters(mockChooseDelimitersRequest);
     }
 
     @Test
-    public void SendSourceTest() {
+    public void sendSourceTest() {
         SendSourceRequest mockSendSourceRequest = mock(SendSourceRequest.class);
 
         DataStore.sendSource(mockSendSourceRequest);
