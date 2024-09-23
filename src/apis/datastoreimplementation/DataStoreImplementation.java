@@ -1,4 +1,4 @@
-package apis.data_store_implementation;
+package apis.datastoreimplementation;
 
 import apis.datastore.ChooseDefaultDelimitersRequest;
 import apis.datastore.SendSourceRequest;
