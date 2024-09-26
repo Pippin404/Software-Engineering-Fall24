@@ -4,7 +4,13 @@ import static org.mockito.Mockito.*;
 
 public class SmokeTestGriffin {
     public static void main(String[] args) {
+        
         InternalComputeEngine engine = new InternalComputeEngine();
+
+        // Mock the InternalComputeReadingInterface
+        InternalComputeEngine mockEngine = mock(InternalComputeEngine.class);
+        when(mockReader.readInData(anyString())).thenReturn(42);
+        
 
         // testing set and get data
         engine.setData(5);
@@ -21,10 +27,6 @@ public class SmokeTestGriffin {
             System.out.println("compute method failed.");
         }
 
-        // Mock the InternalComputeReadingInterface
-        InternalComputeReadingInterface mockReader = mock(InternalComputeReadingInterface.class);
-        when(mockReader.readData(anyString())).thenReturn(42);
-        engine.setReader(mockReader);
 
         // Smoke test for readInData
         if (engine.readInData("test") == 42) {
