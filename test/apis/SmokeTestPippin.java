@@ -11,10 +11,10 @@ public class SmokeTestPippin {
     
     
     @Test
-    public void StoreDatatest() {
-        DataBaseImpl D=new DataBaseImpl();
+    public void storeDatatest() {
+        DataBaseImpl d=new DataBaseImpl();
         
-        String s=D.storeData(6);
+        String s=d.storeData(6);
        
             
         //checks if equal. if not, throw!
@@ -26,10 +26,10 @@ public class SmokeTestPippin {
     
     
     @Test
-    public void GetDataTest() {
+    public void getDataTest() {
         
-        DataBaseImpl D=new DataBaseImpl();
-        D.sendData("FileName");
+        DataBaseImpl d=new DataBaseImpl();
+        d.sendData("FileName");
         Assertions.assertEquals(1,"FileName");
         
     }
