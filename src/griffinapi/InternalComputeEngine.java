@@ -5,7 +5,6 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     // Placeholder Values
     private Integer data = null;
     private String message = null;
-    private InternalComputeReadingInterface reader;
 
     
 	
