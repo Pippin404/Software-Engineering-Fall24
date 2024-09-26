@@ -2,9 +2,11 @@ package griffinapi;
 
 import static org.mockito.Mockito.*;
 
+
 public class SmokeTestGriffin {
-    public static void main(String[] args) {
-        
+    
+    @Test
+    public void test() {    
         InternalComputeEngine engine = new InternalComputeEngine();
 
         // Mock the InternalComputeReadingInterface
