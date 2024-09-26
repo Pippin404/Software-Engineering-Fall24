@@ -1,30 +1,41 @@
 package griffinapi;
 
-public class SmokeTestGriffin {
-    public static void main(String[] args) {
+import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+public class TestInternalComputeEngine {
+
+    @Test
+    public void testSetDataAndGetData() {
         InternalComputeEngine engine = new InternalComputeEngine();
 
-        // testing set and get data
         engine.setData(5);
-        if (engine.getData() == 5) {
-            System.out.println("setData and getData passed.");
-        } else {
-            System.out.println("setData and getData failed.");
-        }
+        assertEquals(5, engine.getData());
+    }
 
-        // testing compute() method
-        if (engine.compute(10) == 1) {
-            System.out.println("compute method passed (placeholder logic).");
-        } else {
-            System.out.println("compute method failed.");
-        }
+    @Test
+    public void testCompute() {
+        InternalComputeEngine engine = new InternalComputeEngine();
 
-        // Smoke test for readInData
-        if (engine.readInData("test") == 0) {
-            System.out.println("readInData method passed.");
-        } else {
-            System.out.println("readInData method failed.");
-        }
+        // Assuming compute method should eventually compute Fibonacci
+        // Since it's not implemented yet, we can test the placeholder
+        assertEquals(1, engine.compute(10));
+    }
 
-        
+    @Test
+    public void testReadInData() {
+        // Mock the InternalComputeReadingInterface
+        InternalComputeReadingInterface mockReader = mock(InternalComputeReadingInterface.class);
+        when(mockReader.readData(anyString())).thenReturn(42);
+
+        InternalComputeEngine engine = new InternalComputeEngine();
+        engine.setReader(mockReader);
+
+        int result = engine.readInData("test");
+        assertEquals(42, result);
+
+        // Verify that the mock's readData method was called
+        verify(mockReader).readData("test");
+    }
 }
