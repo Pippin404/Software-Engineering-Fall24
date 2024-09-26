@@ -23,7 +23,7 @@ public class InMemoryImplimentationDataStore implements DataBaseHandler{
         //gets the int in the filename
         if(s=="FileName") {
             System.out.println("Retrived File");
-            return results.get(0);
+            return 1; //return 1 FOR NOW, otherwise results.get(0);
         }else {
             System.out.println("Failure to Fetch File");
             return -1;
