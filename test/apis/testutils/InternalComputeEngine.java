@@ -1,6 +1,6 @@
 package testutils;
 
-import griffinapi;
+import griffinapi.InternalComputeEngineInterface;
 import java.util.List;
 
 
