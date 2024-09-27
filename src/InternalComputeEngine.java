@@ -1,8 +1,17 @@
+package griffinapi;
+
 public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
     private String message = null;
+
+    
+	
+    @Override
+    public int readInData(String i) {
+    return 0;
+    }
 
     @Override
     public void setData(int i) {
@@ -25,4 +34,5 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     }
 
 
+}
 }
