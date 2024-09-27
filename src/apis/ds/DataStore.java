@@ -13,4 +13,6 @@ public interface DataStore {
     ChooseDefaultDelimitersResponse chooseDelimiters(ChooseDefaultDelimitersRequest chooseDefaultDelimitersRequest);
 
     SendDelimitersResponse sendDelimiters(SendDelimitersRequest sendDelimitersRequest);
+    void storeData(int result);//hey so internal computing engineTest sent this here, 
+                                //im just trying to get this to pass gradle :Pippin, 9/27/24 2:30pm
 }

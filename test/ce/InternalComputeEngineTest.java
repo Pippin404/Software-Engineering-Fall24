@@ -6,14 +6,15 @@ import apis.ce.InternalComputeEngineInterface;
 import apis.ds.DataStore;
 
 
-public class InternalComputeEngine implements InternalComputeEngineInterface {
+public class InternalComputeEngineTest implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
+    @SuppressWarnings("unused")
     private String message = null;
     private DataStore dataStore;
 
-    public InternalComputeEngine(DataStore dataStore) {
+    public InternalComputeEngineTest(DataStore dataStore) {
         this.dataStore = dataStore;
     }
 	

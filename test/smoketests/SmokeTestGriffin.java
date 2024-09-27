@@ -16,10 +16,10 @@ public class SmokeTestGriffin {
     
     @Test
     public void test() {    
-        InternalComputeEngine engine = new InternalComputeEngine();
+        InternalComputeEngineTest engine = new InternalComputeEngineTest();
 
         // Mock the InternalComputeReadingInterface
-        InternalComputeEngine mockEngine = Mockito.mock(InternalComputeEngine.class);
+        InternalComputeEngineTest mockEngine = Mockito.mock(InternalComputeEngineTest.class);
         when(mockEngine.readInData(anyString())).thenReturn(100);
         when(mockEngine.compute(anyInt())).thenReturn(100);
 
