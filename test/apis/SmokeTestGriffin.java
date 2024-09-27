@@ -15,8 +15,8 @@ public class SmokeTestGriffin {
 
         // Mock the InternalComputeReadingInterface
         InternalComputeEngine mockEngine = Mockito.mock(InternalComputeEngine.class);
-        when(mockEngine.readInData(any(String())).thenReturn(100));
-        when(mockEngine.compute(any(Integer())).thenReturn(100));
+        when(mockEngine.readInData(anyString())).thenReturn(100);
+        when(mockEngine.compute(anyInt())).thenReturn(100);
 
         // testing set and get data
         engine.setData(5);
