@@ -16,9 +16,8 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 	
     public void receiveData(List<Integer> dataList) {
         System.out.println("Compute Engine: Received data from Coordinator.");
-        int result = 100;
-        
-        // Send result to DataStore
+	// Example computation
+	int result = 100;
         sendDataToDataStore(result);
     }
 
