@@ -1,4 +1,4 @@
-package smokeTests;
+package allSmokeTests;
 
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;

@@ -1,4 +1,4 @@
-package smokeTests;
+package allSmokeTests;
 import org.junit.jupiter.api.Test;
 
 import apis.DS.ChooseDefaultDelimitersRequest;
