@@ -6,7 +6,7 @@ public class DataStore {
 
     public void storeData(int data) {
         this.storedData = data;
-        System.out.println("Data Store: Data stored successfully.");
+        System.out.println("Data Store: Data stored successfully. Value is: "+ data);
     }
 
     public int getStoredData() {
