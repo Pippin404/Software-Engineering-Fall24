@@ -2,7 +2,7 @@ package smoketests;
 
 import org.mockito.Mockito;
 
-import testutils.InternalComputeEngine;
+import ce.InternalComputeEngineTest;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -10,13 +10,15 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import org.junit.jupiter.api.Assertions;
 import static org.mockito.Mockito.verify;
 import org.junit.jupiter.api.Test;
+import ds.DataStore;
 
 
 public class SmokeTestGriffin {
     
     @Test
     public void test() {    
-        InternalComputeEngineTest engine = new InternalComputeEngineTest();
+        DataStore ds=new DataStore();
+        InternalComputeEngineTest engine = new InternalComputeEngineTest((apis.ds.DataStore) ds);
 
         // Mock the InternalComputeReadingInterface
         InternalComputeEngineTest mockEngine = Mockito.mock(InternalComputeEngineTest.class);

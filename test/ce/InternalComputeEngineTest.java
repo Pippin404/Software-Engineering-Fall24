@@ -13,7 +13,7 @@ public class InternalComputeEngineTest implements InternalComputeEngineInterface
     @SuppressWarnings("unused")
     private String message = null;
     private DataStore dataStore;
-
+    
     public InternalComputeEngineTest(DataStore dataStore) {
         this.dataStore = dataStore;
     }
