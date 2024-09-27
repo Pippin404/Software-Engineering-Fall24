@@ -3,8 +3,11 @@ package apis.ds;
 import java.util.Iterator;
 
 public class DataStoreImplementation implements DataStore {
+    @SuppressWarnings("unused")
     private DataStore dataStore;
+    @SuppressWarnings("unused")
     private Iterable<Integer> source;
+    @SuppressWarnings("unused")
     private DestinationConfig destination;
 
     public Iterable<Integer> read(SourceConfig source) {
@@ -44,6 +47,12 @@ public class DataStoreImplementation implements DataStore {
     public SendDelimitersResponse sendDelimiters(SendDelimitersRequest sendDelimitersRequest){
         return new SendDelimitersResponse() {
         };
+    }
+
+    @Override
+    public void storeData(int result) {
+        // TODO Auto-generated method stub
+        
     }
 
 
