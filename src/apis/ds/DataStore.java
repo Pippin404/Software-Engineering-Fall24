@@ -1,4 +1,4 @@
-package apis.DS;
+package apis.ds;
 
 public interface DataStore {
     Iterable<Integer> read(SourceConfig source);

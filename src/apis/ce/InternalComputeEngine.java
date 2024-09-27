@@ -1,4 +1,4 @@
-package apis.CE;
+package apis.ce;
 
 public class InternalComputeEngine implements InternalComputeEngineInterface {
 

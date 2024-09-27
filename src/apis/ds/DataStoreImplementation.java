@@ -1,20 +1,6 @@
-package apis.datastoreimplementation;
+package apis.ds;
 
 import java.util.Iterator;
-
-import apis.DS.ChooseDefaultDelimitersRequest;
-import apis.DS.ChooseDefaultDelimitersResponse;
-import apis.DS.DataStore;
-import apis.DS.DelimiterInformation;
-import apis.DS.DestinationConfig;
-import apis.DS.SendDelimitersRequest;
-import apis.DS.SendDelimitersResponse;
-import apis.DS.SendDestinationRequest;
-import apis.DS.SendDestinationResponse;
-import apis.DS.SendSourceRequest;
-import apis.DS.SendSourceResponse;
-import apis.DS.SourceConfig;
-import apis.DS.WriteResult;
 
 public class DataStoreImplementation implements DataStore {
     private DataStore dataStore;

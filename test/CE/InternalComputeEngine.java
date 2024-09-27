@@ -2,7 +2,7 @@ package testutils;
 
 import java.util.List;
 
-import apis.CE.InternalComputeEngineInterface;
+import apis.ce.InternalComputeEngineInterface;
 
 
 public class InternalComputeEngine implements InternalComputeEngineInterface {

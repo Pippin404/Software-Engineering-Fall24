@@ -1,7 +1,7 @@
 import org.mockito.Mockito;
 
-import apis.DS.DataStore;
-import apis.DS.DataStorePrototype;
+import apis.ds.DataStore;
+import apis.ds.DataStorePrototype;
 
 
 

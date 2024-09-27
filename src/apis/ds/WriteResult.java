@@ -1,4 +1,4 @@
-package apis.DS;
+package apis.ds;
 
 public interface WriteResult {
 }

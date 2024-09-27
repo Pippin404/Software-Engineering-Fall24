@@ -1,4 +1,4 @@
-package apis.CE;
+package apis.ce;
 
 public interface InternalComputeEngineInterface {
     // Declaring Methods with no bodies

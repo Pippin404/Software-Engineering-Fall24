@@ -1,20 +1,20 @@
 package smoketests;
 import org.junit.jupiter.api.Test;
 
-import apis.DS.ChooseDefaultDelimitersRequest;
-import apis.DS.DataStore;
-import apis.DS.DataStorePrototype;
-import apis.DS.SendDelimitersRequest;
-import apis.DS.SendDestinationRequest;
-import apis.DS.SendSourceRequest;
+import apis.ds.ChooseDefaultDelimitersRequest;
+import apis.ds.DataStore;
+import apis.ds.DataStorePrototype;
+import apis.ds.SendDelimitersRequest;
+import apis.ds.SendDestinationRequest;
+import apis.ds.SendSourceRequest;
 
 import static org.mockito.Mockito.mock;
 
 public class SmokeTestDataStore {
 
     private static DataStore DataStore;
-    private apis.DS.ChooseDefaultDelimitersRequest chooseDefaultDelimitersRequest;
-    private Class<? extends apis.DS.SendSourceRequest> sendSourceRequest;
+    private apis.ds.ChooseDefaultDelimitersRequest chooseDefaultDelimitersRequest;
+    private Class<? extends apis.ds.SendSourceRequest> sendSourceRequest;
 
 
     @Test
