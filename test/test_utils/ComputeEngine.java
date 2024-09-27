@@ -1,5 +1,7 @@
 package test_utils;
 import griffinapi
+import java.util.List;
+
 
 public class InternalComputeEngine implements InternalComputeEngineInterface {
 
@@ -8,6 +10,10 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     private String message = null;
     private DataStore dataStore;
 
+    public InternalComputeEngine(DataStore dataStore) {
+        this.dataStore = dataStore;
+    }
+	
     public void receiveData(List<Integer> dataList) {
         System.out.println("Compute Engine: Received data from Coordinator.");
         int result = 0;
@@ -15,8 +21,12 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
         // Send result to DataStore
         sendDataToDataStore(result);
     }
-    
-	
+
+    private void sendDataToDataStore(int result) {
+        System.out.println("Compute Engine: Sending result to Data Store.");
+        dataStore.storeData(result);
+    }
+
 
     @Override
     public int readInData(String i) {
