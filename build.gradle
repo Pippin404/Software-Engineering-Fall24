@@ -1,11 +1,12 @@
 plugins {
     id 'java'
     id 'eclipse'
-    id 'application'
+    id 'application'  // Add the application plugin
 }
 
 application {
-    mainClass = 'testutils.IntegrationTest'  // Update with the correct package and class name
+    // Fully qualified name of the class with the main method
+    mainClass = 'testutils.IntegrationTest'  // Update this based on the package of IntegrationTest
 }
 
 sourceSets {
