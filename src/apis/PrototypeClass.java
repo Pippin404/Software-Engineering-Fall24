@@ -7,7 +7,7 @@ class PrototypeClass{
 
         dataStore.sendData("Example Filename");
 
-        dataStore.storeData(10000000000000L);
+        dataStore.storeData(7);
 
 
 
