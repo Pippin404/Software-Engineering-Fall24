@@ -1,5 +1,3 @@
-package test_utils;
-
 import java.util.List;
 
 public class IntegrationTest {
