@@ -1,7 +1,8 @@
 package testutils;
 
-import griffinapi.InternalComputeEngineInterface;
 import java.util.List;
+
+import apis.CE.InternalComputeEngineInterface;
 
 
 public class InternalComputeEngine implements InternalComputeEngineInterface {

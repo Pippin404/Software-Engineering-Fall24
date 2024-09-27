@@ -1,4 +1,4 @@
-package apis.datastore;
+package apis.DS;
 
 public enum DelimiterInformation {
     DEFAULT_DELIMITERS,

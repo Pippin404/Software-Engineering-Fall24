@@ -1,4 +1,4 @@
-package griffinapi;
+package apis.CE;
 
 public interface InternalComputeEngineInterface {
     // Declaring Methods with no bodies
