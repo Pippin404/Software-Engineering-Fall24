@@ -1,6 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+plugins {
+    id 'application'
+}
+
+application {
+    mainClass = 'testutils.IntegrationTest'  // Update with the correct package and class name
+}
+
+
 sourceSets {
 	main {
 	  java {
