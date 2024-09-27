@@ -6,8 +6,17 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     // Placeholder Values
     private Integer data = null;
     private String message = null;
+    private DataStore dataStore;
 
-
+    public void receiveData(List<Integer> dataList) {
+        System.out.println("Compute Engine: Received data from Coordinator.");
+        int result = 0;
+        
+        // Send result to DataStore
+        sendDataToDataStore(result);
+    }
+    
+	
 
     @Override
     public int readInData(String i) {
