@@ -39,7 +39,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     @Override
     public int getData() {
-		    if (data != null) {
+	if (data != null) {
             return data;
         }
     return 0;
@@ -51,6 +51,5 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 	return 1;
 
     }
-
 
 }
