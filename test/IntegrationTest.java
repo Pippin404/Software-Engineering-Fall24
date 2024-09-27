@@ -9,7 +9,7 @@ public class IntegrationTest {
 
     public static void main(String[] args) {
         // Start by Initializing DataStore 
-        DS.DataStore dataStore = new DS.DataStore();
+        ds.DataStore dataStore = new ds.DataStore();
 
         // Initialize InternalComputeEngine with DataStore
         apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine();

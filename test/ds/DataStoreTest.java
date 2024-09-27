@@ -1,4 +1,4 @@
-package DS;
+package ds;
 
 import org.mockito.Mockito;
 

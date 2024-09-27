@@ -1,4 +1,4 @@
-package CE;
+package ce;
 
 import java.util.List;
 
