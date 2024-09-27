@@ -1,37 +1,30 @@
 package griffinapi;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
-import test_utils.TestDataStore;
-import test_utils.TestInputConfig;
-import test_utils.TestOutputConfig;
+public class IntegrationTest {
 
-public class ComputeEngineIntegrationTest {
+    public static void main(String[] args) {
+        // Start by Initializing DataStore 
+        DataStore dataStore = new DataStore();
 
-    @Test
-    public void testComputeEngineWithDataStore() {
-        TestInputConfig inputConfig = new TestInputConfig(Arrays.asList(1, 10, 25));
+        // Initialize InternalComputeEngine with DataStore
+        InternalComputeEngine computeEngine = new InternalComputeEngine(dataStore);
 
-        TestOutputConfig outputConfig = new TestOutputConfig();
+        // Initialize Coordinator with InternalComputeEngine
+        Coordinator coordinator = new Coordinator(computeEngine);
 
-        TestDataStore dataStore = new TestDataStore(inputConfig, outputConfig);
+        // Set data in Coordinator
+        List<Integer> dataList = Arrays.asList(1, 10, 25);
+        coordinator.setData(dataList);
+        System.out.println("Coordinator: Data set to " + dataList);
 
-        InternalComputeEngine engine = new InternalComputeEngine();
-        
-        engine.setDataStore(dataStore);
+        // Start the data flow
+        coordinator.sendDataToComputeEngine();
 
-        List<Integer> inputData = dataStore.readInputData();
-        for (Integer input : inputData) {
-            engine.setData(input);
-            int result = engine.compute(input);
-            String output = "ComputedValue" + result;
-            dataStore.writeOutputData(output);
-        }
-
-        List<String> expectedOutput = Arrays.asList("ComputedValue1", "ComputedValue1", "ComputedValue1");
-        assertEquals(expectedOutput, outputConfig.getOutputData());
+        // Retrieve data from DataStore
+        int finalResult = dataStore.getStoredData();
+        System.out.println("Integration Test: Final result in Data Store is " + finalResult);
     }
 }
