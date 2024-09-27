@@ -1,10 +1,6 @@
-package allSmokeTests;
+package smoketests;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import apis.DataBaseImpl;
-
 
 public class SmokeTestPippin {
 
