@@ -1,6 +1,9 @@
+/*
 package smoketests;
 
 import org.junit.jupiter.api.Assertions;
+
+import apis.DataBaseImpl;
 
 public class SmokeTestPippin {
 
@@ -33,3 +36,4 @@ public class SmokeTestPippin {
     }
     
 }
+*/

@@ -1,13 +1,11 @@
+package DS;
 import java.util.ArrayList;
-
-import apis.DataBaseHandler;
 
 public class InMemoryImplimentationDataStore implements DataBaseHandler{  
 
     ArrayList<Integer> results = new ArrayList<Integer>();
     
     
-    @Override
     public String storeData(int i) {
         //results of computation
         System.out.println("I stored the int in the local arraylist");
@@ -17,7 +15,6 @@ public class InMemoryImplimentationDataStore implements DataBaseHandler{
     }
     
     
-    @Override
     public int sendData(String s) {       
         
         //gets the int in the filename
