@@ -6,10 +6,6 @@ public class Coordinator {
 
     private InternalComputeEngine computeEngine;
     
-    // Example data
-    List<Integer> myList = Arrays.asList(1, 10, 25);
-
-
     public Coordinator(InternalComputeEngine computeEngine) {
         this.computeEngine = computeEngine;
     }
