@@ -5,8 +5,7 @@ plugins {
 }
 
 application {
-    // Fully qualified name of the class with the main method
-    mainClass = 'testutils.IntegrationTest'  // Update this based on the package of IntegrationTest
+    mainClass = 'IntegrationTest'  // No package, just the class name
 }
 
 sourceSets {
@@ -17,7 +16,7 @@ sourceSets {
     }
     test {
         java {
-            srcDirs = ['test']
+            srcDirs = ['test']  // Points to where IntegrationTest.java is
         }
     }
 }
@@ -30,6 +29,10 @@ dependencies {
     testImplementation('junit:junit:4.12')
     testImplementation('org.junit.jupiter:junit-jupiter:5.10.2')
     testImplementation('org.mockito:mockito-core:5.10.0')
+}
+
+test {
+    useJUnitPlatform()
 }
 
 test {
