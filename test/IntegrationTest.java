@@ -1,6 +1,5 @@
-package griffinapi;
+package test_utils;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class IntegrationTest {
