@@ -1,17 +1,25 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'application'  // Add the application plugin
+}
+
+application {
+    // Fully qualified name of the class with the main method
+    mainClass = 'testutils.IntegrationTest'  // Update this based on the package of IntegrationTest
+}
 
 sourceSets {
-	main {
-	  java {
-		srcDirs = ['src']
-	  }
-	}
-	test {
-	  java {
-	     srcDirs = ['test']
-	  }
-	 }
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
 }
 
 repositories {
@@ -21,7 +29,7 @@ repositories {
 dependencies {
     testImplementation('junit:junit:4.12')
     testImplementation('org.junit.jupiter:junit-jupiter:5.10.2')
-	testImplementation('org.mockito:mockito-core:5.10.0')
+    testImplementation('org.mockito:mockito-core:5.10.0')
 }
 
 test {
