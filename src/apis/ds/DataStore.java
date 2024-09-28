@@ -16,5 +16,7 @@ public interface DataStore {
 
     SendDelimitersResponse sendDelimiters(SendDelimitersRequest sendDelimitersRequest);
     void storeData(int result);//hey so internal computing engineTest sent this here, 
-                                //im just trying to get this to pass gradle :Pippin, 9/27/24 2:30pm
+
+    StartPrototypeResponse startPrototype(StartPrototypeRequest startPrototypeRequest);
+    //im just trying to get this to pass gradle :Pippin, 9/27/24 2:30pm
 }

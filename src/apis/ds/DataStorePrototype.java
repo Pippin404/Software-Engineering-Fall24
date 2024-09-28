@@ -3,6 +3,9 @@ package apis.ds;
 public class DataStorePrototype {
     public static void prototypeCode(DataStore dataStore) {
 
+//        start this process
+        StartPrototypeResponse startPrototype = dataStore.startPrototype(new StartPrototypeRequest());
+
 //        send source directory
         SendInputResponse sourceResponse = dataStore.sendInput(new SendInputRequest());
 
