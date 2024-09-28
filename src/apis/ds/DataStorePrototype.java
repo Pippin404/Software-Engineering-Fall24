@@ -4,7 +4,7 @@ public class DataStorePrototype {
     public static void prototypeCode(DataStore dataStore) {
 
 //        send source directory
-        SendInputResponse sourceResponse = dataStore.sendSource(new SendInputRequest());
+        SendInputResponse sourceResponse = dataStore.sendInput(new SendInputRequest());
 
 //        send destination directory
         SendOutputResponse destinationResponse = dataStore.sendDestination(new SendOutputRequest());

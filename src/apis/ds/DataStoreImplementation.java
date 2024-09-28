@@ -8,7 +8,7 @@ public class DataStoreImplementation implements DataStore {
     @SuppressWarnings("unused")
     private Iterable<Integer> source;
     @SuppressWarnings("unused")
-    private DestinationConfig destination;
+    private OutputConfig destination;
 
     public Iterable<Integer> read(InputConfig source) {
         return new Iterable<Integer>() {
@@ -19,7 +19,7 @@ public class DataStoreImplementation implements DataStore {
         };
     }
 
-    public WriteResult appendSingleResult(DestinationConfig output, String result){
+    public WriteResult appendSingleResult(OutputConfig output, String result){
         return new WriteResult(){
 
         };

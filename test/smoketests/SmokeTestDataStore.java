@@ -39,7 +39,7 @@ public class SmokeTestDataStore {
     public void sendSourceTest() {
         SendInputRequest mockSendInputRequest = mock(SendInputRequest.class);
 
-        DataStore.sendSource(mockSendInputRequest);
+        DataStore.sendInput(mockSendInputRequest);
         Assertions.assertEquals(DataStore, null);
     }
 
