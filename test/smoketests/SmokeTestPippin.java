@@ -19,7 +19,7 @@ public class SmokeTestPippin {
        
             
         //checks if equal. if not, throw!
-       Assertions.assertEquals(s,"FileName");
+       Assertions.assertEquals(s,"File Name");
         
         
         

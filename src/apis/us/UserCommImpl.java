@@ -50,6 +50,10 @@ public class UserCommImpl implements UserCommHandler{
 
     @Override
     public void outPut(String stringParam) {
+        
+        //Depending on where this goes, do it
+        //file
+        //or command line
         System.out.println(stringParam);
     }
 
