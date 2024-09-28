@@ -51,15 +51,7 @@ public class InternalComputeEngineTest implements InternalComputeEngineInterface
 
     @Override
     public int computeNthFibonacci(int i) {
-	int firstfib = 0;
-    	int secondfib = 1;
-    	while (i != 0) {
-	    int placeholder = firstfib;
-	    firstfib = secondfib;
-            secondfib = placeholder + secondfib;
-            i--;
-    	}
-	return firstfib;
+	return 1;
     }
 
 }
