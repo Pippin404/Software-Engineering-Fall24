@@ -15,23 +15,23 @@ public class SmokeTestUS {
         
         //do this 3 times to make sure the lower case function is working
         
-        String Res=com.setOutputType("FILE");
+        String res=com.setOutputType("FILE");
         //checks if equal. if not, throw!
-        Assertions.assertEquals(Res,"file");
+        Assertions.assertEquals(res,"file");
 
-        Res=com.setOutputType("File");
+        res=com.setOutputType("File");
         //checks if equal. if not, throw!
-        Assertions.assertEquals(Res,"file");
+        Assertions.assertEquals(res,"file");
         
-        Res=com.setOutputType("file");
+        res=com.setOutputType("file");
         //checks if equal. if not, throw!
-        Assertions.assertEquals(Res,"file");
+        Assertions.assertEquals(res,"file");
         
     }
     
     
     @Test
-    public void UserInput() {
+    public void userInput() {
         
         UserCommImpl com=new UserCommImpl();
         com.getUserInput();
