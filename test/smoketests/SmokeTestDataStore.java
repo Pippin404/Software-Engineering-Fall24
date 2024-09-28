@@ -1,4 +1,6 @@
 package smoketests;
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import apis.ds.ChooseDefaultDelimitersRequest;
@@ -23,6 +25,7 @@ public class SmokeTestDataStore {
 
         DataStorePrototype dataStorePrototype = new DataStorePrototype();
         DataStorePrototype.prototypeCode(mockDataStore);
+        Assertions.assertEquals(mockDataStore, null);
     }
 
     @Test
@@ -30,6 +33,7 @@ public class SmokeTestDataStore {
         ChooseDefaultDelimitersRequest mockChooseDelimitersRequest = mock(ChooseDefaultDelimitersRequest.class);
 
         DataStore.chooseDelimiters(mockChooseDelimitersRequest);
+        Assertions.assertEquals(DataStore, null);
     }
 
     @Test
@@ -37,6 +41,7 @@ public class SmokeTestDataStore {
         SendSourceRequest mockSendSourceRequest = mock(SendSourceRequest.class);
 
         DataStore.sendSource(mockSendSourceRequest);
+        Assertions.assertEquals(DataStore, null);
     }
 
     @Test
@@ -44,11 +49,14 @@ public class SmokeTestDataStore {
         SendDestinationRequest mockSendDestinationRequest = mock(SendDestinationRequest.class);
 
         DataStore.sendDestination(mockSendDestinationRequest);
+        Assertions.assertEquals(DataStore, null);
     }
 
     @Test
     public void getDelimiterTypeTest() {
+
         DataStore.getDelimiterType();
+        Assertions.assertEquals(DataStore, null);
     }
 
     @Test
@@ -56,6 +64,7 @@ public class SmokeTestDataStore {
         SendDelimitersRequest mockSendDelimitersRequest = mock(SendDelimitersRequest.class);
 
         DataStore.sendDelimiters(mockSendDelimitersRequest);
+        Assertions.assertEquals(DataStore, null);
     }
 
 
