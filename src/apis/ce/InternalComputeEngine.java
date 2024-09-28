@@ -39,7 +39,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 	    int placeholder = firstfib;
 	    firstfib = secondfib;
             secondfib = placeholder + secondfib;
-            n--;
+            i--;
     	}
 	return firstfib;
     }
