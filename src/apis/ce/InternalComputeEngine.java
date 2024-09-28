@@ -32,10 +32,16 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     }
 
     @Override
-    public int compute(int i) {
-        // Need to implement fib. here
-	return 1;
-
+    public int computeNthFibonacci(int i) {
+    	int firstfib = 0;
+    	int secondfib = 1;
+    	while (i != 0) {
+	    int placeholder = firstfib;
+	    firstfib = secondfib;
+            secondfib = placeholder + secondfib;
+            n--;
+    	}
+	return firstfib;
     }
 
     public void receiveData(List<Integer> data2) {
