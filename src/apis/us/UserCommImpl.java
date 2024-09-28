@@ -22,11 +22,11 @@ public class UserCommImpl implements UserCommHandler{
     }
 
     @Override
-    public String setOutputType(String s) {
+    public String setOutputType(String stringParam) {
         // Slap a bunch of switch cases to set the method type
         //File
         //command line
-        String upperS=s.toLowerCase();
+        String upperS=stringParam.toLowerCase();
         
         switch (upperS) {
         case "file":
@@ -49,8 +49,8 @@ public class UserCommImpl implements UserCommHandler{
     }
 
     @Override
-    public void outPut(String S) {
-        System.out.println(S);
+    public void outPut(String stringParam) {
+        System.out.println(stringParam);
     }
 
     @Override

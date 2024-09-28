@@ -30,7 +30,7 @@ public interface UserCommHandler {
     //IF ITS A FILE, RETURN FILENAME??
     
     
-    public void outPut(String S);
+    public void outPut(String stringParam);
     //Outputs if its a string
     //goes where setOutputType wants it
     //need a variable to control that?
