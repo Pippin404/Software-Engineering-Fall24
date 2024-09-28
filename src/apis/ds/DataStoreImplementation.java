@@ -25,7 +25,7 @@ public class DataStoreImplementation implements DataStore {
         };
     }
 
-    public SendInputResponse sendSource(SendInputRequest sendInputRequest){
+    public SendInputResponse sendInput(SendInputRequest sendInputRequest){
         return new SendInputResponse() {
         };
     }
