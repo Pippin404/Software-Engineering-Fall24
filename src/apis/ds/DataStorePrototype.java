@@ -4,10 +4,10 @@ public class DataStorePrototype {
     public static void prototypeCode(DataStore dataStore) {
 
 //        send source directory
-        SendSourceResponse sourceResponse = dataStore.sendSource(new SendSourceRequest());
+        SendInputResponse sourceResponse = dataStore.sendSource(new SendInputRequest());
 
 //        send destination directory
-        SendDestinationResponse destinationResponse = dataStore.sendDestination(new SendDestinationRequest());
+        SendOutputResponse destinationResponse = dataStore.sendDestination(new SendOutputRequest());
 
 //        Choose from the default delimiters if there aren't any included
         if(dataStore.getDelimiterType() == DelimiterInformation.DEFAULT_DELIMITERS) {

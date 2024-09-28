@@ -1,12 +1,12 @@
 package apis.ds;
 
 public interface DataStore {
-    Iterable<Integer> read(SourceConfig source);
+    Iterable<Integer> read(InputConfig source);
     WriteResult appendSingleResult(DestinationConfig output, String result);
 
-    SendSourceResponse sendSource(SendSourceRequest sendSourceRequest);
+    SendInputResponse sendSource(SendInputRequest sendInputRequest);
 
-    SendDestinationResponse sendDestination(SendDestinationRequest sendDestinationRequest);
+    SendOutputResponse sendDestination(SendOutputRequest sendOutputRequest);
 
     DelimiterInformation getDelimiterType();
 

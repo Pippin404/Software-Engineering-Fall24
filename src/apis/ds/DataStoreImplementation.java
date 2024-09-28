@@ -10,7 +10,7 @@ public class DataStoreImplementation implements DataStore {
     @SuppressWarnings("unused")
     private DestinationConfig destination;
 
-    public Iterable<Integer> read(SourceConfig source) {
+    public Iterable<Integer> read(InputConfig source) {
         return new Iterable<Integer>() {
             @Override
             public Iterator<Integer> iterator() {
@@ -25,13 +25,13 @@ public class DataStoreImplementation implements DataStore {
         };
     }
 
-    public SendSourceResponse sendSource(SendSourceRequest sendSourceRequest){
-        return new SendSourceResponse() {
+    public SendInputResponse sendSource(SendInputRequest sendInputRequest){
+        return new SendInputResponse() {
         };
     }
 
-    public SendDestinationResponse sendDestination(SendDestinationRequest sendDestinationRequest){
-        return new SendDestinationResponse() {
+    public SendOutputResponse sendDestination(SendOutputRequest sendOutputRequest){
+        return new SendOutputResponse() {
         };
     }
 
