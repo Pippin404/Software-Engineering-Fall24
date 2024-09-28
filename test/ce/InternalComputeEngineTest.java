@@ -50,7 +50,7 @@ public class InternalComputeEngineTest implements InternalComputeEngineInterface
     }
 
     @Override
-    public int computeNthFib(int i) {
+    public int computeNthFibonacci(int i) {
         // Need to implement fib. here
 	      return 1;
     }
