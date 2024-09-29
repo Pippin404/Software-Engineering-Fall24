@@ -14,6 +14,12 @@ public class ParseInputFileRequest  {
     private String delimiter;
     private InputType inputType;
 
+    public ParseInputFileRequest(File inputFile, InputType inputType, Delimiter delimiter) {
+        this.inputFile = inputFile;
+        this.inputType = inputType;
+        this.delimiter = delimiter.getValue();
+    }
+
     public List<Integer> parseFile(File inputFile, InputType inputType, Delimiter delimiter) {
         switch (inputType) {
             case CONSOLE:
