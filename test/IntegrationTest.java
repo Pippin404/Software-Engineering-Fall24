@@ -13,7 +13,7 @@ public class IntegrationTest {
         ds.DataStore dataStore = new ds.DataStore();
 
         // Initialize InternalComputeEngineTest with DataStore
-        ce.InternalComputeEngineTest computeEngine = new ce.InternalComputeEngineTest(DataStore);
+        ce.InternalComputeEngineTest computeEngine = new ce.InternalComputeEngineTest(dataStore);
 
         // Initialize Coordinator with InternalComputeEngine
         Coordinator coordinator = new Coordinator(computeEngine);
