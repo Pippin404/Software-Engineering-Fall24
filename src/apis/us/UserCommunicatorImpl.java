@@ -1,5 +1,7 @@
 package apis.us;
 
+import inputoutput.OutputType;
+
 public class UserCommunicatorImpl implements UserCommunicatorHandler{
 
     OutputType output=OutputType.CONSOLE;

@@ -1,4 +1,4 @@
-package apis.us;
+package inputoutput;
 
 public enum OutputType {
     CONSOLE,
