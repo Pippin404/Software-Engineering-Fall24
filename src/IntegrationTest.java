@@ -1,9 +1,8 @@
 import java.util.List;
 import java.util.Arrays;
-import testutils.Coordinator;
 import apis.ce.InternalComputeEngine;
-import placeholder.DatastorePlaceholder;
-import placeholder.CoordinatorPlaceholder;
+import placeholders.DatastorePlaceholder;
+import placeholders.CoordinatorPlaceholder;
 
 
 
