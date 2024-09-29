@@ -7,7 +7,7 @@ import ce.InternalComputeEngineTest;
 public class Coordinator {
 
     private InternalComputeEngineTest computeEngine;
-    private List<Integer> data;
+    private Integer data;
     
     public Coordinator(InternalComputeEngineTest computeEngine) {
         this.computeEngine = computeEngine;
