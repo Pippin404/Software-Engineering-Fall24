@@ -2,12 +2,10 @@ package smoketests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import apis.ds.ChooseDefaultDelimitersRequest;
 import apis.ds.DataStore;
 import apis.ds.DataStorePrototype;
-import apis.ds.SendDelimitersRequest;
-import apis.ds.SendOutputRequest;
-import apis.ds.SendInputRequest;
+import apis.ds.WriteToFileRequest;
+import apis.ds.ParseInputFileRequest;
 
 import static org.mockito.Mockito.mock;
 
@@ -15,7 +13,7 @@ public class SmokeTestDataStore {
 
     private static DataStore DataStore;
     private apis.ds.ChooseDefaultDelimitersRequest chooseDefaultDelimitersRequest;
-    private Class<? extends SendInputRequest> sendSourceRequest;
+    private Class<? extends ParseInputFileRequest> sendSourceRequest;
 
 
     @Test
@@ -37,17 +35,17 @@ public class SmokeTestDataStore {
 
     @Test
     public void sendSourceTest() {
-        SendInputRequest mockSendInputRequest = mock(SendInputRequest.class);
+        ParseInputFileRequest mockParseInputFileRequest = mock(ParseInputFileRequest.class);
 
-        DataStore.sendInput(mockSendInputRequest);
+        DataStore.sendInput(mockParseInputFileRequest);
         Assertions.assertEquals(DataStore, null);
     }
 
     @Test
     public void sendDestinationTest() {
-        SendOutputRequest mockSendOutputRequest = mock(SendOutputRequest.class);
+        WriteToFileRequest mockWriteToFileRequest = mock(WriteToFileRequest.class);
 
-        DataStore.sendDestination(mockSendOutputRequest);
+        DataStore.sendDestination(mockWriteToFileRequest);
         Assertions.assertEquals(DataStore, null);
     }
 

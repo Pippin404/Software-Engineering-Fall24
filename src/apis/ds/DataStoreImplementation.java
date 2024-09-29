@@ -8,7 +8,7 @@ public class DataStoreImplementation implements DataStore {
     @SuppressWarnings("unused")
     private Iterable<Integer> source;
     @SuppressWarnings("unused")
-    private OutputConfig destination;
+    private WriteToFileResponse destination;
 
     public Iterable<Integer> read(InputConfig source) {
         return new Iterable<Integer>() {
@@ -19,18 +19,18 @@ public class DataStoreImplementation implements DataStore {
         };
     }
 
-    public WriteResult appendSingleResult(OutputConfig output, String result){
+    public WriteResult appendSingleResult(WriteToFileResponse output, String result){
         return new WriteResult(){
 
         };
     }
 
-    public SendInputResponse sendInput(SendInputRequest sendInputRequest){
-        return new SendInputResponse() {
+    public ParseInputFileResponse sendInput(ParseInputFileRequest parseInputFileRequest){
+        return new ParseInputFileResponse() {
         };
     }
 
-    public SendOutputResponse sendDestination(SendOutputRequest sendOutputRequest){
+    public SendOutputResponse sendDestination(WriteToFileRequest writeToFileRequest){
         return new SendOutputResponse() {
         };
     }

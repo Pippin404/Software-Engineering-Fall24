@@ -4,18 +4,13 @@ public interface DataStore {
     
     
     Iterable<Integer> read(InputConfig input);
-    WriteResult appendSingleResult(OutputConfig output, String result);
+    WriteResult appendSingleResult(WriteToFileResponse output, String result);
 
-    SendInputResponse sendInput(SendInputRequest sendInputRequest);
+    ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest);
 
-    SendOutputResponse sendDestination(SendOutputRequest sendOutputRequest);
+    WriteToFileResponse writeIntegerToFile(WriteToFileRequest writeToFileRequest);
 
     DelimiterInformation getDelimiterType();
-
-    ChooseDefaultDelimitersResponse chooseDelimiters(ChooseDefaultDelimitersRequest chooseDefaultDelimitersRequest);
-
-    SendDelimitersResponse sendDelimiters(SendDelimitersRequest sendDelimitersRequest);
-    void storeData(int result);//hey so internal computing engineTest sent this here, 
 
     StartPrototypeResponse startPrototype(StartPrototypeRequest startPrototypeRequest);
     //im just trying to get this to pass gradle :Pippin, 9/27/24 2:30pm

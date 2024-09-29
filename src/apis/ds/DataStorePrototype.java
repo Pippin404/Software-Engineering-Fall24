@@ -7,10 +7,10 @@ public class DataStorePrototype {
         StartPrototypeResponse startPrototype = dataStore.startPrototype(new StartPrototypeRequest());
 
 //        send source directory
-        SendInputResponse sourceResponse = dataStore.sendInput(new SendInputRequest());
+        ParseInputFileResponse sourceResponse = dataStore.sendInput(new ParseInputFileRequest());
 
 //        send destination directory
-        SendOutputResponse destinationResponse = dataStore.sendDestination(new SendOutputRequest());
+        SendOutputResponse destinationResponse = dataStore.sendDestination(new WriteToFileRequest());
 
 //        Choose from the default delimiters if there aren't any included
         if(dataStore.getDelimiterType() == DelimiterInformation.DEFAULT_DELIMITERS) {
