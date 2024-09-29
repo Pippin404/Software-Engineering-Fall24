@@ -1,7 +1,9 @@
 package apis.us;
 
-
 import java.util.Scanner;
+
+import inputoutput.OutputType;
+
 
 public class UserCommunicatorImpl implements UserCommunicatorHandler{
 

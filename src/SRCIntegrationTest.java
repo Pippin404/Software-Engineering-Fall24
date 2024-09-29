@@ -24,12 +24,15 @@ public class SRCIntegrationTest {
         System.out.println("US: Data set to " + coordinator.getData());
         //This function tells the data inside coordinator (of type UScomputerEngineConstructor) to send the data
         coordinator.sendDataToComputeEngine();
+
       //--------------------------------------
         
         
         dataStore.storeData(computeEngine.computeNthFibonacci(computeEngine.getData()));
       
-        
+       
+
+
         // Retrieve data from DataStore
         int finalResult = dataStore.getStoredData();
         System.out.println("Integration Test: Final result in Data Store is " + finalResult);
