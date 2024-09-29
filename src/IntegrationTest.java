@@ -11,20 +11,18 @@ public class IntegrationTest {
 
     public static void main(String[] args) {
         // Initializing template datastore
-        ds.DataStore dataStore = new ds.DataStore();
+        placeholder.datastoreplaceholder dataStore = new placeholder.datastoreplaceholder();
         // Initializing internal compute engine with template datastore
         apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine(dataStore);
         //HEY THIS LINE HAD A PARAMETER DATASTORE! I REMOVED IT BECAUSE ITS NOT IN THE CONSTRUCTOR!!^^^^
 
         // Initialize Coordinator with InternalComputeEngine
-        Coordinator coordinator = new Coordinator(computeEngine);
+        placeholder.coordinatorplaceholder coordinator = new placeholder.coordinatorplaceholder(computeEngine);
 
-        // Set data in Coordinator
-        List<Integer> dataList = Arrays.asList(1, 10, 25);
-        coordinator.setData(dataList);
-        System.out.println("Coordinator: Data set to " + dataList);
+        int data = 10;
+        coordinator.setData(data);
+        System.out.println("Coordinator: Data set to " + data);
 
-        // Start the data flow
         coordinator.sendDataToComputeEngine();
 
         // Retrieve data from DataStore
