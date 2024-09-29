@@ -10,13 +10,13 @@ public class IntegrationTest {
 
     public static void main(String[] args) {
         // Initializing template datastore
-        placeholder.DatastorePlaceholder dataStore = new placeholder.DatastorePlaceholder();
+        placeholders.DatastorePlaceholder dataStore = new placeholders.DatastorePlaceholder();
         
         // Initializing internal compute engine with template datastore
         apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine(dataStore);
 
         // Initialize Coordinator with InternalComputeEngine
-        placeholder.CoordinatorPlaceholder coordinator = new placeholder.CoordinatorPlaceholder(computeEngine);
+        placeholders.CoordinatorPlaceholder coordinator = new placeholders.CoordinatorPlaceholder(computeEngine);
 
         int data = 10;
         coordinator.setData(data);
