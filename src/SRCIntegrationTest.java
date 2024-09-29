@@ -13,10 +13,10 @@ public class SRCIntegrationTest {
         placeholders.DatastorePlaceholder dataStore = new placeholders.DatastorePlaceholder();
         
         // Initializing internal compute engine with template datastore
-        apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine(dataStore);
+        apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine();
 
         // Initialize Coordinator with InternalComputeEngine
-        placeholders.CoordinatorPlaceholder coordinator = new placeholders.CoordinatorPlaceholder(computeEngine);
+        placeholders.CoordinatorPlaceholder coordinator = new placeholders.CoordinatorPlaceholder();
 
         int data = 10;
         coordinator.setData(data);
