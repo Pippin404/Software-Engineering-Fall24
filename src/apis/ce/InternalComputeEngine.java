@@ -14,7 +14,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     }
 
     
-    //this was given to me by eclipse. I think it removes the "unused" error
+    //this was given to me by eclipse. I think it removes the "unused" error. Pippin assignment 4
     @SuppressWarnings("unused")
     private String message = null;
 

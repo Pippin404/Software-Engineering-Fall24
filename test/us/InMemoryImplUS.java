@@ -20,7 +20,7 @@ public class InMemoryImplUS implements UserCommunicatorHandler{
     
     
     //to get the info from the user
-    public void getUserInput() {
+    public int getUserInput() {
         // Scanner and stuff
         //no command line here
         //stores user input
