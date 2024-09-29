@@ -1,6 +1,6 @@
 package apis.ce;
 
-import placeholders;
+import placeholders.DatastorePlaceholder;
 import java.util.List;
 
 public class InternalComputeEngine implements InternalComputeEngineInterface {
