@@ -2,7 +2,7 @@ package testutils;
 
 import java.util.List;
 
-import test.ce.InternalComputeEngine;
+import ce.InternalComputeEngine;
 
 public class Coordinator {
 
