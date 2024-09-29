@@ -33,6 +33,8 @@ public class InMemoryImplUS implements UserCommunicatorHandler{
         
         //NEVER FORGET!
         scanner.close();
+        
+        return num;
     }
     
     
