@@ -7,11 +7,6 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
-    private DatastorePlaceholder dataStore;
-
-    public InternalComputeEngine(DatastorePlaceholder dataStore) {
-        this.dataStore = dataStore;
-    }
 
     
     //this was given to me by eclipse. I think it removes the "unused" error
