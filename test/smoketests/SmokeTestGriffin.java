@@ -18,7 +18,7 @@ public class SmokeTestGriffin {
     @Test
     public void test() {    
         DataStore ds=new DataStore();
-        InternalComputeEngineTest engine = new InternalComputeEngineTest((apis.ds.DataStore) ds);
+        InternalComputeEngineTest engine = new InternalComputeEngineTest((ds.DataStore) ds);
 
         // Mock the InternalComputeReadingInterface
         InternalComputeEngineTest mockEngine = Mockito.mock(InternalComputeEngineTest.class);
