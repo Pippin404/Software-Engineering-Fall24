@@ -19,6 +19,6 @@ public class Coordinator {
 
     public void sendDataToComputeEngine() {
         System.out.println("Coordinator: Sending data to Compute Engine.");
-        computeEngine.setData(data);
+        computeEngine.receiveData(data);
     }
 }
