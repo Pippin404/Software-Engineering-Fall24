@@ -25,7 +25,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     @Override
     public int getData() {
-		    if (data != null) {
+	if (data != null) {
             return data;
         }
     return 0;
@@ -44,10 +44,5 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 	return firstfib;
     }
 
-    public void receiveData(List<Integer> data2) {
-        // TODO Auto-generated method stub
-        //This is from the coordinator under test/testutils. Idk if it was supposed to do this or not
-        //-Pippin: 9/27/24 2:27pm
-    }
 
 }
