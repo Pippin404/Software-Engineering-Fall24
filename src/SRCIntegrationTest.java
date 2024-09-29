@@ -2,11 +2,11 @@ import java.util.List;
 import java.util.Arrays;
 import apis.ce.InternalComputeEngine;
 import placeholders.DatastorePlaceholder;
-import placeholders.CoordinatorPlaceholder;
 
 
 
 public class SRCIntegrationTest {
+
 
     public static void main(String[] args) {
         // Initializing template datastore
@@ -16,14 +16,23 @@ public class SRCIntegrationTest {
         apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine(dataStore);
 
         // Initialize Coordinator with InternalComputeEngine
-        placeholders.CoordinatorPlaceholder coordinator = new placeholders.CoordinatorPlaceholder(computeEngine);
+        apis.us.UScomputerEngineConstructer coordinator = new apis.us.UScomputerEngineConstructer(computeEngine);
 
-        int data = 10;
-        coordinator.setData(data);
-        System.out.println("Coordinator: Data set to " + data);
-
+        
+        //Pippin's UScomputerEngineConstructor will use this function to add the data inputed to the user
+        coordinator.setData();
+        
+        System.out.println("US: Data set to " + coordinator.getData());
+        //This function tells the data inside coordinator (of type UScomputerEngineConstructor) to send the data
         coordinator.sendDataToComputeEngine();
+
+      //--------------------------------------
+        
+        
         dataStore.storeData(computeEngine.computeNthFibonacci(computeEngine.getData()));
+      
+       
+
 
         // Retrieve data from DataStore
         int finalResult = dataStore.getStoredData();
