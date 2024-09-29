@@ -12,11 +12,10 @@ import testutils.InternalComputeEngine
 public class IntegrationTest {
 
     public static void main(String[] args) {
-        // Start by Initializing DataStore 
+        // Initializing template datastore
         ds.DataStore dataStore = new ds.DataStore();
-
-        // Initialize InternalComputeEngine with DataStore
-        apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine();
+        // Initializing internal compute engine with template datastore
+        apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine(dataStore);
         //HEY THIS LINE HAD A PARAMETER DATASTORE! I REMOVED IT BECAUSE ITS NOT IN THE CONSTRUCTOR!!^^^^
 
         // Initialize Coordinator with InternalComputeEngine
