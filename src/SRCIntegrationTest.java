@@ -6,7 +6,7 @@ import placeholders.CoordinatorPlaceholder;
 
 
 
-public class IntegrationTest {
+public class SRCIntegrationTest {
 
     public static void main(String[] args) {
         // Initializing template datastore
