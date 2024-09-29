@@ -4,12 +4,12 @@ import java.util.List;
 
 import apis.ce.InternalComputeEngine;
 
-public class coordinatorplaceholder {
+public class CoordinatorPlaceholder {
 
     private InternalComputeEngine computeEngine;
     private Integer data;
     
-    public coordinatorplaceholder(InternalComputeEngine computeEngine) {
+    public CoordinatorPlaceholder(InternalComputeEngine computeEngine) {
         this.computeEngine = computeEngine;
     }
 
