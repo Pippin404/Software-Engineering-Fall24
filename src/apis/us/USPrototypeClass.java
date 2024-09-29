@@ -1,6 +1,6 @@
 package apis.us;
 
-import inputOutput.OutputType;
+import inputoutput.OutputType;
 
 public class USPrototypeClass {
 

@@ -1,4 +1,4 @@
-package inputOutput;
+package inputoutput;
 
 public enum InputType {
     CONSOLE,

@@ -4,7 +4,7 @@ package smoketests;
 import org.junit.jupiter.api.Test;
 
 import apis.us.UserCommunicatorImpl;
-import inputOutput.OutputType;
+import inputoutput.OutputType;
 
 
 public class SmokeTestUS {

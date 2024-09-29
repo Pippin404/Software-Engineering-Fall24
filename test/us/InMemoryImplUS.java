@@ -3,7 +3,7 @@ package us;
 import java.util.ArrayList;
 import java.util.Scanner;
 import apis.us.UserCommunicatorHandler;
-import inputOutput.OutputType;
+import inputoutput.OutputType;
 
 public class InMemoryImplUS implements UserCommunicatorHandler{
 
