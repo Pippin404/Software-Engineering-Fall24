@@ -23,6 +23,7 @@ public class SRCIntegrationTest {
         System.out.println("Coordinator: Data set to " + data);
 
         coordinator.sendDataToComputeEngine();
+        dataStore.storeData(computeEngine.computeNthFibonacci(computeEngine.getData()));
 
         // Retrieve data from DataStore
         int finalResult = dataStore.getStoredData();
