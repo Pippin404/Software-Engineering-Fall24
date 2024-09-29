@@ -7,6 +7,7 @@ import placeholders.DatastorePlaceholder;
 
 public class SRCIntegrationTest {
 
+
     public static void main(String[] args) {
         // Initializing template datastore
         placeholders.DatastorePlaceholder dataStore = new placeholders.DatastorePlaceholder();
