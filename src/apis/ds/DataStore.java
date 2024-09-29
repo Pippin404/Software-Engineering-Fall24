@@ -1,12 +1,14 @@
 package apis.ds;
 
 public interface DataStore {
-    Iterable<Integer> read(SourceConfig source);
-    WriteResult appendSingleResult(DestinationConfig output, String result);
+    
+    
+    Iterable<Integer> read(InputConfig input);
+    WriteResult appendSingleResult(OutputConfig output, String result);
 
-    SendSourceResponse sendSource(SendSourceRequest sendSourceRequest);
+    SendInputResponse sendInput(SendInputRequest sendInputRequest);
 
-    SendDestinationResponse sendDestination(SendDestinationRequest sendDestinationRequest);
+    SendOutputResponse sendDestination(SendOutputRequest sendOutputRequest);
 
     DelimiterInformation getDelimiterType();
 
@@ -14,5 +16,7 @@ public interface DataStore {
 
     SendDelimitersResponse sendDelimiters(SendDelimitersRequest sendDelimitersRequest);
     void storeData(int result);//hey so internal computing engineTest sent this here, 
-                                //im just trying to get this to pass gradle :Pippin, 9/27/24 2:30pm
+
+    StartPrototypeResponse startPrototype(StartPrototypeRequest startPrototypeRequest);
+    //im just trying to get this to pass gradle :Pippin, 9/27/24 2:30pm
 }
