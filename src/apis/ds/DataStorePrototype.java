@@ -6,18 +6,11 @@ public class DataStorePrototype {
 //        start this process
         StartPrototypeResponse startPrototype = dataStore.startPrototype(new StartPrototypeRequest());
 
-//        send source directory
-        ParseInputFileResponse sourceResponse = dataStore.sendInput(new ParseInputFileRequest());
+//        parse the input file into raw integers
+        ParseInputFileResponse parseInputFile = dataStore.parseInputFile(new ParseInputFileRequest());
 
-//        send destination directory
-        SendOutputResponse destinationResponse = dataStore.sendDestination(new WriteToFileRequest());
+//        write those integers into the output file
+        WriteToFileResponse writeToFileResponse = dataStore.writeIntegerToFile(new WriteToFileRequest());
 
-//        Choose from the default delimiters if there aren't any included
-        if(dataStore.getDelimiterType() == DelimiterInformation.DEFAULT_DELIMITERS) {
-            ChooseDefaultDelimitersResponse chooseDelimitersResponse = dataStore.chooseDelimiters(new ChooseDefaultDelimitersRequest());
-        } else {
-//            send chosen delimiters
-            SendDelimitersResponse delimitersResponse = dataStore.sendDelimiters(new SendDelimitersRequest());
-        }
     }
 }

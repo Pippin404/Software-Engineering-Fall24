@@ -19,10 +19,19 @@ public class DataStoreImplementation implements DataStore {
         };
     }
 
-    public WriteResult appendSingleResult(WriteToFileResponse output, String result){
-        return new WriteResult(){
+    @Override
+    public WriteToFileRequest appendSingleResult(WriteToFileResponse output, String result) {
+        return null;
+    }
 
-        };
+    @Override
+    public ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest) {
+        return null;
+    }
+
+    @Override
+    public WriteToFileResponse writeIntegerToFile(WriteToFileRequest writeToFileRequest) {
+        return null;
     }
 
     public ParseInputFileResponse sendInput(ParseInputFileRequest parseInputFileRequest){
@@ -30,26 +39,13 @@ public class DataStoreImplementation implements DataStore {
         };
     }
 
-    public SendOutputResponse sendDestination(WriteToFileRequest writeToFileRequest){
-        return new SendOutputResponse() {
+    public WriteToFileResponse writeToFile(WriteToFileRequest writeToFileRequest){
+        return new WriteToFileResponse() {
         };
     }
 
-    public DelimiterInformation getDelimiterType(){
-        return DelimiterInformation.CHOSEN_DELIMITERS;
-    }
 
-    public ChooseDefaultDelimitersResponse chooseDelimiters(ChooseDefaultDelimitersRequest chooseDefaultDelimitersRequest){
-        return new ChooseDefaultDelimitersResponse() {
-        };
-    }
 
-    public SendDelimitersResponse sendDelimiters(SendDelimitersRequest sendDelimitersRequest){
-        return new SendDelimitersResponse() {
-        };
-    }
-
-    @Override
     public void storeData(int result) {
         // TODO Auto-generated method stub
         
