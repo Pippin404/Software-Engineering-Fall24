@@ -2,7 +2,7 @@
 
 package placeholders;
 
-public class datastoreplaceholder {
+public class DatastorePlaceholder {
 
     private int storedData;
 
