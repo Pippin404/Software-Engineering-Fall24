@@ -1,13 +1,10 @@
 import java.util.List;
 import java.util.Arrays;
 import testutils.Coordinator;
+import ce.InternalComputeEngineTest;
+import ds.DataStore;
 
-/*
-import testutils.InternalComputeEngine;
-import testutils.DataStore;
-import testutils.InternalComputeEngine
-import testutils.InternalComputeEngine
-*/
+
 
 public class IntegrationTest {
 
@@ -15,8 +12,8 @@ public class IntegrationTest {
         // Start by Initializing DataStore 
         ds.DataStore dataStore = new ds.DataStore();
 
-        // Initialize InternalComputeEngine with DataStore
-        apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine();
+        // Initialize InternalComputeEngineTest with DataStore
+        ce.InternalComputeEngineTest computeEngine = new ce.InternalComputeEngineTest();
         //HEY THIS LINE HAD A PARAMETER DATASTORE! I REMOVED IT BECAUSE ITS NOT IN THE CONSTRUCTOR!!^^^^
 
         // Initialize Coordinator with InternalComputeEngine
