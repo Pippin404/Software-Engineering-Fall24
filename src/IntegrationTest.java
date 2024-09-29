@@ -3,7 +3,7 @@ import java.util.Arrays;
 import testutils.Coordinator;
 import apis.ce.InternalComputeEngine;
 import placeholder.datastoreplaceholder;
-import placeholder.coordinatorplaceholder;
+import placeholder.CoordinatorPlaceholder;
 
 
 
@@ -12,12 +12,12 @@ public class IntegrationTest {
     public static void main(String[] args) {
         // Initializing template datastore
         placeholder.datastoreplaceholder dataStore = new placeholder.datastoreplaceholder();
+        
         // Initializing internal compute engine with template datastore
         apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine(dataStore);
-        //HEY THIS LINE HAD A PARAMETER DATASTORE! I REMOVED IT BECAUSE ITS NOT IN THE CONSTRUCTOR!!^^^^
 
         // Initialize Coordinator with InternalComputeEngine
-        placeholder.coordinatorplaceholder coordinator = new placeholder.coordinatorplaceholder(computeEngine);
+        placeholder.CoordinatorPlaceholder coordinator = new placeholder.CoordinatorPlaceholder(computeEngine);
 
         int data = 10;
         coordinator.setData(data);
