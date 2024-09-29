@@ -2,8 +2,9 @@ package smoketests;
 
 //import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import apis.us.OutputType;
+
 import apis.us.UserCommunicatorImpl;
+import inputoutput.OutputType;
 
 
 public class SmokeTestUS {
