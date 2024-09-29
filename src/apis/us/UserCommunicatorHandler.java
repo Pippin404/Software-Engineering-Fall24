@@ -1,7 +1,8 @@
 package apis.us;
 
-public interface UserCommHandler {
+public interface UserCommunicatorHandler {
 
+    OutputType output=OutputType.CONSOLE;
     String outPutLocation=null;
     String inputType=null;
     //file or command line or scanner.
@@ -24,7 +25,7 @@ public interface UserCommHandler {
     //SETS INPUT TYPE
     //Use overflowing
     
-    public String setOutputType(String s);
+    public void setOutputType(OutputType outputType);
     //output to command line
     //Or a file
     //IF ITS A FILE, RETURN FILENAME??
@@ -33,7 +34,9 @@ public interface UserCommHandler {
     public void outPut(String stringParam);
     //Outputs if its a string
     //goes where setOutputType wants it
-    //need a variable to control that?
+    //Either to a file, CSV, or prints it out in the console
+    
+    
     
     public void outPut(int i);
     //method overloading to also accept strings

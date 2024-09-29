@@ -5,21 +5,19 @@ public class USPrototypeClass {
     
     //This is a prototype class for the US handler
     
-    void prototype(UserCommHandler comm) {
+    void prototype(UserCommunicatorHandler comm) {
         
         
-        //Sets the output to file
-        String outputType=comm.setOutputType("file");
+        //Sets the output to text file
+        OutputType out=OutputType.TEXT;
         
-        System.out.println(outputType);
+        System.out.println(out);
         
         
         //this gets the user input. 
         
         //this should probably do something
         comm.setDelimiters();
-        
-        
         comm.getUserInput();
         
         

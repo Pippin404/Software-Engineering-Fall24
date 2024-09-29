@@ -2,10 +2,10 @@ package us;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import apis.us.UserCommunicatorHandler;
+import apis.us.OutputType;
 
-import apis.us.UserCommHandler;
-
-public class InMemoryImplUS implements UserCommHandler{
+public class InMemoryImplUS implements UserCommunicatorHandler{
 
   //this should ask for an in memory impel
     //ask user for an item? send it off?
@@ -19,6 +19,7 @@ public class InMemoryImplUS implements UserCommHandler{
     ArrayList<Integer> results = new ArrayList<Integer>();
     
     
+    //to get the info from the user
     public void getUserInput() {
         // Scanner and stuff
         //no command line here
@@ -79,6 +80,15 @@ public class InMemoryImplUS implements UserCommHandler{
 
     @Override
     public void setDelimiters() {
+        // TODO Auto-generated method stub
+        
+    }
+
+
+
+
+    @Override
+    public void setOutputType(OutputType outputType) {
         // TODO Auto-generated method stub
         
     }
