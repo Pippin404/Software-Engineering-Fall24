@@ -2,7 +2,7 @@ package apis.us;
 
 public class UserCommunicatorImpl implements UserCommunicatorHandler{
 
-    OutputType Output=OutputType.CONSOLE;
+    OutputType output=OutputType.CONSOLE;
     String outPutLocation=null;
     String inputType=null;
     //SEE THE UserCommHandler TO FIND OUT WHAT THESE DO!!!
@@ -21,7 +21,7 @@ public class UserCommunicatorImpl implements UserCommunicatorHandler{
     @Override
     public void setOutputType(OutputType out) {
         //This sets the outputType of the function, using the enum OutputType previously declared   
-        Output=out;
+        output=out;
         
     }
     @Override
