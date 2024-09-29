@@ -9,6 +9,10 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     private Integer data = null;
     private DatastorePlaceholder dataStore;
 
+    public InternalComputeEngine(DatastorePlaceholder dataStore) {
+        this.dataStore = dataStore;
+    }
+
     
     //this was given to me by eclipse. I think it removes the "unused" error
     @SuppressWarnings("unused")
