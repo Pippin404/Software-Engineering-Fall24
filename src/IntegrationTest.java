@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Arrays;
 import testutils.Coordinator;
 import apis.ce.InternalComputeEngine;
-import placeholder.datastoreplaceholder;
+import placeholder.DatastorePlaceholder;
 import placeholder.CoordinatorPlaceholder;
 
 
@@ -11,7 +11,7 @@ public class IntegrationTest {
 
     public static void main(String[] args) {
         // Initializing template datastore
-        placeholder.datastoreplaceholder dataStore = new placeholder.datastoreplaceholder();
+        placeholder.DatastorePlaceholder dataStore = new placeholder.DatastorePlaceholder();
         
         // Initializing internal compute engine with template datastore
         apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine(dataStore);
