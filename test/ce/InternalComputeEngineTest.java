@@ -3,7 +3,7 @@ package ce;
 import java.util.List;
 
 import apis.ce.InternalComputeEngineInterface;
-import apis.ds.DataStore;
+import ds.DataStore;
 
 
 public class InternalComputeEngineTest implements InternalComputeEngineInterface {

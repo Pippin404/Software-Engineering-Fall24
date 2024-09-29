@@ -2,14 +2,14 @@ package testutils;
 
 import java.util.List;
 
-import apis.ce.InternalComputeEngine;
+import ce.InternalComputeEngineTest;
 
 public class Coordinator {
 
-    private InternalComputeEngine computeEngine;
+    private InternalComputeEngineTest computeEngine;
     private List<Integer> data;
     
-    public Coordinator(InternalComputeEngine computeEngine) {
+    public Coordinator(InternalComputeEngineTest computeEngine) {
         this.computeEngine = computeEngine;
     }
 
