@@ -1,11 +1,18 @@
 package apis.ce;
 
+import placeholders.DatastorePlaceholder;
 import java.util.List;
 
 public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
+    private DatastorePlaceholder dataStore;
+
+    public InternalComputeEngine(DatastorePlaceholder dataStore) {
+        this.dataStore = dataStore;
+    }
+
     
     //this was given to me by eclipse. I think it removes the "unused" error
     @SuppressWarnings("unused")
@@ -25,23 +32,24 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     @Override
     public int getData() {
-		    if (data != null) {
+	if (data != null) {
             return data;
         }
     return 0;
     }
 
     @Override
-    public int compute(int i) {
-        // Need to implement fib. here
-	return 1;
-
+    public int computeNthFibonacci(int i) {
+    	int firstfib = 0;
+    	int secondfib = 1;
+    	while (i != 0) {
+	    int placeholder = firstfib;
+	    firstfib = secondfib;
+            secondfib = placeholder + secondfib;
+            i--;
+    	}
+	return firstfib;
     }
 
-    public void receiveData(List<Integer> data2) {
-        // TODO Auto-generated method stub
-        //This is from the coordinator under test/testutils. Idk if it was supposed to do this or not
-        //-Pippin: 9/27/24 2:27pm
-    }
 
 }

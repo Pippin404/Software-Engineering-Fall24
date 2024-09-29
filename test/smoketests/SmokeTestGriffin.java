@@ -18,12 +18,12 @@ public class SmokeTestGriffin {
     @Test
     public void test() {    
         DataStore ds=new DataStore();
-        InternalComputeEngineTest engine = new InternalComputeEngineTest((apis.ds.DataStore) ds);
+        InternalComputeEngineTest engine = new InternalComputeEngineTest((ds.DataStore) ds);
 
         // Mock the InternalComputeReadingInterface
         InternalComputeEngineTest mockEngine = Mockito.mock(InternalComputeEngineTest.class);
         when(mockEngine.readInData(anyString())).thenReturn(100);
-        when(mockEngine.compute(anyInt())).thenReturn(100);
+        when(mockEngine.computeNthFibonacci(anyInt())).thenReturn(100);
 
         // testing set and get data
         engine.setData(5);
@@ -34,7 +34,7 @@ public class SmokeTestGriffin {
         }
 
         // testing compute() method
-        if (mockEngine.compute(10) == 100) {
+        if (mockEngine.computeNthFibonacci(10) == 100) {
             System.out.println("compute method passed placeholder logic.");
         } else {
             System.out.println("compute method failed.");
