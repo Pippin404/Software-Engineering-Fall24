@@ -1,3 +1,5 @@
+// Placeholder for real data store. Delete this after real one is implemented
+
 package ds;
 
 public class DataStore {
