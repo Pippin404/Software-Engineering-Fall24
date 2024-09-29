@@ -55,6 +55,12 @@ public class DataStoreImplementation implements DataStore {
         
     }
 
+    @Override
+    public StartPrototypeResponse startPrototype(StartPrototypeRequest startPrototypeRequest) {
+        return new StartPrototypeResponse() {
+
+        };
+    }
 
 
 }
