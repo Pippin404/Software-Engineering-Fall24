@@ -1,11 +1,10 @@
 package apis.ds;
 
 import inputoutput.Delimiter;
+import inputoutput.OutputConfig;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -69,8 +68,9 @@ public class DataStoreImplementation implements DataStore {
 
     @Override
     public WriteListToFileResponse writeListToFile(WriteListToFileRequest writeListToFileRequest) {
-        OutputConfig outputInformation = writeListToFileRequest.getOUTPUT_CONFIG();
-        switch (outputInformation.getOUTPUT_TYPE()) {
+        OutputConfig outputConfig = writeListToFileRequest.getOUTPUT_CONFIG();
+
+        switch (outputConfig.getOUTPUT_TYPE()) {
             case CSV -> {
 
             }
@@ -84,9 +84,59 @@ public class DataStoreImplementation implements DataStore {
 
             }
         }
+        return null;
     }
 
-    public WriteIntegerToFileResponse writeIntegerToFile(WriteIntegerToFileRequest writeIntegerToFileRequest, OutputConfig outputConfig){
+    public WriteListToFileResponse writeToTextHandler(Path outputFilePath, String outputFileName, List<Integer> computedIntegers) {
+        return null;
+    }
+
+
+    @Override
+    public WriteIntegerToFileResponse writeIntegerToFile(WriteIntegerToFileRequest writeIntegerToFileRequest) {
+//        instantiated to be more readable
+        OutputConfig outputConfig = writeIntegerToFileRequest.getOUTPUT_CONFIG();
+        int computedInteger = writeIntegerToFileRequest.getComputedInteger();
+
+        switch (outputConfig.getOUTPUT_TYPE()) {
+            case CSV -> {
+
+            }
+            case JSON -> {
+
+            }
+            case TEXT -> {
+                writeToTextHandler(outputConfig.getOUTPUT_PATH(), computedInteger);
+            }
+            case CONSOLE -> {
+
+            }
+        }
+        return null;
+    }
+
+    public WriteIntegerToFileResponse writeToTextHandler(String outputFilePath, int computedInteger) {
+        File file = new File(outputFilePath);
+        FileWriter writer = null;
+        try {
+            // Makes the new file or adds to it if it already exists
+            writer = new FileWriter(file, true);
+            // Add data and a new line to the file
+            writer.write(computedInteger + "\n");
+            // Catch any error, throw exception
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file: " + e.getMessage());
+        } finally {
+            try {
+                if (writer != null) {
+                    writer.close();
+                }
+            } catch (IOException e) {
+                System.out.println("An error occurred while closing the file writer: " + e.getMessage());
+            }
+        }
+
+//        TODO: just returns null for now
         return null;
     }
 
