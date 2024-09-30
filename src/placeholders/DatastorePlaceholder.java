@@ -7,8 +7,9 @@ import java.io.File;
 public class DatastorePlaceholder {
 
     private int storedData;
-    private static final String FILE_NAME = "data.txt";
+    private static final String FILE_NAME = "data.txt"; // name for file written to
 
+    // Everytime storeData is used writeDataToFile activates and writes to data.txt
     public void storeData(int data) {
         this.storedData = data;
         writeDataToFile(data);
@@ -24,17 +25,13 @@ public class DatastorePlaceholder {
         File file = new File(FILE_NAME);
         FileWriter writer = null;
         try {
-            // Use FileWriter with 'true' for append mode
+            // Makes the new file or adds to it if it already exists
             writer = new FileWriter(file, true);
 
-            // Check if the file exists, otherwise create it (FileWriter will handle it)
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            // Append the data and add a new line
+            // Add data and a new line to the file
             writer.write(data + "\n");
 
+        // Catch any error, throw exception
         } catch (IOException e) {
             System.out.println("An error occurred while writing to the file: " + e.getMessage());
         } finally {
