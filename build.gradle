@@ -1,19 +1,17 @@
 apply plugin: 'java'
-apply plugin: 'kotlin'
 apply plugin: 'eclipse'
 
 sourceSets {
-	main {
-	  java {
-		srcDirs = ['src']
-	  }
-	}
-	test {
-	  java {
-	     srcDirs = ['test']
-
-	  }
-	 }
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
 }
 
 repositories {
@@ -23,22 +21,9 @@ repositories {
 dependencies {
     testImplementation('junit:junit:4.12')
     testImplementation('org.junit.jupiter:junit-jupiter:5.10.2')
-	testImplementation('org.mockito:mockito-core:5.10.0')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    testImplementation('org.mockito:mockito-core:5.10.0')
 }
 
 test {
     useJUnitPlatform()
-}
-buildscript {
-    ext.kotlin_version = '2.0.10'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-kotlin {
-    jvmToolchain(20)
 }
