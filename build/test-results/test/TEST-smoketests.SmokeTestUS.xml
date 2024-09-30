@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="smoketests.SmokeTestUS" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-09-30T18:06:19" hostname="PIPS-LAPTOP" time="0.013">
+  <properties/>
+  <testcase name="userInput()" classname="smoketests.SmokeTestUS" time="0.008"/>
+  <testcase name="outputAssignmentTest()" classname="smoketests.SmokeTestUS" time="0.003"/>
+  <system-out><![CDATA[TEXT
+CONSOLE
+CSV
+JSON
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

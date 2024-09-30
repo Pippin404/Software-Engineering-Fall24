@@ -26,7 +26,6 @@ public class SmokeTestUS {
         
     }
     
-    
     @Test
     public void userInput() {
         
