@@ -34,6 +34,8 @@ public class DataStoreImplementation implements DataStore {
                 break;
             case "JSON":
                 break;
+            default:
+                break;
         }
         return null;
     }
@@ -68,21 +70,25 @@ public class DataStoreImplementation implements DataStore {
 
     @Override
     public WriteListToFileResponse writeListToFile(WriteListToFileRequest writeListToFileRequest) {
-        OutputConfig outputConfig = writeListToFileRequest.getOUTPUT_CONFIG();
+        OutputConfig outputConfig = writeListToFileRequest.getOutputConfig();
 
-        switch (outputConfig.getOUTPUT_TYPE()) {
+        switch (outputConfig.getOutputType()) {
             case CSV -> {
-
+                break;
             }
             case JSON -> {
-
+                break;
             }
             case TEXT -> {
-
+                break;
             }
             case CONSOLE -> {
-
+                break;
             }
+            default -> {
+                break;
+            }
+
         }
         return null;
     }
@@ -95,21 +101,25 @@ public class DataStoreImplementation implements DataStore {
     @Override
     public WriteIntegerToFileResponse writeIntegerToFile(WriteIntegerToFileRequest writeIntegerToFileRequest) {
 //        instantiated to be more readable
-        OutputConfig outputConfig = writeIntegerToFileRequest.getOUTPUT_CONFIG();
+        OutputConfig outputConfig = writeIntegerToFileRequest.getOutputConfig();
         int computedInteger = writeIntegerToFileRequest.getComputedInteger();
 
-        switch (outputConfig.getOUTPUT_TYPE()) {
+        switch (outputConfig.getOutputType()) {
             case CSV -> {
-
+                break;
             }
             case JSON -> {
-
+                break;
             }
             case TEXT -> {
-                writeToTextHandler(outputConfig.getOUTPUT_PATH(), computedInteger);
+                writeToTextHandler(outputConfig.getOutputPath(), computedInteger);
+                break;
             }
             case CONSOLE -> {
-
+                break;
+            }
+            default -> {
+                break;
             }
         }
         return null;

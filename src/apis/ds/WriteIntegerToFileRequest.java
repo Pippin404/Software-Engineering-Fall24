@@ -2,20 +2,18 @@ package apis.ds;
 
 import inputoutput.OutputConfig;
 
-import java.util.List;
-
 public class WriteIntegerToFileRequest {
-    private final OutputConfig OUTPUT_CONFIG;
+    private final OutputConfig outputConfig;
 
     private final int computedInteger;
 
-    public WriteIntegerToFileRequest(OutputConfig OUTPUT_CONFIG, int computedInteger) {
-        this.OUTPUT_CONFIG = OUTPUT_CONFIG;
+    public WriteIntegerToFileRequest(OutputConfig outputConfig, int computedInteger) {
+        this.outputConfig = outputConfig;
         this.computedInteger = computedInteger;
     }
 
-    public OutputConfig getOUTPUT_CONFIG() {
-        return OUTPUT_CONFIG;
+    public OutputConfig getOutputConfig() {
+        return outputConfig;
     }
 
     public int getComputedInteger() {

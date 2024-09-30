@@ -5,17 +5,17 @@ import inputoutput.OutputConfig;
 import java.util.List;
 
 public class WriteListToFileRequest {
-    private final OutputConfig OUTPUT_CONFIG;
+    private final OutputConfig outputConfig;
 
     private final List<Integer> parsedIntegerList;
 
-    public WriteListToFileRequest(OutputConfig OUTPUT_CONFIG, List<Integer> parsedIntegerList) {
-        this.OUTPUT_CONFIG = OUTPUT_CONFIG;
+    public WriteListToFileRequest(OutputConfig outputConfig, List<Integer> parsedIntegerList) {
+        this.outputConfig = outputConfig;
         this.parsedIntegerList = parsedIntegerList;
     }
 
-    public OutputConfig getOUTPUT_CONFIG() {
-        return OUTPUT_CONFIG;
+    public OutputConfig getOutputConfig() {
+        return outputConfig;
     }
 
     public List<Integer> getParsedIntegerList() {
