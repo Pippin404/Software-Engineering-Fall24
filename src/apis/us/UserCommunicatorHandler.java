@@ -11,7 +11,7 @@ public interface UserCommunicatorHandler {
     
     
     
-    public void getUserInput();
+    public int getUserInput();
     //MAKE SURE setOutPut type is set??
     //if outPutLocation==null, set it to system.out.println
     //if inputType (Delimiters) is not set, call it to make it up!!

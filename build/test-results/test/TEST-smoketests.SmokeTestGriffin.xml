@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="smoketests.SmokeTestGriffin" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-09-30T18:06:19" hostname="PIPS-LAPTOP" time="0.18">
+  <properties/>
+  <testcase name="test()" classname="smoketests.SmokeTestGriffin" time="0.18"/>
+  <system-out><![CDATA[setData and getData passed.
+compute method passed placeholder logic.
+readInData method passed with mock.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
