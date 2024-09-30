@@ -1,5 +1,7 @@
 package apis.ds;
 
+import inputoutput.OutputConfig;
+
 import java.util.List;
 
 public class WriteListToFileRequest {
