@@ -10,8 +10,17 @@ public class OutputConfig {
     private final File OUTPUT_FILE;
     private final OutputType OUTPUT_TYPE;
 
+
     public OutputConfig(File OUTPUT_FILE, OutputType OUTPUT_TYPE) {
         this.OUTPUT_FILE = OUTPUT_FILE;
         this.OUTPUT_TYPE = OUTPUT_TYPE;
+    }
+
+    public File getOUTPUT_FILE() {
+        return OUTPUT_FILE;
+    }
+
+    public OutputType getOUTPUT_TYPE() {
+        return OUTPUT_TYPE;
     }
 }

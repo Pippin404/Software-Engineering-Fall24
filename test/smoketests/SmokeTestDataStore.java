@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import apis.ds.DataStore;
 import apis.ds.DataStorePrototype;
-import apis.ds.WriteToFileRequest;
+import apis.ds.WriteListToFileRequest;
 import apis.ds.ParseInputFileRequest;
 
 import static org.mockito.Mockito.mock;
@@ -43,9 +43,9 @@ public class SmokeTestDataStore {
 
     @Test
     public void sendDestinationTest() {
-        WriteToFileRequest mockWriteToFileRequest = mock(WriteToFileRequest.class);
+        WriteListToFileRequest mockWriteListToFileRequest = mock(WriteListToFileRequest.class);
 
-        DataStore.sendDestination(mockWriteToFileRequest);
+        DataStore.sendDestination(mockWriteListToFileRequest);
         Assertions.assertEquals(DataStore, null);
     }
 

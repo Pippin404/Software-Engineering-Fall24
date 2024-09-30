@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class DataStoreImplementation implements DataStore {
@@ -69,25 +68,26 @@ public class DataStoreImplementation implements DataStore {
     }
 
     @Override
-    public WriteToFileResponse writeIntegerToFile(WriteToFileRequest writeToFileRequest) {
+    public WriteListToFileResponse writeListToFile(WriteListToFileRequest writeListToFileRequest) {
+        OutputConfig outputInformation = writeListToFileRequest.getOUTPUT_CONFIG();
+        switch (outputInformation.getOUTPUT_TYPE()) {
+            case CSV -> {
+
+            }
+            case JSON -> {
+
+            }
+            case TEXT -> {
+
+            }
+            case CONSOLE -> {
+
+            }
+        }
+    }
+
+    public WriteIntegerToFileResponse writeIntegerToFile(WriteIntegerToFileRequest writeIntegerToFileRequest, OutputConfig outputConfig){
         return null;
-    }
-
-    public ParseInputFileResponse sendInput(ParseInputFileRequest parseInputFileRequest){
-        return new ParseInputFileResponse(new ArrayList<>()) {
-        };
-    }
-
-    public WriteToFileResponse writeToFile(WriteToFileRequest writeToFileRequest){
-        return new WriteToFileResponse() {
-        };
-    }
-
-
-
-    public void storeData(int result) {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
