@@ -12,26 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class DataStoreImplementation implements DataStore {
-    @SuppressWarnings("unused")
-    private DataStore dataStore;
-    @SuppressWarnings("unused")
-    private Iterable<Integer> source;
-    @SuppressWarnings("unused")
-    private WriteToFileResponse destination;
-
-    public Iterable<Integer> read(InputConfig source) {
-        return new Iterable<Integer>() {
-            @Override
-            public Iterator<Integer> iterator() {
-                return null;
-            }
-        };
-    }
-
-    @Override
-    public WriteToFileRequest appendSingleResult(WriteToFileResponse output, String result) {
-        return null;
-    }
 
     @Override
     public ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest) {
@@ -46,7 +26,7 @@ public class DataStoreImplementation implements DataStore {
 
                 List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
 
-//                TODO: Ask if this response would be better off as a class or interface
+//                TODO (Question): Ask if this response would be better off as a class or interface
                 return new ParseInputFileResponse(parsedIntegers);
             case "TEXT":
                 break;
@@ -56,7 +36,7 @@ public class DataStoreImplementation implements DataStore {
         return null;
     }
 
-    //TODO: Double check with the professor if this is the right format to return the parsed ints. Also ask if this is very very slow.
+    //TODO (Question): Double check with the professor if this is the right format to return the parsed ints. Also ask if this is very very slow.
 
     public List<Integer> csvHandler(File inputFile, Delimiter delimiter) {
         List<Integer> parsedIntegers = new ArrayList<>();

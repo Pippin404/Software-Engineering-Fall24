@@ -1,10 +1,6 @@
 package apis.ds;
 
 public interface DataStore {
-    
-    
-    Iterable<Integer> read(InputConfig input);
-    WriteToFileRequest appendSingleResult(WriteToFileResponse output, String result);
 
     ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest);
 
