@@ -1,22 +1,13 @@
 package apis.ds;
 
 public interface DataStore {
-    
-    
-    Iterable<Integer> read(InputConfig input);
-    WriteResult appendSingleResult(OutputConfig output, String result);
 
-    SendInputResponse sendInput(SendInputRequest sendInputRequest);
+    ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest);
 
-    SendOutputResponse sendDestination(SendOutputRequest sendOutputRequest);
+    WriteListToFileResponse writeListToFile(WriteListToFileRequest writeListToFileRequest);
 
-    DelimiterInformation getDelimiterType();
-
-    ChooseDefaultDelimitersResponse chooseDelimiters(ChooseDefaultDelimitersRequest chooseDefaultDelimitersRequest);
-
-    SendDelimitersResponse sendDelimiters(SendDelimitersRequest sendDelimitersRequest);
-    void storeData(int result);//hey so internal computing engineTest sent this here, 
+    WriteIntegerToFileResponse writeIntegerToFile(WriteIntegerToFileRequest writeIntegerToFileRequest);
 
     StartPrototypeResponse startPrototype(StartPrototypeRequest startPrototypeRequest);
-    //im just trying to get this to pass gradle :Pippin, 9/27/24 2:30pm
+
 }

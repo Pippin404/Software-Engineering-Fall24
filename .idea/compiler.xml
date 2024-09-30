@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="21" />
+    <bytecodeTargetLevel target="21">
+      <module name="Software-Engineering-Fall24" target="20" />
+      <module name="Software-Engineering-Fall24.main" target="20" />
+      <module name="Software-Engineering-Fall24.test" target="20" />
+    </bytecodeTargetLevel>
   </component>
 </project>

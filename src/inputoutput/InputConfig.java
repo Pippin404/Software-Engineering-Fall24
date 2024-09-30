@@ -1,4 +1,4 @@
-package apis.ds;
+package inputoutput;
 
 public interface InputConfig {
 }
