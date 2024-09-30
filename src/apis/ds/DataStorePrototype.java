@@ -10,7 +10,7 @@ public class DataStorePrototype {
         ParseInputFileResponse parseInputFile = dataStore.parseInputFile(new ParseInputFileRequest(null, null, null));
 
 //        write those integers into the output file
-        WriteToFileResponse writeToFileResponse = dataStore.writeIntegerToFile(new WriteToFileRequest());
+        WriteToFileResponse writeToFileResponse = dataStore.writeIntegerToFile(new WriteToFileRequest(null, null));
 
     }
 }

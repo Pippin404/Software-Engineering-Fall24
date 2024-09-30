@@ -13,6 +13,8 @@ import java.util.List;
 
 public class DataStoreImplementation implements DataStore {
 
+//    The actual data store itself doesn't store variables, it just processes requests to store them in other places
+
     @Override
     public ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest) {
 //        this is only instantiated to be easier to read
@@ -27,7 +29,9 @@ public class DataStoreImplementation implements DataStore {
                 List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
 
 //                TODO (Question): Ask if this response would be better off as a class or interface
+//                returns the parsed integers to the CE
                 return new ParseInputFileResponse(parsedIntegers);
+
             case "TEXT":
                 break;
             case "JSON":
