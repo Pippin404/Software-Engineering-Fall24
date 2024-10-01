@@ -86,19 +86,19 @@ public class DataStore implements DataStoreInterface {
         OutputConfig outputConfig = writeListToFileRequest.getOutputConfig();
 
         switch (outputConfig.getOutputType()) {
-            case CSV -> {
+            case CSV: {
                 break;
             }
-            case JSON -> {
+            case JSON: {
                 break;
             }
-            case TEXT -> {
+            case TEXT: {
                 break;
             }
-            case CONSOLE -> {
+            case CONSOLE: {
                 break;
             }
-            default -> {
+            default: {
                 break;
             }
 
@@ -118,20 +118,20 @@ public class DataStore implements DataStoreInterface {
         int computedInteger = writeIntegerToFileRequest.getComputedInteger();
 
         switch (outputConfig.getOutputType()) {
-            case CSV -> {
+            case CSV: {
                 break;
             }
-            case JSON -> {
+            case JSON: {
                 break;
             }
-            case TEXT -> {
+            case TEXT: {
                 writeToTextHandler(outputConfig.getOutputPath(), computedInteger);
                 break;
             }
-            case CONSOLE -> {
+            case CONSOLE: {
                 break;
             }
-            default -> {
+            default: {
                 break;
             }
         }

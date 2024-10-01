@@ -10,6 +10,7 @@ public class UserCommunicatorImpl implements UserCommunicatorHandler{
     OutputType output=OutputType.CONSOLE;
     String outPutLocation=null;
     String inputType=null;
+    int data=5;
     
     //SEE THE UserCommHandler TO FIND OUT WHAT THESE DO!!!
     
@@ -30,6 +31,7 @@ public class UserCommunicatorImpl implements UserCommunicatorHandler{
         System.out.println("User input retrieved");
         return num;
         */
+        this.data=5;
         return 5;
     }
     @Override

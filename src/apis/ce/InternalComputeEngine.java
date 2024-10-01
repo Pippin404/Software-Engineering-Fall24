@@ -6,6 +6,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
+    @SuppressWarnings("unused")
     private DataStore dataStore;
 
     public InternalComputeEngine(DataStore dataStore) {
