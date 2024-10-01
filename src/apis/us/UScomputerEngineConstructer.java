@@ -12,12 +12,18 @@ public class UScomputerEngineConstructer {
         public UScomputerEngineConstructer(InternalComputeEngine computeEngine) {
             // TODO Auto-generated constructor stub
         }
-        
+
+//        TODO: That is a crazy solution to a null pointer problem we should not do this lmao
         public void setData() {
             //Ask the rest of my code for the data
             //set the data in computerEngine to the data we get from my other code
             //right now it just returns 5
-            commHandler.getUserInput();
+            if(commHandler==null) {
+                @SuppressWarnings("unused")
+                UserCommunicatorImpl commHandler=new UserCommunicatorImpl();
+
+            }
+            this.data = commHandler.getUserInput();
         }
 
         public Integer getData() {

@@ -2,7 +2,7 @@ package ds;
 
 import org.mockito.Mockito;
 
-import apis.ds.DataStore;
+import apis.ds.DataStoreInterface;
 import apis.ds.DataStorePrototype;
 
 
@@ -13,12 +13,12 @@ public class DataStoreTest {
 
 
     public static void main(String[] args) {
-        DataStore mockInput = Mockito.mock(DataStore.class);
+        DataStoreInterface mockInput = Mockito.mock(DataStoreInterface.class);
         prototype(mockInput);
     }
 
-    static void prototype(DataStore dataStore){
+    static void prototype(DataStoreInterface dataStoreInterface){
 //        not sure if this is how I'm supposed to do it
-        DataStorePrototype.prototypeCode(dataStore);
+        DataStorePrototype.prototypeCode(dataStoreInterface);
     }
 }
