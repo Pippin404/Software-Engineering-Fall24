@@ -1,4 +1,6 @@
 import apis.ds.DataStore;
+import apis.ce.InternalComputeEngine;
+import apis.us.UScomputerEngineConstructer;
 
 
 public class SRCIntegrationTest {
@@ -9,10 +11,10 @@ public class SRCIntegrationTest {
         DataStore dataStore = new DataStore();
 
         // Initializing internal compute engine with template datastore
-        apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine(dataStore);
+        InternalComputeEngine computeEngine = new InternalComputeEngine(dataStore);
 
         // Initialize Coordinator with InternalComputeEngine
-        apis.us.UScomputerEngineConstructer coordinator = new apis.us.UScomputerEngineConstructer(computeEngine);
+        UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine);
 
         
         //Pippin's UScomputerEngineConstructor will use this function to add the data inputed to the user
