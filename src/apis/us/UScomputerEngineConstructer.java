@@ -15,15 +15,19 @@ public class UScomputerEngineConstructer {
 
 //        TODO: That is a crazy solution to a null pointer problem we should not do this lmao
         public void setData() {
-            //Ask the rest of my code for the data
-            //set the data in computerEngine to the data we get from my other code
-            //right now it just returns 5
+            
             if(commHandler==null) {
                 @SuppressWarnings("unused")
                 UserCommunicatorImpl commHandler=new UserCommunicatorImpl();
-
+                
             }
-            this.data = commHandler.getUserInput();
+            
+            //Ask the rest of my code for the data
+            //set the data in computerEngine to the data we get from my other code
+            //right now it just returns 5
+            
+            //int tempTest=commHandler.data;
+            this.data = 5;
         }
 
         public Integer getData() {
@@ -37,6 +41,7 @@ public class UScomputerEngineConstructer {
         public void sendDataToComputeEngine() {
             System.out.println("US: Adding data to computeEngine.data");
             computeEngine.setData(data);
+            this.setData();
         }
         
 }
