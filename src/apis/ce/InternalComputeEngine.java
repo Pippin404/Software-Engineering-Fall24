@@ -1,15 +1,14 @@
 package apis.ce;
 
-import placeholders.DatastorePlaceholder;
-import java.util.List;
+import apis.ds.DataStore;
 
 public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
-    private DatastorePlaceholder dataStore;
+    private DataStore dataStore;
 
-    public InternalComputeEngine(DatastorePlaceholder dataStore) {
+    public InternalComputeEngine(DataStore dataStore) {
         this.dataStore = dataStore;
     }
 
