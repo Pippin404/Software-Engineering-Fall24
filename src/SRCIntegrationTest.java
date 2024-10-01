@@ -1,8 +1,4 @@
-import java.util.List;
-import java.util.Arrays;
-import apis.ce.InternalComputeEngine;
-import placeholders.DatastorePlaceholder;
-
+import apis.ds.DataStore;
 
 
 public class SRCIntegrationTest {
@@ -10,8 +6,8 @@ public class SRCIntegrationTest {
 
     public static void main(String[] args) {
         // Initializing template datastore
-        placeholders.DatastorePlaceholder dataStore = new placeholders.DatastorePlaceholder();
-        
+        DataStore dataStore = new DataStore();
+
         // Initializing internal compute engine with template datastore
         apis.ce.InternalComputeEngine computeEngine = new apis.ce.InternalComputeEngine(dataStore);
 
@@ -29,13 +25,13 @@ public class SRCIntegrationTest {
       //--------------------------------------
         
         
-        dataStore.storeData(computeEngine.computeNthFibonacci(computeEngine.getData()));
+        dataStore.setData(computeEngine.computeNthFibonacci(computeEngine.getData()));
       
        
 
 
         // Retrieve data from DataStore
-        int finalResult = dataStore.getStoredData();
+        int finalResult = dataStore.getData();
         System.out.println("Integration Test: Final result in Data Store is " + finalResult);
     }
 }
