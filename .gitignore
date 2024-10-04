@@ -3,3 +3,9 @@
 .settings/org.eclipse.jdt.ui.prefs
 .classpath
 build
+.gradle
+.idea
+bin
+gradle
+
+
