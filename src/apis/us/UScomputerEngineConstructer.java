@@ -7,7 +7,7 @@ public class UScomputerEngineConstructer {
         //Make an "InternalComputeEngine" to pass the data to the CE
         private InternalComputeEngine computeEngine;
         private Integer data;
-        private UserCommunicatorImpl commHandler;
+        private UserCommunicatorImpl commHandler=null;
         
         public UScomputerEngineConstructer(InternalComputeEngine computeEngine) {
             // TODO Auto-generated constructor stub
@@ -21,6 +21,15 @@ public class UScomputerEngineConstructer {
                 UserCommunicatorImpl commHandler=new UserCommunicatorImpl();
                 
             }
+            
+            try {
+                commHandler.getUserInput();
+            } catch (Exception e) {
+                System.out.println("Input must be >0");
+                e.printStackTrace();
+                this.data=1;
+            }
+            
             
             //Ask the rest of my code for the data
             //set the data in computerEngine to the data we get from my other code
