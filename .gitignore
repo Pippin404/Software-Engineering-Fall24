@@ -2,10 +2,13 @@
 .settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.jdt.ui.prefs
 .classpath
-build
-.gradle
-.idea
+.github
 bin
-gradle
 
+#compiled builds
+build
+.build
+
+#compiled class files
+*.class
 
