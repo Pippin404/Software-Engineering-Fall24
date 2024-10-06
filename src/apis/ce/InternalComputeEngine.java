@@ -44,7 +44,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     }
 
     @Override
-    public void validateData(Integer i) {
+    public void validateData(int i) {
         if (i == null) {
             throw new IllegalArgumentException("Data cannot be null");
         }
