@@ -1,16 +1,31 @@
 package apis.ds;
 
 import inputoutput.OutputConfig;
+import statuscodes.ParameterResponseCode;
 
 public class WriteIntegerToFileRequest {
-    private final OutputConfig outputConfig;
+    private OutputConfig outputConfig;
 
-    private final int computedInteger;
+    private int computedInteger;
 
+    private ParameterResponseCode parameterResponseCode;
 
     public WriteIntegerToFileRequest(OutputConfig outputConfig, int computedInteger) {
-        this.outputConfig = outputConfig;
-        this.computedInteger = computedInteger;
+        try {
+            if (outputConfig == null) {
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
+                throw new IllegalArgumentException("Output config cannot be null.");
+            } else {
+                this.outputConfig = outputConfig;
+            }
+
+//            don't check for computedInteger being null because the compiler won't let someone put null for a primitive int in a parameter to begin with
+
+            parameterResponseCode = ParameterResponseCode.VALID_PARAMETERS;
+
+        } catch(IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 
     public OutputConfig getOutputConfig() {
@@ -19,5 +34,9 @@ public class WriteIntegerToFileRequest {
 
     public int getComputedInteger() {
         return computedInteger;
+    }
+
+    public ParameterResponseCode getParameterResponseCode() {
+        return parameterResponseCode;
     }
 }
