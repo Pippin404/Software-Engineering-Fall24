@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DataStore implements DataStoreInterface {
 
-//    the implementation of other apis might handle the passing of data differently and need to access it like this
+    //    the implementation of other apis might handle the passing of data differently and need to access it like this
     private int data;
 
     public int getData() {
@@ -31,34 +31,42 @@ public class DataStore implements DataStoreInterface {
 
     @Override
     public ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest) {
-//        this is only instantiated to be easier to read
-        Delimiter delimiter = parseInputFileRequest.getDelimiter();
-        switch (delimiter.getValue()) {
-            case "CONSOLE":
-                break;
-            case "CSV":
+        try {
+            //this is only instantiated to be easier to read
+            Delimiter delimiter = parseInputFileRequest.getDelimiter();
+            switch (delimiter.getValue()) {
+                case "CONSOLE":
+                    break;
+                case "CSV":
 //                this is only instantiated to be easier to read
-                InputConfig inputConfig = parseInputFileRequest.getInputConfig();
+                    InputConfig inputConfig = parseInputFileRequest.getInputConfig();
 
-                File inputFile = inputConfig.getInputFile();
+                    File inputFile = inputConfig.getInputFile();
 
-                FileResponseCode fileResponseCode = parseInputFileRequest.getParseInputFileResponseCode();
-                ParameterResponseCode parameterResponseCode = parseInputFileRequest.getBasicResponseCode();
+                    FileResponseCode fileResponseCode = parseInputFileRequest.getParseInputFileResponseCode();
+                    ParameterResponseCode parameterResponseCode = parseInputFileRequest.getBasicResponseCode();
 
-                List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
+                    List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
 
 //                returns the parsed integers to the CE
-                return new ParseInputFileResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
+                    return new ParseInputFileResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
+                case "TEXT":
+                    break;
+                case "JSON":
+                    break;
+                default:
+                    break;
+            }
 
-            case "TEXT":
-                break;
-            case "JSON":
-                break;
-            default:
-                break;
+        } catch (Exception e) {
+            System.out.println("Uncaught exception in API boundary.");
+            e.printStackTrace();
         }
+//        TODO: Should not return null like this
         return null;
     }
+
+
 
 //    Handler methods are private because they should only be called by other methods in the class. They rely on processed information that should only be passed if the requests pass certain checks
 
@@ -92,26 +100,32 @@ public class DataStore implements DataStoreInterface {
 
     @Override
     public WriteListToFileResponse writeListToFile(WriteListToFileRequest writeListToFileRequest) {
-        OutputConfig outputConfig = writeListToFileRequest.getOutputConfig();
+        try {
+            OutputConfig outputConfig = writeListToFileRequest.getOutputConfig();
 
-        switch (outputConfig.getOutputType()) {
-            case CSV: {
-                break;
-            }
-            case JSON: {
-                break;
-            }
-            case TEXT: {
-                break;
-            }
-            case CONSOLE: {
-                break;
-            }
-            default: {
-                break;
-            }
+            switch (outputConfig.getOutputType()) {
+                case CSV: {
+                    break;
+                }
+                case JSON: {
+                    break;
+                }
+                case TEXT: {
+                    break;
+                }
+                case CONSOLE: {
+                    break;
+                }
+                default: {
+                    break;
+                }
 
+            }
+        } catch(Exception e) {
+            System.out.println("Uncaught exception in API boundary.");
+            e.printStackTrace();
         }
+//        TODO: Should not return null
         return null;
     }
 
@@ -122,29 +136,35 @@ public class DataStore implements DataStoreInterface {
 
     @Override
     public WriteIntegerToFileResponse writeIntegerToFile(WriteIntegerToFileRequest writeIntegerToFileRequest) {
-//        instantiated to be more readable
-        OutputConfig outputConfig = writeIntegerToFileRequest.getOutputConfig();
-        int computedInteger = writeIntegerToFileRequest.getComputedInteger();
+        try {
+            //        instantiated to be more readable
+            OutputConfig outputConfig = writeIntegerToFileRequest.getOutputConfig();
+            int computedInteger = writeIntegerToFileRequest.getComputedInteger();
 
-        switch (outputConfig.getOutputType()) {
-            case CSV: {
-                break;
+            switch (outputConfig.getOutputType()) {
+                case CSV: {
+                    break;
+                }
+                case JSON: {
+                    break;
+                }
+                case TEXT: {
+                    writeToTextHandler(outputConfig.getOutputPath(), computedInteger);
+                    break;
+                }
+                case CONSOLE: {
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
-            case JSON: {
-                break;
-            }
-            case TEXT: {
-                writeToTextHandler(outputConfig.getOutputPath(), computedInteger);
-                break;
-            }
-            case CONSOLE: {
-                break;
-            }
-            default: {
-                break;
-            }
+
+        } catch(Exception e) {
+            System.out.println("Uncaught exception in API boundary.");
+            e.printStackTrace();
         }
-//        TODO: bad, unfinished, add implementation
+        //        TODO: bad, unfinished, add implementation
         return new WriteIntegerToFileResponse(BasicResponseCode.FAILURE);
     }
 
