@@ -10,24 +10,19 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     private DataStore dataStore;
 
     public InternalComputeEngine(DataStore dataStore) {
-        this.dataStore = dataStore;
+        if (dataStore == null) {
+            throw new IllegalArgumentException("DataStore cannot be null");
+        }
+	this.dataStore = dataStore;
     }
 
     
-    //this was given to me by eclipse. I think it removes the "unused" error. Pippin assignment 4
-    @SuppressWarnings("unused")
-    private String message = null;
-
-    
-	
-    @Override
-    public int readInData(String i) {
-    return 0;
-    }
-
     @Override
     public void setData(int i) {
-       data = i;
+        if (i < 0) {
+            throw new IllegalArgumentException("Data cannot be negative");
+    	}
+    data = i;
     }
 
     @Override
@@ -40,6 +35,9 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     @Override
     public int computeNthFibonacci(int i) {
+	if (i < 0) {
+            throw new IllegalArgumentException("Fibonacci index cannot be negative");
+    	}
     	int firstfib = 0;
     	int secondfib = 1;
     	while (i != 0) {
