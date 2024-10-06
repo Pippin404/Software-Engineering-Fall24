@@ -18,12 +18,6 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     @SuppressWarnings("unused")
     private String message = null;
 
-    
-	
-    @Override
-    public int readInData(String i) {
-    return 0;
-    }
 
     @Override
     public void setData(int i) {
@@ -49,6 +43,16 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
             i--;
     	}
 	return firstfib;
+    }
+
+    @Override
+    public void validateData(Integer i) {
+        if (i == null) {
+            throw new IllegalArgumentException("Data cannot be null");
+        }
+        if (i < 0) {
+            throw new IllegalArgumentException("Data cannot be negative");
+        }
     }
 
 
