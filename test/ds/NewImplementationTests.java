@@ -5,10 +5,7 @@ import apis.ds.ParseInputFileRequest;
 import apis.ds.ParseInputFileResponse;
 import apis.ds.WriteIntegerToFileRequest;
 import apis.ds.DataStore;
-import inputoutput.Delimiter;
-import inputoutput.InputType;
-import inputoutput.OutputConfig;
-import inputoutput.OutputType;
+import inputoutput.*;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -31,7 +28,10 @@ public class NewImplementationTests {
         DataStore ds = new DataStore();
 
         File inputFile = new File("D:\\New Desktop on Hard drive\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\csvTest.txt");
-        ParseInputFileRequest request = new ParseInputFileRequest(inputFile, InputType.CSV, Delimiter.COMMA);
+
+        InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
+
+        ParseInputFileRequest request = new ParseInputFileRequest(inputConfig, Delimiter.COMMA);
 
         ParseInputFileResponse response = ds.parseInputFile(request);
 

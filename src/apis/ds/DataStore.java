@@ -1,6 +1,7 @@
 package apis.ds;
 
 import inputoutput.Delimiter;
+import inputoutput.InputConfig;
 import inputoutput.OutputConfig;
 import statuscodes.BasicResponseCode;
 import statuscodes.FileResponseCode;
@@ -37,7 +38,11 @@ public class DataStore implements DataStoreInterface {
                 break;
             case "CSV":
 //                this is only instantiated to be easier to read
-                File inputFile = parseInputFileRequest.getInputFile();
+                InputConfig inputConfig = parseInputFileRequest.getInputConfig();
+
+                File inputFile = inputConfig.getInputFile();
+
+
                 FileResponseCode fileResponseCode = parseInputFileRequest.getParseInputFileResponseCode();
                 BasicResponseCode basicResponseCode = parseInputFileRequest.getBasicResponseCode();
 

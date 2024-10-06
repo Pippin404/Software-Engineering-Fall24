@@ -24,7 +24,7 @@ public class OutputConfig {
         try {
             if(outputPath == null) {
                 basicResponseCode = BasicResponseCode.NULL_PARAMETER;
-                throw new IllegalArgumentException("Output config cannot be null.");
+                throw new IllegalArgumentException("Output path cannot be null.");
             } else {
                 this.outputPath = outputPath;
             }

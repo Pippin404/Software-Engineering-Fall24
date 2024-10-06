@@ -7,6 +7,7 @@ public class WriteIntegerToFileRequest {
 
     private final int computedInteger;
 
+
     public WriteIntegerToFileRequest(OutputConfig outputConfig, int computedInteger) {
         this.outputConfig = outputConfig;
         this.computedInteger = computedInteger;
