@@ -2,7 +2,7 @@ package apis.ds;
 
 import inputoutput.Delimiter;
 import inputoutput.InputConfig;
-import statuscodes.BasicResponseCode;
+import statuscodes.ParameterResponseCode;
 import statuscodes.FileResponseCode;
 
 public class ParseInputFileRequest  {
@@ -11,7 +11,7 @@ public class ParseInputFileRequest  {
     private InputConfig inputConfig;
 
 //    status codes for error handling
-    private BasicResponseCode basicResponseCode;
+    private ParameterResponseCode parameterResponseCode;
     private FileResponseCode fileResponseCode;
 
     public Delimiter getDelimiter() {
@@ -22,8 +22,8 @@ public class ParseInputFileRequest  {
         return inputConfig;
     }
 
-    public BasicResponseCode getBasicResponseCode() {
-        return basicResponseCode;
+    public ParameterResponseCode getBasicResponseCode() {
+        return parameterResponseCode;
     }
 
     public FileResponseCode getParseInputFileResponseCode() {
@@ -33,7 +33,7 @@ public class ParseInputFileRequest  {
     public ParseInputFileRequest(InputConfig inputConfig, Delimiter delimiter) {
         try {
             if (inputConfig == null) {
-                basicResponseCode = BasicResponseCode.NULL_PARAMETER;
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
                 throw new IllegalArgumentException("Input config cannot be null.");
             } else {
                 this.inputConfig = inputConfig;
@@ -43,10 +43,10 @@ public class ParseInputFileRequest  {
             if (delimiter != null) {
                 this.delimiter = delimiter;
             } else {
-                basicResponseCode = BasicResponseCode.NULL_PARAMETER;
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
                 throw new IllegalArgumentException("Delimiter type cannot be null.");
             }
-            basicResponseCode = BasicResponseCode.VALID_PARAMETERS;
+            parameterResponseCode = ParameterResponseCode.VALID_PARAMETERS;
 
         } catch(IllegalArgumentException e) {
             e.printStackTrace();

@@ -1,6 +1,6 @@
 package inputoutput;
 
-import statuscodes.BasicResponseCode;
+import statuscodes.ParameterResponseCode;
 import statuscodes.FileResponseCode;
 
 import java.io.File;
@@ -11,14 +11,14 @@ public class InputConfig {
     private File inputFile;
     private InputType inputType;
 
-    private BasicResponseCode basicResponseCode;
+    private ParameterResponseCode parameterResponseCode;
     private FileResponseCode fileResponseCode;
 
     public InputConfig(File inputFile, InputType inputType) {
         try {
 //            check in this order because if it's null, and you call inputFile.exists() it could cause a null pointer problem before reaching the other checks
             if(inputFile == null) {
-                basicResponseCode = BasicResponseCode.NULL_PARAMETER;
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
                 throw new IllegalArgumentException("Input file cannot be null.");
             } else if(inputFile.exists()) {
                 fileResponseCode = FileResponseCode.VALID_FILE;
@@ -29,7 +29,7 @@ public class InputConfig {
             }
 
             if (inputType == null) {
-                basicResponseCode = BasicResponseCode.NULL_PARAMETER;
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
                 throw new IllegalArgumentException("Input type cannot be null.");
             } else {
                 this.inputType = inputType;
@@ -52,8 +52,8 @@ public class InputConfig {
         return inputType;
     }
 
-    public BasicResponseCode getBasicResponseCode() {
-        return basicResponseCode;
+    public ParameterResponseCode getBasicResponseCode() {
+        return parameterResponseCode;
     }
 
     public FileResponseCode getFileResponseCode() {

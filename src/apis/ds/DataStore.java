@@ -4,8 +4,8 @@ import inputoutput.Delimiter;
 import inputoutput.InputConfig;
 import inputoutput.OutputConfig;
 import statuscodes.BasicResponseCode;
+import statuscodes.ParameterResponseCode;
 import statuscodes.FileResponseCode;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -42,14 +42,13 @@ public class DataStore implements DataStoreInterface {
 
                 File inputFile = inputConfig.getInputFile();
 
-
                 FileResponseCode fileResponseCode = parseInputFileRequest.getParseInputFileResponseCode();
-                BasicResponseCode basicResponseCode = parseInputFileRequest.getBasicResponseCode();
+                ParameterResponseCode parameterResponseCode = parseInputFileRequest.getBasicResponseCode();
 
                 List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
 
 //                returns the parsed integers to the CE
-                return new ParseInputFileResponse(parsedIntegers, fileResponseCode, basicResponseCode);
+                return new ParseInputFileResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
 
             case "TEXT":
                 break;
@@ -60,8 +59,6 @@ public class DataStore implements DataStoreInterface {
         }
         return null;
     }
-
-    //TODO (Question): Double check with the professor if this is the right format to return the parsed ints. Also ask if this is very very slow.
 
 //    Handler methods are private because they should only be called by other methods in the class. They rely on processed information that should only be passed if the requests pass certain checks
 
@@ -84,8 +81,10 @@ public class DataStore implements DataStoreInterface {
             return parsedIntegers;
         } catch (IndexOutOfBoundsException e) {
             System.out.println("File not found!");
+            e.printStackTrace();
             throw new RuntimeException(e);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
 
@@ -169,8 +168,7 @@ public class DataStore implements DataStoreInterface {
             }
         }
 
-//        TODO: just returns null for now
-        return null;
+        return new WriteIntegerToFileResponse(BasicResponseCode.SUCCESS);
     }
 
     @Override

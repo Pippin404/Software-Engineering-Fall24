@@ -1,12 +1,7 @@
 package inputoutput;
 
-import statuscodes.BasicResponseCode;
+import statuscodes.ParameterResponseCode;
 import statuscodes.FileResponseCode;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class OutputConfig {
 //    this is necessary so the request to write to files doesn't need a million different variables
@@ -14,7 +9,7 @@ public class OutputConfig {
     private String outputPath;
     private OutputType outputType;
 
-    private BasicResponseCode basicResponseCode;
+    private ParameterResponseCode parameterResponseCode;
     private FileResponseCode fileResponseCode;
 
 
@@ -23,7 +18,7 @@ public class OutputConfig {
 //        TODO: Check if the output path is valid
         try {
             if(outputPath == null) {
-                basicResponseCode = BasicResponseCode.NULL_PARAMETER;
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
                 throw new IllegalArgumentException("Output path cannot be null.");
             } else {
                 this.outputPath = outputPath;
@@ -32,10 +27,10 @@ public class OutputConfig {
             if(outputType != null) {
                 this.outputType = outputType;
             } else {
-                basicResponseCode = BasicResponseCode.NULL_PARAMETER;
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
                 throw new IllegalArgumentException("Output type cannot be null.");
             }
-            basicResponseCode = BasicResponseCode.VALID_PARAMETERS;
+            parameterResponseCode = ParameterResponseCode.VALID_PARAMETERS;
 
         } catch(IllegalArgumentException e) {
             e.printStackTrace();
@@ -50,8 +45,8 @@ public class OutputConfig {
         return outputType;
     }
 
-    public BasicResponseCode getBasicResponseCode() {
-        return basicResponseCode;
+    public ParameterResponseCode getBasicResponseCode() {
+        return parameterResponseCode;
     }
 
     public FileResponseCode getFileResponseCode() {

@@ -1,10 +1,8 @@
 package statuscodes;
 
-public enum BasicResponseCode implements Success {
+public enum BasicResponseCode {
     SUCCESS(true),
-    FAILURE(false),
-    VALID_PARAMETERS(true),
-    NULL_PARAMETER(false);
+    FAILURE(false);
     private boolean success;
 
     private BasicResponseCode(boolean success) {
@@ -13,5 +11,4 @@ public enum BasicResponseCode implements Success {
     public boolean success() {
         return success;
     }
-
 }
