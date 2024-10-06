@@ -18,7 +18,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     
     @Override
-    public void setData(int i) {
+    public void setData(Integer i) {
     validateData(i);
     data = i;
     }
@@ -30,7 +30,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     }
 
     @Override
-    public int computeNthFibonacci(int i) {
+    public Integer computeNthFibonacci(Integer i) {
 	validateData(i);
     	int firstfib = 0;
     	int secondfib = 1;
@@ -44,7 +44,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     }
 
     @Override
-    public void validateData(int i) {
+    public void validateData(Integer i) {
         if (i == null) {
             throw new IllegalArgumentException("Data cannot be null");
         }
