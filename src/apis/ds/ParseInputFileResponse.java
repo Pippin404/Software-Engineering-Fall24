@@ -17,6 +17,9 @@ public class ParseInputFileResponse {
         this.parameterResponseCode = parameterResponseCode;
     }
 
+    public ParseInputFileResponse() {
+    }
+
     public List<Integer> getParsedIntegers() {
         return parsedIntegers;
     }

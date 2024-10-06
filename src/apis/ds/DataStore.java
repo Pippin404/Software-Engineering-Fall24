@@ -2,6 +2,7 @@ package apis.ds;
 
 import inputoutput.Delimiter;
 import inputoutput.InputConfig;
+import inputoutput.InputType;
 import inputoutput.OutputConfig;
 import statuscodes.BasicResponseCode;
 import statuscodes.ParameterResponseCode;
@@ -32,14 +33,17 @@ public class DataStore implements DataStoreInterface {
     @Override
     public ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest) {
         try {
-            //this is only instantiated to be easier to read
-            Delimiter delimiter = parseInputFileRequest.getDelimiter();
-            switch (delimiter.getValue()) {
+//            FIX: this should be switching on inputType not delimiter
+            InputType inputType = parseInputFileRequest.getInputConfig().getInputType();
+            switch (inputType.getValue()) {
                 case "CONSOLE":
                     break;
                 case "CSV":
 //                this is only instantiated to be easier to read
                     InputConfig inputConfig = parseInputFileRequest.getInputConfig();
+
+                    Delimiter delimiter = parseInputFileRequest.getDelimiter();
+
 
                     File inputFile = inputConfig.getInputFile();
 
@@ -62,8 +66,8 @@ public class DataStore implements DataStoreInterface {
             System.out.println("Uncaught exception in API boundary.");
             e.printStackTrace();
         }
-//        TODO: Should not return null like this
-        return null;
+//        TODO: This is causing a bug where the ParseInputFileResponse is always empty, find a way to have it be returned in the try catch only
+        return new ParseInputFileResponse();
     }
 
 
