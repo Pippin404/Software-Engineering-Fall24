@@ -6,7 +6,9 @@ import apis.ds.ParseInputFileResponse;
 import apis.ds.WriteIntegerToFileRequest;
 import apis.ds.DataStore;
 import inputoutput.*;
-import org.junit.Test;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +28,7 @@ public class NewImplementationTests {
     public void parseCSVTest() {
         DataStore ds = new DataStore();
 
-        File inputFile = new File("D:\\New Desktop on Hard drive\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\csvTest.txt");
+        File inputFile = new File("C:\\Users\\eribr\\Desktop\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\iotests\\csvTest.txt");
 
         InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
 
@@ -35,6 +37,7 @@ public class NewImplementationTests {
         ParseInputFileResponse response = ds.parseInputFile(request);
 
         List<Integer> parsedResult = response.getParsedIntegers();
+
 
         List<Integer> expectedResult = new ArrayList<Integer>(
           Arrays.asList(1, 2, 3, 4, 5)

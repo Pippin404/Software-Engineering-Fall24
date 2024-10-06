@@ -4,6 +4,7 @@ import apis.ds.ParseInputFileRequest;
 import inputoutput.Delimiter;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
@@ -46,6 +47,18 @@ public class FileReading {
         InputConfig inputConfig = new InputConfig(inputFile, mockInputType);
 
         exception.expect(FileNotFoundException.class);
+
+    }
+
+    @Test
+    public void validFileTest() {
+//        mock everything but the input file in InputConfig, have it be a fake file
+//        inputConfig isn't mocked because i'm testing the constructor for it
+        File inputFile = new File("C:\\Users\\eribr\\Desktop\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\iotests\\csvTest.txt");
+        InputType mockInputType = Mockito.mock(InputType.class);
+//        InputConfig inputConfig = new InputConfig(inputFile, mockInputType);
+
+        Assert.assertTrue(inputFile.exists());
 
     }
 
