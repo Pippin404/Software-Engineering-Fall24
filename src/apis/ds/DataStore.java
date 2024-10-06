@@ -58,7 +58,9 @@ public class DataStore implements DataStoreInterface {
 
     //TODO (Question): Double check with the professor if this is the right format to return the parsed ints. Also ask if this is very very slow.
 
-    public List<Integer> csvHandler(File inputFile, Delimiter delimiter) {
+//    Handler methods are private because they should only be called by other methods in the class. They rely on processed information that should only be passed if the requests pass certain checks
+
+    private List<Integer> csvHandler(File inputFile, Delimiter delimiter) {
         List<Integer> parsedIntegers = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
@@ -109,7 +111,7 @@ public class DataStore implements DataStoreInterface {
         return null;
     }
 
-    public WriteListToFileResponse writeToTextHandler(Path outputFilePath, String outputFileName, List<Integer> computedIntegers) {
+    private WriteListToFileResponse writeToTextHandler(Path outputFilePath, String outputFileName, List<Integer> computedIntegers) {
         return null;
     }
 
@@ -141,7 +143,7 @@ public class DataStore implements DataStoreInterface {
         return null;
     }
 
-    public WriteIntegerToFileResponse writeToTextHandler(String outputFilePath, int computedInteger) {
+    private WriteIntegerToFileResponse writeToTextHandler(String outputFilePath, int computedInteger) {
         File file = new File(outputFilePath);
         FileWriter writer = null;
         try {
