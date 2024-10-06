@@ -144,7 +144,8 @@ public class DataStore implements DataStoreInterface {
                 break;
             }
         }
-        return null;
+//        TODO: bad, unfinished, add implementation
+        return new WriteIntegerToFileResponse(BasicResponseCode.FAILURE);
     }
 
     private WriteIntegerToFileResponse writeToTextHandler(String outputFilePath, int computedInteger) {
