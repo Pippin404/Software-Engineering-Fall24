@@ -25,7 +25,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     @Override
     public int getData() {
-    validateData(i);
+    validateData(this.data);
     return 0;
     }
 
