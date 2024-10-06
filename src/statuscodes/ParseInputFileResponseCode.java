@@ -1,6 +1,6 @@
 package statuscodes;
 
-public enum ParseInputFileResponseCode {
+public enum ParseInputFileResponseCode implements Success {
     VALID_FILE(true),
     INVALID_FILE(false);
     private boolean success;
