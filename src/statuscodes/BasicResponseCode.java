@@ -2,7 +2,9 @@ package statuscodes;
 
 public enum BasicResponseCode {
     SUCCESS(true),
-    FAILURE(false);
+    FAILURE(false),
+    VALID_PARAMETERS(true),
+    NULL_PARAMETER(false);
     private boolean success;
 
     private BasicResponseCode(boolean success) {
