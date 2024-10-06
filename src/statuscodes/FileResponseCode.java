@@ -1,11 +1,11 @@
 package statuscodes;
 
-public enum ParseInputFileResponseCode implements Success {
+public enum FileResponseCode implements Success {
     VALID_FILE(true),
     INVALID_FILE(false);
     private boolean success;
 
-    private ParseInputFileResponseCode(boolean success) {
+    private FileResponseCode(boolean success) {
         this.success = success;
     }
     public boolean success() {

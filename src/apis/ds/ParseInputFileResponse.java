@@ -1,20 +1,19 @@
 package apis.ds;
 
 import statuscodes.BasicResponseCode;
-import statuscodes.ParseInputFileResponseCode;
+import statuscodes.FileResponseCode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ParseInputFileResponse {
 //    should include the raw integers from the parsed file so the CE can access them
     List<Integer> parsedIntegers;
-    ParseInputFileResponseCode parseInputFileResponseCode;
+    FileResponseCode fileResponseCode;
     BasicResponseCode basicResponseCode;
 
-    public ParseInputFileResponse(List<Integer> parsedIntegers, ParseInputFileResponseCode parseInputFileResponseCode, BasicResponseCode basicResponseCode) {
+    public ParseInputFileResponse(List<Integer> parsedIntegers, FileResponseCode fileResponseCode, BasicResponseCode basicResponseCode) {
         this.parsedIntegers = parsedIntegers;
-        this.parseInputFileResponseCode = parseInputFileResponseCode;
+        this.fileResponseCode = fileResponseCode;
         this.basicResponseCode = basicResponseCode;
     }
 
@@ -22,8 +21,8 @@ public class ParseInputFileResponse {
         return parsedIntegers;
     }
 
-    public ParseInputFileResponseCode getParseInputFileResponseCode() {
-        return parseInputFileResponseCode;
+    public FileResponseCode getParseInputFileResponseCode() {
+        return fileResponseCode;
     }
 
     public BasicResponseCode getBasicResponseCode() {

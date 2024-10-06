@@ -3,7 +3,7 @@ package apis.ds;
 import inputoutput.Delimiter;
 import inputoutput.OutputConfig;
 import statuscodes.BasicResponseCode;
-import statuscodes.ParseInputFileResponseCode;
+import statuscodes.FileResponseCode;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,13 +38,13 @@ public class DataStore implements DataStoreInterface {
             case "CSV":
 //                this is only instantiated to be easier to read
                 File inputFile = parseInputFileRequest.getInputFile();
-                ParseInputFileResponseCode parseInputFileResponseCode = parseInputFileRequest.getParseInputFileResponseCode();
+                FileResponseCode fileResponseCode = parseInputFileRequest.getParseInputFileResponseCode();
                 BasicResponseCode basicResponseCode = parseInputFileRequest.getBasicResponseCode();
 
                 List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
 
 //                returns the parsed integers to the CE
-                return new ParseInputFileResponse(parsedIntegers, parseInputFileResponseCode, basicResponseCode);
+                return new ParseInputFileResponse(parsedIntegers, fileResponseCode, basicResponseCode);
 
             case "TEXT":
                 break;

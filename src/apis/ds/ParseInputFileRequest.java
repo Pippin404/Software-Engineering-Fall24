@@ -3,7 +3,7 @@ package apis.ds;
 import inputoutput.Delimiter;
 import inputoutput.InputType;
 import statuscodes.BasicResponseCode;
-import statuscodes.ParseInputFileResponseCode;
+import statuscodes.FileResponseCode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +16,7 @@ public class ParseInputFileRequest  {
 
 //    status codes for error handling
     private BasicResponseCode basicResponseCode;
-    private ParseInputFileResponseCode parseInputFileResponseCode;
+    private FileResponseCode fileResponseCode;
 
     public File getInputFile() {
         return inputFile;
@@ -34,8 +34,8 @@ public class ParseInputFileRequest  {
         return basicResponseCode;
     }
 
-    public ParseInputFileResponseCode getParseInputFileResponseCode() {
-        return parseInputFileResponseCode;
+    public FileResponseCode getParseInputFileResponseCode() {
+        return fileResponseCode;
     }
 
     public ParseInputFileRequest(File inputFile, InputType inputType, Delimiter delimiter) {
@@ -47,10 +47,10 @@ public class ParseInputFileRequest  {
                 throw new IllegalArgumentException("Input file cannot be null.");
             }
             else if(inputFile.exists()) {
-                parseInputFileResponseCode = ParseInputFileResponseCode.VALID_FILE;
+                fileResponseCode = FileResponseCode.VALID_FILE;
                 this.inputFile = inputFile;
             } else {
-                parseInputFileResponseCode = ParseInputFileResponseCode.INVALID_FILE;
+                fileResponseCode = FileResponseCode.INVALID_FILE;
                 throw new FileNotFoundException("Input file not found. File Path: " + inputFile);
             }
 
@@ -70,7 +70,7 @@ public class ParseInputFileRequest  {
             basicResponseCode = BasicResponseCode.VALID_PARAMETERS;
 
         } catch(FileNotFoundException e) {
-            System.out.println("ParseInputFileCodes: " + this.parseInputFileResponseCode);
+            System.out.println("ParseInputFileCodes: " + this.fileResponseCode);
             e.printStackTrace();
         } catch(IllegalArgumentException e) {
             e.printStackTrace();
