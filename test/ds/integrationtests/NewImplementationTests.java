@@ -1,4 +1,4 @@
-package ds;
+package ds.integrationtests;
 
 
 import apis.ds.ParseInputFileRequest;
@@ -11,7 +11,6 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
