@@ -1,11 +1,11 @@
 package ds.integrationtests;
 
+
 import apis.ds.DataStore;
 import apis.ds.ParseInputFileRequest;
 import apis.ds.ParseInputFileResponse;
-import inputoutput.Delimiter;
-import inputoutput.InputConfig;
-import inputoutput.InputType;
+import apis.ds.WriteIntegerToFileRequest;
+import inputoutput.*;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
@@ -16,6 +16,15 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public class ErrorHandlingTests {
+    public static void main(String[] args) {
+//        I'm not sure how to use junit to test this so I'm just using main for now
+        DataStore dataStore = new DataStore();
+        OutputConfig outputConfig = new OutputConfig("C:\\Users\\eribr\\Desktop\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\iotests\\OutputText.txt", OutputType.TEXT);
+        WriteIntegerToFileRequest writeIntegerToFileRequest = new WriteIntegerToFileRequest(outputConfig, 5);
+
+        dataStore.writeIntegerToFile(writeIntegerToFileRequest);
+
+    }
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
