@@ -27,6 +27,8 @@ public class UserCommunicatorImpl implements UserCommunicatorHandler{
         String input = scanner.nextLine();
         int num = Integer.parseInt(input);
         
+        //Small change to attempt to publish branch
+        
         //NEVER FORGET!
         scanner.close();
         System.out.println("User input retrieved");
