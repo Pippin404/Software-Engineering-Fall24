@@ -5,6 +5,7 @@ import java.util.Scanner;
 import inputoutput.OutputType;
 
 
+@SuppressWarnings("unused")
 public class UserCommunicatorImpl implements UserCommunicatorHandler{
 
     OutputType output=OutputType.CONSOLE;
@@ -16,7 +17,7 @@ public class UserCommunicatorImpl implements UserCommunicatorHandler{
     
     
     @Override
-    public int getUserInput() {
+    public int getUserInput() throws Exception {
         
         /*//NOT RIGHT NOW!!
         //scanner here
@@ -26,11 +27,20 @@ public class UserCommunicatorImpl implements UserCommunicatorHandler{
         String input = scanner.nextLine();
         int num = Integer.parseInt(input);
         
+        //Small change to attempt to publish branch
+        
         //NEVER FORGET!
         scanner.close();
         System.out.println("User input retrieved");
         return num;
         */
+        int input=3;
+        
+        if(input<=0) {
+           throw new Exception("Error! User input needs to be >1");
+        }
+        
+        
         this.data=5;
         return 5;
     }

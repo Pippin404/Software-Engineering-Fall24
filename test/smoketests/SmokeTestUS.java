@@ -30,7 +30,12 @@ public class SmokeTestUS {
     public void userInput() {
         
         UserCommunicatorImpl com=new UserCommunicatorImpl();
-        com.getUserInput();
+        try {
+            com.getUserInput();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
         //this should scan something. will ask about it in class
         

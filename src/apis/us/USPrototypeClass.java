@@ -20,7 +20,12 @@ public class USPrototypeClass {
         
         //this should probably do something
         comm.setDelimiters();
-        comm.getUserInput();
+        try {
+            comm.getUserInput();
+        } catch (Exception e) {
+            //input not 1
+            e.printStackTrace();
+        }
         
         
         
