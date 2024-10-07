@@ -1,23 +1,22 @@
-package ds;
+package ds.integrationtests;
 
 
+import apis.ds.DataStore;
 import apis.ds.ParseInputFileRequest;
 import apis.ds.ParseInputFileResponse;
 import apis.ds.WriteIntegerToFileRequest;
-import apis.ds.DataStore;
 import inputoutput.Delimiter;
+import inputoutput.InputConfig;
 import inputoutput.InputType;
 import inputoutput.OutputConfig;
 import inputoutput.OutputType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
@@ -30,12 +29,16 @@ public class NewImplementationTests {
     public void parseCSVTest() {
         DataStore ds = new DataStore();
 
-        File inputFile = new File("D:\\New Desktop on Hard drive\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\csvTest.txt");
-        ParseInputFileRequest request = new ParseInputFileRequest(inputFile, InputType.CSV, Delimiter.COMMA);
+        File inputFile = new File("C:\\Users\\eribr\\Desktop\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\iotests\\csvTest.txt");
+
+        InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
+
+        ParseInputFileRequest request = new ParseInputFileRequest(inputConfig, Delimiter.COMMA);
 
         ParseInputFileResponse response = ds.parseInputFile(request);
 
         List<Integer> parsedResult = response.getParsedIntegers();
+
 
         List<Integer> expectedResult = new ArrayList<Integer>(
           Arrays.asList(1, 2, 3, 4, 5)
