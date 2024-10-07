@@ -1,21 +1,22 @@
 package ds.integrationtests;
 
 
+import apis.ds.DataStore;
 import apis.ds.ParseInputFileRequest;
 import apis.ds.ParseInputFileResponse;
 import apis.ds.WriteIntegerToFileRequest;
-import apis.ds.DataStore;
-import inputoutput.*;
-import org.junit.Assert;
+import inputoutput.Delimiter;
+import inputoutput.InputConfig;
+import inputoutput.InputType;
+import inputoutput.OutputConfig;
+import inputoutput.OutputType;
 import org.junit.jupiter.api.Test;
-
-
-import java.util.Arrays;
-import java.util.List;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
