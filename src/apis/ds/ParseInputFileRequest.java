@@ -1,35 +1,57 @@
 package apis.ds;
 
 import inputoutput.Delimiter;
-import inputoutput.InputType;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import inputoutput.InputConfig;
+import statuscodes.ParameterResponseCode;
+import statuscodes.FileResponseCode;
 
 public class ParseInputFileRequest  {
 //    should include an input config with the file path and the delimiters
-    private File inputFile;
     private Delimiter delimiter;
-    private InputType inputType;
+    private InputConfig inputConfig;
 
-    public File getInputFile() {
-        return inputFile;
-    }
+//    status codes for error handling
+    private ParameterResponseCode parameterResponseCode;
+    private FileResponseCode fileResponseCode;
 
     public Delimiter getDelimiter() {
         return delimiter;
     }
 
-    public InputType getInputType() {
-        return inputType;
+    public InputConfig getInputConfig() {
+        return inputConfig;
     }
 
-    public ParseInputFileRequest(File inputFile, InputType inputType, Delimiter delimiter) {
-        this.inputFile = inputFile;
-        this.inputType = inputType;
-        this.delimiter = delimiter;
+    public ParameterResponseCode getBasicResponseCode() {
+        return parameterResponseCode;
+    }
+
+    public FileResponseCode getParseInputFileResponseCode() {
+        return fileResponseCode;
+    }
+
+    public ParseInputFileRequest(InputConfig inputConfig, Delimiter delimiter) {
+        try {
+            if (inputConfig == null) {
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
+                throw new IllegalArgumentException("Input config cannot be null.");
+            } else {
+                this.inputConfig = inputConfig;
+            }
+
+//            delimiter cannot be null
+            if (delimiter != null) {
+                this.delimiter = delimiter;
+            } else {
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
+                throw new IllegalArgumentException("Delimiter type cannot be null.");
+            }
+            parameterResponseCode = ParameterResponseCode.VALID_PARAMETERS;
+
+        } catch(IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

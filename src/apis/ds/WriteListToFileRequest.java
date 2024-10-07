@@ -1,17 +1,39 @@
 package apis.ds;
 
 import inputoutput.OutputConfig;
+import statuscodes.ParameterResponseCode;
 
 import java.util.List;
 
 public class WriteListToFileRequest {
-    private final OutputConfig outputConfig;
+    private OutputConfig outputConfig;
 
-    private final List<Integer> parsedIntegerList;
+    private List<Integer> parsedIntegerList;
+
+    private ParameterResponseCode parameterResponseCode;
+
 
     public WriteListToFileRequest(OutputConfig outputConfig, List<Integer> parsedIntegerList) {
-        this.outputConfig = outputConfig;
-        this.parsedIntegerList = parsedIntegerList;
+        try {
+            if(outputConfig != null) {
+                this.outputConfig = outputConfig;
+            } else {
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
+                throw new IllegalArgumentException("Output config cannot be null.");
+            }
+
+            if(outputConfig != null) {
+                this.parsedIntegerList = parsedIntegerList;
+            } else {
+                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
+                throw new IllegalArgumentException("List of integers cannot be null.");
+            }
+            parameterResponseCode = ParameterResponseCode.VALID_PARAMETERS;
+
+        } catch(IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public OutputConfig getOutputConfig() {
@@ -20,5 +42,9 @@ public class WriteListToFileRequest {
 
     public List<Integer> getParsedIntegerList() {
         return parsedIntegerList;
+    }
+
+    public ParameterResponseCode getBasicResponseCode() {
+        return parameterResponseCode;
     }
 }

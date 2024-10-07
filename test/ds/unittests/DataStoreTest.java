@@ -1,4 +1,4 @@
-package ds;
+package ds.unittests;
 
 import org.mockito.Mockito;
 
