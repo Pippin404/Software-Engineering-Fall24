@@ -20,6 +20,7 @@ public class WriteIntegerToFileRequest {
             }
 
 //            don't check for computedInteger being null because the compiler won't let someone put null for a primitive int in a parameter to begin with
+            this.computedInteger = computedInteger;
 
             parameterResponseCode = ParameterResponseCode.VALID_PARAMETERS;
 
