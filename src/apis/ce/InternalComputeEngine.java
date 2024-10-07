@@ -43,7 +43,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 	return firstfib;
     }
 
-    public void validateData(Integer i) {
+    private void validateData(Integer i) {
         if (i == null) {
             throw new IllegalArgumentException("Data cannot be null");
         }
