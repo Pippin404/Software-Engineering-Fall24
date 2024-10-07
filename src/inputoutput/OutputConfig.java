@@ -13,8 +13,7 @@ public class OutputConfig {
     private FileResponseCode fileResponseCode;
 
 
-    public OutputConfig(String outputPath, OutputType outputType)
-    {
+    public OutputConfig(String outputPath, OutputType outputType) {
 //        TODO: Check if the output path is valid
         try {
             if(outputPath == null) {
