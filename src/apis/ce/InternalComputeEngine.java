@@ -27,7 +27,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     @Override
     public int getData() {
-    if (i < 0) {
+    if (this.data < 0) {
         throw new IllegalArgumentException("Data cannot be negative");
     }
     return 0;
