@@ -31,10 +31,6 @@ public class InternalComputeEngineTest implements InternalComputeEngineInterface
     }
 
 
-    @Override
-    public int readInData(String i) {
-      return 0;
-    }
 
     @Override
     public void setData(int i) {
