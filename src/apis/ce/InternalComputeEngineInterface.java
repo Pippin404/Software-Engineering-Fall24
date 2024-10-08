@@ -5,7 +5,6 @@ public interface InternalComputeEngineInterface {
     void setData(int i);
     int getData();
     int computeNthFibonacci(int i);
-    int readInData(String i);
 
     
 }
