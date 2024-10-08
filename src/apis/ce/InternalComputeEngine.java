@@ -21,7 +21,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     public void setData(int i) {
         if (i < 0) {
             throw new IllegalArgumentException("Data cannot be negative");
-        }
+        } 
 	data = i;
     }
 
