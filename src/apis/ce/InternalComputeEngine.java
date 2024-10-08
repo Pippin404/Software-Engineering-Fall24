@@ -6,24 +6,12 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
-    @SuppressWarnings("unused")
     private DataStore dataStore;
 
     public InternalComputeEngine(DataStore dataStore) {
         this.dataStore = dataStore;
     }
-
     
-    //this was given to me by eclipse. I think it removes the "unused" error. Pippin assignment 4
-    @SuppressWarnings("unused")
-    private String message = null;
-
-    
-	
-    @Override
-    public int readInData(String i) {
-    return 0;
-    }
 
     @Override
     public void setData(int i) {
