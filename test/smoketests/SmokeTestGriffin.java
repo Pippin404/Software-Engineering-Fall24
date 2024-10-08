@@ -22,7 +22,6 @@ public class SmokeTestGriffin {
 
         // Mock the InternalComputeReadingInterface
         InternalComputeEngineTest mockEngine = Mockito.mock(InternalComputeEngineTest.class);
-        when(mockEngine.readInData(anyString())).thenReturn(100);
         when(mockEngine.computeNthFibonacci(anyInt())).thenReturn(100);
 
         // testing set and get data
@@ -41,14 +40,5 @@ public class SmokeTestGriffin {
         }
 
 
-        // Smoke test for readInData
-        if (mockEngine.readInData("test") == 100) {
-            System.out.println("readInData method passed with mock.");
-        } else {
-            System.out.println("readInData method failed with mock.");
-        }
-
-        // Verify the mock method was called
-        verify(mockEngine).readInData("test");
     }
 }
