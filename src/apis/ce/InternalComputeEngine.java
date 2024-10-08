@@ -49,14 +49,6 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 	return firstfib;
     }
     
-    private void validateData(Integer i) {
-        if (i == null) {
-            throw new IllegalArgumentException("Data cannot be null");
-        }
-        if (i < 0) {
-            throw new IllegalArgumentException("Data cannot be negative");
-        }
-    }
 
 
 }
