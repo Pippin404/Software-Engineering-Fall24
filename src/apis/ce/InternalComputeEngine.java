@@ -19,19 +19,25 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     @Override
     public void setData(int i) {
-       validateData(i);
+        if (i < 0) {
+            throw new IllegalArgumentException("Data cannot be negative");
+        }
 	data = i;
     }
 
     @Override
     public int getData() {
-    validateData(this.data);
+    if (i < 0) {
+        throw new IllegalArgumentException("Data cannot be negative");
+    }
     return 0;
     }
 	
     @Override
     public int computeNthFibonacci(int i) {
-	validateData(i);
+	if (i < 0) {
+            throw new IllegalArgumentException("Data cannot be negative");
+        }
     	int firstfib = 0;
     	int secondfib = 1;
     	while (i != 0) {
