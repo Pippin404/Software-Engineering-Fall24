@@ -10,15 +10,14 @@ public class UScomputerEngineConstructer {
         private UserCommunicatorImpl commHandler=null;
         
         public UScomputerEngineConstructer(InternalComputeEngine computeEngine) {
-            // TODO Auto-generated constructor stub
+            this.computeEngine=computeEngine;
         }
 
 //        TODO: That is a crazy solution to a null pointer problem we should not do this lmao
         public void setData() {
             
-            if(commHandler==null) {
-                @SuppressWarnings("unused")
-                UserCommunicatorImpl commHandler=new UserCommunicatorImpl();
+            if(this.commHandler==null) {
+                this.commHandler=new UserCommunicatorImpl();
                 
             }
             
