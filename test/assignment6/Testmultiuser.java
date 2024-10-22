@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import apis.us.UScomputerEngineConstructer;
 
-public class TestMultiUser {
+public class Testmultiuser {
 	
 	// DONE TODO 1: change the type of this variable to the name you're using for your
 	// User <-> ComputeEngine API DONE
@@ -33,9 +33,9 @@ public class TestMultiUser {
 	@Test
 	public void compareMultiAndSingleThreaded() throws Exception {
 		int numThreads = 4;
-		List<TestUser> testUsers = new ArrayList<>();
+		List<Testuser> testUsers = new ArrayList<>();
 		for (int i = 0; i < numThreads; i++) {
-			testUsers.add(new TestUser(coordinator));
+			testUsers.add(new Testuser(coordinator));
 		}
 		
 		// Run single threaded
@@ -56,7 +56,7 @@ public class TestMultiUser {
 					new File(multiThreadFilePrefix + i);
 			multiThreadedOut.deleteOnExit();
 			String multiThreadOutputPath = multiThreadedOut.getCanonicalPath();
-			TestUser testUser = testUsers.get(i);
+			Testuser testUser = testUsers.get(i);
 			results.add(threadPool.submit(() -> testUser.run(multiThreadOutputPath)));
 		}
 		

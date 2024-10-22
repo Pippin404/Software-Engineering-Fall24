@@ -7,14 +7,14 @@ import java.io.File;
 import apis.us.UScomputerEngineConstructer;
 
 
-public class TestUser {
+public class Testuser {
 	
 	// DONE TODO 3: change the type of this variable to the name you're using for your
 	// User <-> ComputeEngine API; also update the parameter passed to the constructor DONE
     //Pippin Notes: There isn't a toString function or anything. I wonder how our code is going to integrate with this
 	private final UScomputerEngineConstructer coordinator;
 
-	public TestUser(UScomputerEngineConstructer coordinator) {
+	public Testuser(UScomputerEngineConstructer coordinator) {
 		this.coordinator = coordinator;
 	}
 
