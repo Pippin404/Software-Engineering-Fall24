@@ -1,4 +1,4 @@
-package assignment6;
+package assignmentnumbersix;
 
 
 import java.io.File;
