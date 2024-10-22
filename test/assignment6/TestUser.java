@@ -1,4 +1,4 @@
-package assign6;
+package assignment6;
 
 
 
