@@ -1,10 +1,9 @@
-package assignmentnumbersix;
+package assignment6;
 
-
-
-import java.io.File;
 
 import apis.us.UScomputerEngineConstructer;
+
+import java.io.File;
 
 
 public class Testuser {
@@ -21,7 +20,7 @@ public class Testuser {
 	public void run(String outputPath) {
 		char delimiter = ';';
 		String inputPath = "test" + File.separatorChar + "testInputFile.test";
-		
+
 		// TODO 4: Call the appropriate method(s) on the coordinator to get it to 
 		// run the compute job specified by inputPath, outputPath, and delimiter
 	}
