@@ -2,8 +2,8 @@ package assignment6;
 
 
 import apis.ce.InternalComputeEngine;
-import apis.us.UScomputerEngineConstructer;
 import apis.ds.DataStore;
+import apis.us.UScomputerEngineConstructer;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,9 +29,15 @@ public class Testmultiuser {
 		// that the user will make requests to
 		// Store it in the 'coordinator' instance variable
 	    // TODO!!!!
-		DataStore dataStore = new DataStore();
-		InternalComputeEngine internalComputeEngine = new InternalComputeEngine(dataStore);
-		coordinator = new UScomputerEngineConstructer(internalComputeEngine);
+		// Initializing template datastore
+		apis.ds.DataStore dataStore = new DataStore();
+
+		// Initializing internal compute engine with template datastore
+		InternalComputeEngine computeEngine = new InternalComputeEngine(dataStore);
+
+		// Initialize Coordinator with InternalComputeEngine
+		coordinator = new UScomputerEngineConstructer(computeEngine);
+
 	}
 
 	@Test
