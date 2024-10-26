@@ -1,6 +1,8 @@
 package apis.us;
 
 import apis.ce.InternalComputeEngine;
+import java.io.File;
+
 
 public class UScomputerEngineConstructer {
 
@@ -8,9 +10,21 @@ public class UScomputerEngineConstructer {
         private InternalComputeEngine computeEngine;
         private Integer data;
         private UserCommunicatorImpl commHandler=null;
+        private File file;  // Store the file as a file object
         
         public UScomputerEngineConstructer(InternalComputeEngine computeEngine) {
             this.computeEngine=computeEngine;
+        }
+
+        public void setInputFile(File file) {
+            this.inputFile = file;
+            System.out.println("Reading data from: " + this.inputFile.getName()); 
+            // ^ conformation message for file setting (remove if you want)
+        }
+
+        // get method for file path
+        public File getInputFile() {
+            return this.inputFile;
         }
 
 //        TODO: That is a crazy solution to a null pointer problem we should not do this lmao
