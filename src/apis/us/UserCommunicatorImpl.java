@@ -1,6 +1,8 @@
 package apis.us;
 
-import java.util.Scanner;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 import inputoutput.OutputType;
 
@@ -44,6 +46,17 @@ public class UserCommunicatorImpl implements UserCommunicatorHandler{
         this.data=5;
         return 5;
     }
+
+    // returns an example List<Integer> (file reading not implemented yet)
+    public List<Integer> readFile(File file) {
+        // Return the base case list
+        List<Integer> numbers = Arrays.asList(10, 11, 12, 13, 14, 15);
+        return numbers;
+    }
+
+
+
+    
     @Override
     public void setDelimiters() {
         // TODO Auto-generated method stub
