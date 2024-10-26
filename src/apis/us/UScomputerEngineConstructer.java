@@ -2,6 +2,8 @@ package apis.us;
 
 import apis.ce.InternalComputeEngine;
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class UScomputerEngineConstructer {
@@ -10,7 +12,7 @@ public class UScomputerEngineConstructer {
         private InternalComputeEngine computeEngine;
         private Integer data;
         private UserCommunicatorImpl commHandler=null;
-        private File file;  // Store the file as a file object
+        private File inputFile;  // Store the file as a file object
         
         public UScomputerEngineConstructer(InternalComputeEngine computeEngine) {
             this.computeEngine=computeEngine;
@@ -22,7 +24,7 @@ public class UScomputerEngineConstructer {
             // ^ conformation message for file setting (remove if you want)
         }
 
-        // get method for file path
+        // get method for file
         public File getInputFile() {
             return this.inputFile;
         }
@@ -35,21 +37,18 @@ public class UScomputerEngineConstructer {
                 
             }
             
-            try {
-                commHandler.getUserInput();
-            } catch (Exception e) {
-                System.out.println("Input must be >0");
-                e.printStackTrace();
-                this.data=1;
+            // Pass the file to UserCommunicatorImpl to process
+            List<Integer> numbers = commHandler.readFile(inputFile);
+            System.out.println("Numbers read from file in coordinator: " + numbers);
+            
+            
+            // Default to [1, 2, 3] if the file is empty
+            if (numbers.isEmpty()) {
+                numbers = Arrays.asList(1, 2, 3);
             }
-            
-            
-            //Ask the rest of my code for the data
-            //set the data in computerEngine to the data we get from my other code
-            //right now it just returns 5
-            
-            //int tempTest=commHandler.data;
-            this.data = 5;
+
+            // Set data to the first number in the list
+            this.data = numbers.get(0);
         }
 
         public Integer getData() {
