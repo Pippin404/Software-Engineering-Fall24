@@ -9,8 +9,10 @@ public class UScomputerEngineConstructer {
         //Make an "InternalComputeEngine" to pass the data to the CE
         private InternalComputeEngine computeEngine;
         private DataStore dataStore;
-        private Integer data;
         private UserCommunicatorImpl commHandler=null;
+        private Integer data;
+        private File inputFile;  // Store the file as a file object
+
 
         
         public UScomputerEngineConstructer(InternalComputeEngine computeEngine, DataStore dataStore) {
@@ -21,29 +23,37 @@ public class UScomputerEngineConstructer {
         this.dataStore = dataStore;    
         }
 
-//        TODO: That is a crazy solution to a null pointer problem we should not do this lmao
+        public void setInputFile(File file) {
+            this.inputFile = file;
+            System.out.println("Reading data from: " + this.inputFile.getName()); 
+            // ^ conformation message for file setting (remove if you want)
+        }
+
+        // get method for file
+        public File getInputFile() {
+            return this.inputFile;
+        }
+
+
+        //  TODO: That is a crazy solution to a null pointer problem we should not do this lmao
         public void setData() {
             
             if(this.commHandler==null) {
                 this.commHandler=new UserCommunicatorImpl();
-                
             }
             
-            try {
-                commHandler.getUserInput();
-            } catch (Exception e) {
-                System.out.println("Input must be >0");
-                e.printStackTrace();
-                this.data=1;
+            // Pass the file to UserCommunicatorImpl to process
+            List<Integer> numbers = commHandler.readFile(inputFile);
+            System.out.println("Numbers read from file in coordinator: " + numbers);
+            
+            
+            // Default to [1, 2, 3] if the file is empty
+            if (numbers.isEmpty()) {
+                numbers = Arrays.asList(1, 2, 3);
             }
-            
-            
-            //Ask the rest of my code for the data
-            //set the data in computerEngine to the data we get from my other code
-            //right now it just returns 5
-            
-            //int tempTest=commHandler.data;
-            this.data = 5;
+
+            // Set data to the first number in the list
+            this.data = numbers.get(0);
         }
 
         public Integer runInternalCompute(int i) {
