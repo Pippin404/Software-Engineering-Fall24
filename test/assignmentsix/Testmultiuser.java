@@ -1,5 +1,12 @@
-package assignmentnumbersix;
+package assignmentsix;
 
+
+import apis.ce.InternalComputeEngine;
+import apis.ds.DataStore;
+import apis.us.UScomputerEngineConstructer;
+import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,24 +17,27 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import apis.us.UScomputerEngineConstructer;
-
 public class Testmultiuser {
 	
-	// DONE TODO 1: change the type of this variable to the name you're using for your
+	// DONE 6.B.1: change the type of this variable to the name you're using for your
 	// User <-> ComputeEngine API DONE
 	private UScomputerEngineConstructer coordinator;
 	
 	@BeforeEach
 	public void initializeComputeEngine() {
-		//TODO 2: create an instance of your coordinator component; this is the component
+		//TODO 6.B.2: create an instance of your coordinator component; this is the component
 		// that the user will make requests to
 		// Store it in the 'coordinator' instance variable
 	    // TODO!!!!
+		// Initializing template datastore
+		apis.ds.DataStore dataStore = new DataStore();
+
+		// Initializing internal compute engine with template datastore
+		InternalComputeEngine computeEngine = new InternalComputeEngine(dataStore);
+
+		// Initialize Coordinator with InternalComputeEngine
+		coordinator = new UScomputerEngineConstructer(computeEngine);
+
 	}
 
 	@Test
