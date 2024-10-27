@@ -19,7 +19,7 @@ public class UserCommunicatorImpl implements UserCommunicatorHandler{
     
     //SEE THE UserCommHandler TO FIND OUT WHAT THESE DO!!!
     
-    
+    // reads a file of integers seperated by commas and stores then in List<Integer> which it returns
     public List<Integer> readFile(File file) {
         List<Integer> numbers = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
