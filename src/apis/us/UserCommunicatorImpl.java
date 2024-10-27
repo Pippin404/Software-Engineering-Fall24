@@ -1,7 +1,11 @@
 package apis.us;
 
 import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import inputoutput.OutputType;
 
 
@@ -14,6 +18,27 @@ public class UserCommunicatorImpl implements UserCommunicatorHandler{
     int data=5;
     
     //SEE THE UserCommHandler TO FIND OUT WHAT THESE DO!!!
+    
+    
+    public List<Integer> readFile(File file) {
+        List<Integer> numbers = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Split the line by commas, trim whitespace, and parse each element as an integer
+                String[] values = line.split(",");
+                for (String value : values) {
+                    numbers.add(Integer.parseInt(value.trim()));
+                }
+            }
+            System.out.println("Numbers read from file: " + numbers);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return numbers;
+    }
+    
+    
     
     
     @Override
