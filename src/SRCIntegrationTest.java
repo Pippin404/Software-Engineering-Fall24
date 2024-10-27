@@ -7,14 +7,14 @@ public class SRCIntegrationTest {
 
 
     public static void main(String[] args) {
-        // Initializing template datastore
+        // Initializing datastore
         DataStore dataStore = new DataStore();
 
-        // Initializing internal compute engine with template datastore
-        InternalComputeEngine computeEngine = new InternalComputeEngine(dataStore);
+        // Initializing internal compute engine
+        InternalComputeEngine computeEngine = new InternalComputeEngine();
 
-        // Initialize Coordinator with InternalComputeEngine
-        UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine);
+        // Initialize Coordinator with InternalComputeEngine and DataStore
+        UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine, dataStore);
 
         
         //Pippin's UScomputerEngineConstructor will use this function to add the data inputed to the user
@@ -26,9 +26,9 @@ public class SRCIntegrationTest {
 
       //--------------------------------------
         
-        
-        dataStore.setData(computeEngine.computeNthFibonacci(computeEngine.getData()));
-      
+
+        dataStore.setData((coordinator.runInternalCompute(coordinator.getData())));
+              
        
 
 

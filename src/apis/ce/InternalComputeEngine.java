@@ -6,14 +6,6 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
-    private DataStore dataStore;
-
-    public InternalComputeEngine(DataStore dataStore) {
-        if (dataStore == null) {
-            throw new IllegalArgumentException("Data cannot be null");
-        }
-	this.dataStore = dataStore;    
-    }
     
 
     @Override
