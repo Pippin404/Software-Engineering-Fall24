@@ -44,6 +44,10 @@ public class UScomputerEngineConstructer {
             this.data = 5;
         }
 
+        public Integer runInternalCompute() {
+            return computeEngine.computeNthFibonacci();
+        }
+
         public Integer getData() {
             return data;
         }
