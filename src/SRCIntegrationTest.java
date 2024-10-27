@@ -2,11 +2,16 @@ import apis.ds.DataStore;
 import apis.ce.InternalComputeEngine;
 import apis.us.UScomputerEngineConstructer;
 
+import java.io.File;
 
 public class SRCIntegrationTest {
 
 
     public static void main(String[] args) {
+        
+        // Path to the file (update the path as needed)
+        File inputFile = new File("test/testInputFile.test");
+        
         // Initializing datastore
         DataStore dataStore = new DataStore();
 
@@ -17,11 +22,13 @@ public class SRCIntegrationTest {
         UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine, dataStore);
 
         
-        //Pippin's UScomputerEngineConstructor will use this function to add the data inputed to the user
-        coordinator.setData();
-        
+        // Set the input file in the coordinator
+        coordinator.setInputFile(inputFile);
+
+        coordinator.setData();  // This reads from the file and sets the data
         System.out.println("US: Data set to " + coordinator.getData());
-        //This function tells the data inside coordinator (of type UScomputerEngineConstructor) to send the data
+
+        //This function sends data to be processed by Internal Compute
         coordinator.sendDataToComputeEngine();
 
       //--------------------------------------
