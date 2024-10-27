@@ -1,16 +1,24 @@
 package apis.us;
 
 import apis.ce.InternalComputeEngine;
+import apis.ds.DataStore;
+
 
 public class UScomputerEngineConstructer {
 
         //Make an "InternalComputeEngine" to pass the data to the CE
         private InternalComputeEngine computeEngine;
+        private DataStore dataStore;
         private Integer data;
         private UserCommunicatorImpl commHandler=null;
+
         
-        public UScomputerEngineConstructer(InternalComputeEngine computeEngine) {
-            this.computeEngine=computeEngine;
+        public UScomputerEngineConstructer(InternalComputeEngine computeEngine, DataStore dataStore) {
+        if (dataStore == null || computeEngine == null) {
+           throw new IllegalArgumentException("Data cannot be null");
+        }
+        this.computeEngine=computeEngine;
+        this.dataStore = dataStore;    
         }
 
 //        TODO: That is a crazy solution to a null pointer problem we should not do this lmao
@@ -36,6 +44,10 @@ public class UScomputerEngineConstructer {
             
             //int tempTest=commHandler.data;
             this.data = 5;
+        }
+
+        public Integer runInternalCompute(int i) {
+            return computeEngine.computeNthFibonacci(i);
         }
 
         public Integer getData() {
