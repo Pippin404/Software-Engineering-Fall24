@@ -14,7 +14,7 @@ public class UScomputerEngineConstructer {
 
         
         public UScomputerEngineConstructer(InternalComputeEngine computeEngine, DataStore dataStore) {
-        if (dataStore || computeEngine == null) {
+        if (dataStore == null || computeEngine == null) {
            throw new IllegalArgumentException("Data cannot be null");
         }
         this.computeEngine=computeEngine;
