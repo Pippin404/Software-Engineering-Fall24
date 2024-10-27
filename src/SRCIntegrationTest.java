@@ -27,7 +27,7 @@ public class SRCIntegrationTest {
       //--------------------------------------
         
 
-        dataStore.setData((coordinator.runInternalCompute(coordinator.getData()));
+        dataStore.setData((coordinator.runInternalCompute(coordinator.getData())));
               
        
 
