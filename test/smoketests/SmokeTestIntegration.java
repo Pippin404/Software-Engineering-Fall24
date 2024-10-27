@@ -19,14 +19,14 @@ public class SmokeTestIntegration {
 
         
         // Initializing internal compute engine with template datastore
-        InternalComputeEngine computeEngine = new InternalComputeEngine(dataStore);
+        InternalComputeEngine computeEngine = new InternalComputeEngine();
         //should get 0, because there is no data yet
         Assertions.assertEquals(computeEngine.getData(),0);
         
         
         
         // Initialize Coordinator with InternalComputeEngine
-        UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine);
+        UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine, dataStore);
         
         
         
