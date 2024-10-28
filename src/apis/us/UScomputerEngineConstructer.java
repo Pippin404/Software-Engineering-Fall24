@@ -54,8 +54,8 @@ public class UScomputerEngineConstructer {
 
 
             // Create InputConfig and ParseInputFileRequest for DataStore
-            InputConfig inputConfig = new InputConfig(InputType.CSV, inputFile);
-            Delimiter delimiter = new Delimiter(",");
+            InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
+            Delimiter delimiter = Delimiter.COMMA;
             ParseInputFileRequest request = new ParseInputFileRequest(inputConfig, delimiter);
 
             // Parse the file using DataStore
