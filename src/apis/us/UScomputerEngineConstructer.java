@@ -84,10 +84,6 @@ public class UScomputerEngineConstructer {
         public List<Integer> getData() {
             return data;
         }
-      
-        public void setComputeEngine(InternalComputeEngine computeEngine) {
-            this.computeEngine = computeEngine;
-        }
 
         
 }
