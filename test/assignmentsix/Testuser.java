@@ -35,18 +35,20 @@ public class Testuser {
 		// Initialize Coordinator with InternalComputeEngine
 		UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine, dataStore);
 
-		Testuser testuser = new Testuser(coordinator);
-
+//		Testuser testuser = new Testuser(coordinator); <- not sure what this line is doing 
 //		TODO: Call the Coordinator's methods for parsing the file and computing the data
 
+		// added methods to get List<Integer> from file and send it to internal compute
 		File inputFile = new File(inputPath);
-
 		coordinator.setInputFile(inputFile);
+		coordinator.setData();
+		List<Integer> computedResults = coordinator.runInternalCompute(coordinator.getData());
 
+
+
+		
 //		List<Integer> parsedIntegers = coordinator.parseInputFile();
-
 //		Foo results = Call the compute engine to do the calculation
-
 //		coordinator.writeToFile(outputFile, results)
 	}
 
