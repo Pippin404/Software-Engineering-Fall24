@@ -45,9 +45,17 @@ public class UScomputerEngineConstructer {
             if(this.commHandler==null) {
                 this.commHandler=new UserCommunicatorImpl();
             }
-            
-            // Pass the file to UserCommunicatorImpl to process
-            List<Integer> numbers = commHandler.readFile(inputFile);
+
+
+
+            // Create InputConfig and ParseInputFileRequest for DataStore
+            InputConfig inputConfig = new InputConfig(InputType.CSV, inputFile);
+            Delimiter delimiter = new Delimiter(",");
+            ParseInputFileRequest request = new ParseInputFileRequest(inputConfig, delimiter);
+
+            // Parse the file using DataStore
+            ParseInputFileResponse response = dataStore.parseInputFile(request);
+            List<Integer> numbers = response.getParsedIntegers();
             System.out.println("Numbers read from file in coordinator: " + numbers);
             
             
