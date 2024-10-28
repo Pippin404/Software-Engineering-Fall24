@@ -19,7 +19,7 @@ public class UScomputerEngineConstructer {
         private InternalComputeEngine computeEngine;
         private DataStore dataStore;
         private UserCommunicatorImpl commHandler=null;
-        private Integer data;
+        private List<Integer> data;
         private File inputFile;  // Store the file as a file object
 
 
@@ -60,23 +60,28 @@ public class UScomputerEngineConstructer {
 
             // Parse the file using DataStore
             ParseInputFileResponse response = dataStore.parseInputFile(request);
-            List<Integer> numbers = response.getParsedIntegers();
+            data = response.getParsedIntegers();
             System.out.println("Numbers read from file in coordinator: " + numbers);
             
             
             // Default to [1, 2, 3] if the file is empty
-            if (numbers.isEmpty()) {
-                numbers = Arrays.asList(1, 2, 3);
+            if (data.isEmpty()) {
+                data = Arrays.asList(1, 2, 3);
             }
 
         }
 
-        public Integer runInternalCompute(int i) {
-            return computeEngine.computeNthFibonacci(i);
+        public List<Integer> runInternalCompute(List<Integer> numbers) {
+            List<Integer> results = new ArrayList<>();
+            for (int number : numbers) {
+                int result = computeEngine.computeNthFibonacci(number);
+                results.add(result);
+            }
+            return results;
         }
 
         public List<Integer> getData() {
-            return numbers;
+            return data;
         }
       
         public void setComputeEngine(InternalComputeEngine computeEngine) {
