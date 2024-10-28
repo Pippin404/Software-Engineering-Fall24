@@ -40,7 +40,7 @@ public class SRCIntegrationTest {
 
 
         // Retrieve data from DataStore
-        int finalResult = dataStore.getData();
+        List<Integer> finalResult = dataStore.getData();
         System.out.println("Integration Test: Final result in Data Store is " + finalResult);
     }
 }
