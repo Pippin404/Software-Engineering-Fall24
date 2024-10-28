@@ -7,6 +7,8 @@ import apis.us.UScomputerEngineConstructer;
 
 import java.io.File;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 
@@ -46,6 +48,9 @@ public class Testuser {
 		coordinator.setData();
 		List<Integer> computedResults = coordinator.runInternalCompute(coordinator.getData());
 
+		writeResultsToFile(computedResults, outputPath);
+
+		
 
 
 		
@@ -53,5 +58,18 @@ public class Testuser {
 //		Foo results = Call the compute engine to do the calculation
 //		coordinator.writeToFile(outputFile, results)
 	}
+
+	private void writeResultsToFile(List<Integer> results, String outputPath) {
+        	try (FileWriter writer = new FileWriter(outputPath)) {
+            	for (int result : results) {
+                    writer.write(result + "\n");  // Write each result on a new line
+            	}
+            	System.out.println("Results successfully written to " + outputPath);
+        	} catch (IOException e) {
+        	System.out.println("Error writing results to file: " + e.getMessage());
+            		e.printStackTrace();
+        	}
+    	}
+
 
 }
