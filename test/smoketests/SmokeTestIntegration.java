@@ -2,6 +2,9 @@ package smoketests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import java.io.File;
+import java.util.List;
+import java.util.ArrayList;
 
 import apis.ce.InternalComputeEngine;
 import apis.ds.DataStore;
@@ -23,13 +26,16 @@ public class SmokeTestIntegration {
         //should get 0, because there is no data yet
         Assertions.assertEquals(computeEngine.getData(),0);
         
-        
-        
         // Initialize Coordinator with InternalComputeEngine
         UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine, dataStore);
         
+        File inputFile = new File("test/testInputFile.test");
+        coordinator.setInputFile(inputFile);
+        coordinator.setData(); 
+        dataStore.setData(coordinator.runInternalCompute(coordinator.getData()));
+
         
-        
+        /*
         
         //Pippin's UScomputerEngineConstructor will use this function to add the data inputed to the user
         coordinator.setData();
@@ -44,7 +50,10 @@ public class SmokeTestIntegration {
         dataStore.setData(computeEngine.computeNthFibonacci(1));
 
         // Retrieve data from DataStore
-        int finalResult = dataStore.getData();
+        
+        */
+        
+        List<Integer> finalResult = dataStore.getData();
         System.out.println("Integration Test: Final result in Data Store is " + finalResult);
     }
 }
