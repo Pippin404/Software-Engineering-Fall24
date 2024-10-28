@@ -69,16 +69,14 @@ public class UScomputerEngineConstructer {
                 numbers = Arrays.asList(1, 2, 3);
             }
 
-            // Set data to the first number in the list
-            this.data = numbers.get(0);
         }
 
         public Integer runInternalCompute(int i) {
             return computeEngine.computeNthFibonacci(i);
         }
 
-        public Integer getData() {
-            return data;
+        public List<Integer> getData() {
+            return numbers;
         }
       
         public void setComputeEngine(InternalComputeEngine computeEngine) {
