@@ -1,6 +1,7 @@
 package apis.us;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class UScomputerEngineConstructer {
             // Parse the file using DataStore
             ParseInputFileResponse response = dataStore.parseInputFile(request);
             data = response.getParsedIntegers();
-            System.out.println("Numbers read from file in coordinator: " + numbers);
+            System.out.println("Numbers read from file in coordinator: " + data);
             
             
             // Default to [1, 2, 3] if the file is empty
@@ -87,11 +88,6 @@ public class UScomputerEngineConstructer {
         public void setComputeEngine(InternalComputeEngine computeEngine) {
             this.computeEngine = computeEngine;
         }
-        
-        public void sendDataToComputeEngine() {
-            System.out.println("US: Adding data to computeEngine.data");
-            computeEngine.setData(data);
-            this.setData();
-        }
+
         
 }
