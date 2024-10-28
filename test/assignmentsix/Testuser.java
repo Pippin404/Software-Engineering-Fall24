@@ -6,6 +6,10 @@ import apis.ds.DataStore;
 import apis.us.UScomputerEngineConstructer;
 
 import java.io.File;
+import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 
 public class Testuser {
@@ -35,19 +39,37 @@ public class Testuser {
 		// Initialize Coordinator with InternalComputeEngine
 		UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine, dataStore);
 
-		Testuser testuser = new Testuser(coordinator);
-
+//		Testuser testuser = new Testuser(coordinator); <- not sure what this line is doing 
 //		TODO: Call the Coordinator's methods for parsing the file and computing the data
 
+		// added methods to get List<Integer> from file and send it to internal compute
 		File inputFile = new File(inputPath);
-
 		coordinator.setInputFile(inputFile);
+		coordinator.setData();
+		List<Integer> computedResults = coordinator.runInternalCompute(coordinator.getData());
 
+		writeResultsToFile(computedResults, outputPath);
+
+		
+
+
+		
 //		List<Integer> parsedIntegers = coordinator.parseInputFile();
-
 //		Foo results = Call the compute engine to do the calculation
-
 //		coordinator.writeToFile(outputFile, results)
 	}
+
+	private void writeResultsToFile(List<Integer> results, String outputPath) {
+        	try (FileWriter writer = new FileWriter(outputPath)) {
+            	for (int result : results) {
+                    writer.write(result + "\n");  // Write each result on a new line
+            	}
+            	System.out.println("Results successfully written to " + outputPath);
+        	} catch (IOException e) {
+        	System.out.println("Error writing results to file: " + e.getMessage());
+            		e.printStackTrace();
+        	}
+    	}
+
 
 }

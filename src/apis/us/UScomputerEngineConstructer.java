@@ -1,11 +1,17 @@
 package apis.us;
 
 import java.io.File;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import apis.ce.InternalComputeEngine;
 import apis.ds.DataStore;
+import apis.ds.ParseInputFileRequest;
+import apis.ds.ParseInputFileResponse;
+import inputoutput.InputConfig;
+import inputoutput.InputType;
+import inputoutput.Delimiter;
 
 
 public class UScomputerEngineConstructer {
@@ -14,7 +20,7 @@ public class UScomputerEngineConstructer {
         private InternalComputeEngine computeEngine;
         private DataStore dataStore;
         private UserCommunicatorImpl commHandler=null;
-        private Integer data;
+        private List<Integer> data;
         private File inputFile;  // Store the file as a file object
 
 
@@ -45,37 +51,43 @@ public class UScomputerEngineConstructer {
             if(this.commHandler==null) {
                 this.commHandler=new UserCommunicatorImpl();
             }
-            
-            // Pass the file to UserCommunicatorImpl to process
-            List<Integer> numbers = commHandler.readFile(inputFile);
-            System.out.println("Numbers read from file in coordinator: " + numbers);
+
+
+
+            // Create InputConfig and ParseInputFileRequest for DataStore
+            InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
+            Delimiter delimiter = Delimiter.COMMA;
+            ParseInputFileRequest request = new ParseInputFileRequest(inputConfig, delimiter);
+
+            // Parse the file using DataStore
+            ParseInputFileResponse response = dataStore.parseInputFile(request);
+            data = response.getParsedIntegers();
+            System.out.println("Numbers read from file in coordinator: " + data);
             
             
             // Default to [1, 2, 3] if the file is empty
-            if (numbers.isEmpty()) {
-                numbers = Arrays.asList(1, 2, 3);
+            if (data.isEmpty()) {
+                data = Arrays.asList(1, 2, 3);
             }
 
-            // Set data to the first number in the list
-            this.data = numbers.get(0);
         }
 
-        public Integer runInternalCompute(int i) {
-            return computeEngine.computeNthFibonacci(i);
+        public List<Integer> runInternalCompute(List<Integer> numbers) {
+            List<Integer> results = new ArrayList<>();
+            for (int number : numbers) {
+                int result = computeEngine.computeNthFibonacci(number);
+                results.add(result);
+            }
+            return results;
         }
 
-        public Integer getData() {
+        public List<Integer> getData() {
             return data;
         }
       
         public void setComputeEngine(InternalComputeEngine computeEngine) {
             this.computeEngine = computeEngine;
         }
-        
-        public void sendDataToComputeEngine() {
-            System.out.println("US: Adding data to computeEngine.data");
-            computeEngine.setData(data);
-            this.setData();
-        }
+
         
 }
