@@ -3,6 +3,8 @@ import apis.ce.InternalComputeEngine;
 import apis.us.UScomputerEngineConstructer;
 
 import java.io.File;
+import java.util.List;
+
 
 public class SRCIntegrationTest {
 
@@ -28,8 +30,6 @@ public class SRCIntegrationTest {
         coordinator.setData();  // This reads from the file and sets the data
         System.out.println("US: Data set to " + coordinator.getData());
 
-        //This function sends data to be processed by Internal Compute
-        coordinator.sendDataToComputeEngine();
 
       //--------------------------------------
         
@@ -40,7 +40,7 @@ public class SRCIntegrationTest {
 
 
         // Retrieve data from DataStore
-        int finalResult = dataStore.getData();
+        List<Integer> finalResult = dataStore.getData();
         System.out.println("Integration Test: Final result in Data Store is " + finalResult);
     }
 }
