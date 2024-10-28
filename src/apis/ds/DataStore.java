@@ -20,13 +20,13 @@ import java.util.List;
 public class DataStore implements DataStoreInterface {
 
     //    the implementation of other apis might handle the passing of data differently and need to access it like this
-    private int data;
+    private List<Integer> data;
 
-    public int getData() {
+    public List<Integer> getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(List<Integer> data) {
         this.data = data;
     }
 
