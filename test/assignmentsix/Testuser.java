@@ -46,7 +46,7 @@ public class Testuser {
 		File inputFile = new File(inputPath);
 		coordinator.setInputFile(inputFile);
 		coordinator.setData();
-		List<Integer> computedResults = coordinator.runInternalCompute(coordinator.getData());
+		List<Integer> computedResults = coordinator.runInternalComputeWithThreading(coordinator.getData());
 
 		writeResultsToFile(computedResults, outputPath);
 
