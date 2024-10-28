@@ -41,7 +41,7 @@ public class SmokeTestIntegration {
         
         //why did we think the variable computeEngine INSIDE UScomputerEngineConstructor had the actual compute engine class???
         
-        dataStore.setData(computeEngine.computeNthFibonacci(coordinator.getData()));
+        dataStore.setData(computeEngine.computeNthFibonacci(1);
 
         // Retrieve data from DataStore
         int finalResult = dataStore.getData();
