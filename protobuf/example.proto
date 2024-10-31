@@ -1,0 +1,12 @@
+package prototest;
+
+message example{
+	optional string exampleString=1; //this exampleString has id 1!	
+	enum exampleEnum{
+		exampleA=2;
+		exampleB=3;
+	}
+	
+	optional exampleEnum enumTest=4;
+
+}
