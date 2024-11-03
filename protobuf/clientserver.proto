@@ -1,6 +1,6 @@
 package protobuf;
 
-message clientserver{
+message sendclientserver{
 	optional string fileLocation=1; //this string has id 1!	
 
 	enum outLocation{
@@ -10,4 +10,12 @@ message clientserver{
 	
 	optional outLocation outputLocation=4;
 
+}
+
+message sendresponse{
+	optional string message=1;
+}
+
+service Senddata {
+    rpc senddatatoclient(sendclientserver) returns (sendresponse);
 }
