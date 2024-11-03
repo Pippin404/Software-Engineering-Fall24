@@ -61,7 +61,7 @@ public class ClientMain {
         // send protobuff!
 
     // SENDING PROTOBUF???
-        //ASK: Send enum with correct location?
+        //ASK: Send enum with correct location? HOW TO?
         //ASK: 
         
         
@@ -73,7 +73,7 @@ public class ClientMain {
         // Create a blocking stub
         SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(channel);
 
-        // Build the request
+        // Build the request DO AN IF STATEMENT?? FOR ENUM MAYBE
         sendclientserver request = sendclientserver.newBuilder()
                 .setFileLocation(inputLocation) // INPUT LOCATION GOES HERE!!
                 .setOutputLocation(sendclientserver.outLocation.file) //THIS IS SETTING OUTPUTLOCATION TO FILE. HOW TO CHANGE IN IF STATEMENT??
