@@ -5,7 +5,6 @@ import java.util.Scanner;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
-import protobuf.Clientserver;
 import protobuf.Clientserver.sendclientserver;
 import protobuf.Clientserver.sendresponse;
 import protobuf.SenddataGrpc;
@@ -60,28 +59,27 @@ public class ClientMain {
 
         // send protobuff!
 
-    // SENDING PROTOBUF???
-        //ASK: Send enum with correct location? HOW TO?
-        //ASK: 
-        
-        
-        
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
-                .usePlaintext() // Disable TLS for simplicity
+        // SENDING PROTOBUF???
+        // ASK: Send enum with correct location? HOW TO?
+        // ASK:
+
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext() // Disable TLS for
+                                                                                                     // simplicity
                 .build();
 
         // Create a blocking stub
         SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(channel);
 
         // Build the request DO AN IF STATEMENT?? FOR ENUM MAYBE
-        sendclientserver request = sendclientserver.newBuilder()
-                .setFileLocation(inputLocation) // INPUT LOCATION GOES HERE!!
-                .setOutputLocation(sendclientserver.outLocation.file) //THIS IS SETTING OUTPUTLOCATION TO FILE. HOW TO CHANGE IN IF STATEMENT??
+        sendclientserver request = sendclientserver.newBuilder().setFileLocation(inputLocation) // INPUT LOCATION GOES
+                                                                                                // HERE!!
+                .setOutputLocation(sendclientserver.outLocation.file) // THIS IS SETTING OUTPUTLOCATION TO FILE. HOW TO
+                                                                      // CHANGE IN IF STATEMENT??
                 .build();
 
         try {
             // Make the RPC call and get the response
-            //I AM DOING THIS ONE WRONG??
+            // I AM DOING THIS ONE WRONG??
             sendresponse response = stub.senddatatoclient(request);
             System.out.println("Response: " + response.getMessage());
         } catch (StatusRuntimeException e) {
@@ -90,11 +88,6 @@ public class ClientMain {
             // Shutdown the channel
             channel.shutdown();
         }
-        }
-    
-    
-    
-
     }
 
 }
