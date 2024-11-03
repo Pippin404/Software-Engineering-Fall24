@@ -1,0 +1,13 @@
+package protobuf;
+
+message clientserver{
+	optional string fileLocation=1; //this string has id 1!	
+
+	enum outLocation{
+		file=2;
+		print=3;
+	}
+	
+	optional outLocation outputLocation=4;
+
+}
