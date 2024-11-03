@@ -2,6 +2,14 @@ package client;
 
 import java.util.Scanner;
 
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
+import protobuf.Clientserver;
+import protobuf.Clientserver.sendclientserver;
+import protobuf.Clientserver.sendresponse;
+import protobuf.SenddataGrpc;
+
 public class ClientMain {
 
     public static void main(String args[]) {
@@ -51,6 +59,41 @@ public class ClientMain {
         // Do the enum thing with the protobuf
 
         // send protobuff!
+
+    // SENDING PROTOBUF???
+        //ASK: Send enum with correct location?
+        //ASK: 
+        
+        
+        
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
+                .usePlaintext() // Disable TLS for simplicity
+                .build();
+
+        // Create a blocking stub
+        SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(channel);
+
+        // Build the request
+        sendclientserver request = sendclientserver.newBuilder()
+                .setFileLocation(inputLocation) // INPUT LOCATION GOES HERE!!
+                .setOutputLocation(sendclientserver.outLocation.file) //THIS IS SETTING OUTPUTLOCATION TO FILE. HOW TO CHANGE IN IF STATEMENT??
+                .build();
+
+        try {
+            // Make the RPC call and get the response
+            //I AM DOING THIS ONE WRONG??
+            sendresponse response = stub.senddatatoclient(request);
+            System.out.println("Response: " + response.getMessage());
+        } catch (StatusRuntimeException e) {
+            System.out.println("RPC failed: " + e.getStatus());
+        } finally {
+            // Shutdown the channel
+            channel.shutdown();
+        }
+        }
+    
+    
+    
 
     }
 
