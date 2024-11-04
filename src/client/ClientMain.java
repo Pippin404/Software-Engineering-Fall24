@@ -50,7 +50,7 @@ public class ClientMain {
             System.out.println("You choose to print to a File!");
             // TODO Do something with the enums here
         }
-        if (outputLocation == "P") {
+        if (outputLocation.equalsIgnoreCase("P")) {
             System.out.println("You choose to print to the Printline!");
             // TODO Do something with the enums here
         }
