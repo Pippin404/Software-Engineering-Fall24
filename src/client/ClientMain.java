@@ -9,7 +9,6 @@ import protobuf.Clientserver.sendclientserver;
 import protobuf.Clientserver.sendresponse;
 import protobuf.SenddataGrpc;
 
-// ASK: How the server recieves it
 
 public class ClientMain {
     public static void main(String args[]) {
@@ -62,6 +61,9 @@ public class ClientMain {
 
         // SENDING PROTOBUF???
 
+        // ASK: Send enum with correct location? HOW TO?
+        // ASK:
+
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext() // Disable TLS for
                                                                                                      // simplicity
                 .build();
@@ -70,6 +72,7 @@ public class ClientMain {
         SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(channel);
 
         // Build the request DO AN IF STATEMENT?? FOR ENUM MAYBE
+
         sendclientserver.Builder builder = sendclientserver.newBuilder();
         builder.setFileLocation(inputLocation);
         // INPUT LOCATION GOES
@@ -82,6 +85,7 @@ public class ClientMain {
 
         sendclientserver request = builder.build();
         System.out.println(request); // this is cool
+
 
         try {
             // Make the RPC call and get the response
