@@ -34,13 +34,13 @@ public class ClientMain {
             outputLocation = scanner.nextLine();
 
             if (outputLocation.equalsIgnoreCase("F")) {
-                System.out.println("You Choose " + outputLocation);
+                System.out.println("You Choose " + outputLocation + ", File!");
+                break;
 
+            } else if (outputLocation.equalsIgnoreCase("P")) {
+                System.out.println("You Choose " + outputLocation + ", print!");
                 break;
-            if (outputLocation.equalsIgnoreCase("P"){
-                System.out.println("You Choose " + outputLocation);
-                break;
-            }
+
             } else {
                 System.out.println("Invalid input! Try again!");
                 System.out.println("F for file, P for print");
