@@ -9,7 +9,6 @@ import protobuf.Clientserver.sendclientserver;
 import protobuf.Clientserver.sendresponse;
 import protobuf.SenddataGrpc;
 
-
 public class ClientMain {
     public static void main(String args[]) {
 
@@ -38,6 +37,10 @@ public class ClientMain {
                 System.out.println("You Choose " + outputLocation);
 
                 break;
+            if (outputLocation.equalsIgnoreCase("P"){
+                System.out.println("You Choose " + outputLocation);
+                break;
+            }
             } else {
                 System.out.println("Invalid input! Try again!");
                 System.out.println("F for file, P for print");
@@ -48,8 +51,7 @@ public class ClientMain {
         if (outputLocation.equalsIgnoreCase("F")) {
             System.out.println("You choose to print to a File!");
             // TODO Do something with the enums here
-        }
-        if (outputLocation.equalsIgnoreCase("P")) {
+        } else if (outputLocation.equalsIgnoreCase("P")) {
             System.out.println("You choose to print to the Printline!");
             // TODO Do something with the enums here
         }
@@ -85,7 +87,6 @@ public class ClientMain {
 
         sendclientserver request = builder.build();
         System.out.println(request); // this is cool
-
 
         try {
             // Make the RPC call and get the response
