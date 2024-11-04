@@ -54,7 +54,7 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
     // Create and send a response
     sendresponse response = sendresponse.newBuilder()
                         // Need to add other responses for errors
-            .setMessage("File accepted. Output Type: "+ outputLocation +"."); 
+            .setMessage("File accepted. Output Type: "+ outputLocation +".")
             .build();
 
     responseObserver.onNext(response);
