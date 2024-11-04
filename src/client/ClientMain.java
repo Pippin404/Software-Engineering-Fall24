@@ -10,7 +10,6 @@ import protobuf.Clientserver.sendresponse;
 import protobuf.SenddataGrpc;
 
 public class ClientMain {
-
     public static void main(String args[]) {
 
         System.out.println("Hey this is the client!");
@@ -35,9 +34,13 @@ public class ClientMain {
             outputLocation = scanner.nextLine();
 
             if (outputLocation.equalsIgnoreCase("F")) {
-                System.out.println("You Choose " + outputLocation);
-
+                System.out.println("You Choose " + outputLocation + ", File!");
                 break;
+
+            } else if (outputLocation.equalsIgnoreCase("P")) {
+                System.out.println("You Choose " + outputLocation + ", print!");
+                break;
+
             } else {
                 System.out.println("Invalid input! Try again!");
                 System.out.println("F for file, P for print");
@@ -48,8 +51,7 @@ public class ClientMain {
         if (outputLocation.equalsIgnoreCase("F")) {
             System.out.println("You choose to print to a File!");
             // TODO Do something with the enums here
-        }
-        if (outputLocation == "P") {
+        } else if (outputLocation.equalsIgnoreCase("P")) {
             System.out.println("You choose to print to the Printline!");
             // TODO Do something with the enums here
         }
@@ -60,6 +62,7 @@ public class ClientMain {
         // send protobuff!
 
         // SENDING PROTOBUF???
+
         // ASK: Send enum with correct location? HOW TO?
         // ASK:
 
@@ -71,11 +74,19 @@ public class ClientMain {
         SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(channel);
 
         // Build the request DO AN IF STATEMENT?? FOR ENUM MAYBE
-        sendclientserver request = sendclientserver.newBuilder().setFileLocation(inputLocation) // INPUT LOCATION GOES
-                                                                                                // HERE!!
-                .setOutputLocation(sendclientserver.outLocation.file) // THIS IS SETTING OUTPUTLOCATION TO FILE. HOW TO
-                                                                      // CHANGE IN IF STATEMENT??
-                .build();
+
+        sendclientserver.Builder builder = sendclientserver.newBuilder();
+        builder.setFileLocation(inputLocation);
+        // INPUT LOCATION GOES
+        if (outputLocation.equalsIgnoreCase("F")) {
+            builder.setOutputLocation(sendclientserver.outLocation.file);
+            // do like a print for bugtesting
+        } else {
+            builder.setOutputLocation(sendclientserver.outLocation.print);
+        }
+
+        sendclientserver request = builder.build();
+        System.out.println(request); // this is cool
 
         try {
             // Make the RPC call and get the response
