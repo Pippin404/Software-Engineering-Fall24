@@ -9,8 +9,9 @@ import protobuf.Clientserver.sendclientserver;
 import protobuf.Clientserver.sendresponse;
 import protobuf.SenddataGrpc;
 
-public class ClientMain {
+// ASK: How the server recieves it
 
+public class ClientMain {
     public static void main(String args[]) {
 
         System.out.println("Hey this is the client!");
@@ -60,8 +61,6 @@ public class ClientMain {
         // send protobuff!
 
         // SENDING PROTOBUF???
-        // ASK: Send enum with correct location? HOW TO?
-        // ASK:
 
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext() // Disable TLS for
                                                                                                      // simplicity
@@ -71,11 +70,18 @@ public class ClientMain {
         SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(channel);
 
         // Build the request DO AN IF STATEMENT?? FOR ENUM MAYBE
-        sendclientserver request = sendclientserver.newBuilder().setFileLocation(inputLocation) // INPUT LOCATION GOES
-                                                                                                // HERE!!
-                .setOutputLocation(sendclientserver.outLocation.file) // THIS IS SETTING OUTPUTLOCATION TO FILE. HOW TO
-                                                                      // CHANGE IN IF STATEMENT??
-                .build();
+        sendclientserver.Builder builder = sendclientserver.newBuilder();
+        builder.setFileLocation(inputLocation);
+        // INPUT LOCATION GOES
+        if (outputLocation.equalsIgnoreCase("F")) {
+            builder.setOutputLocation(sendclientserver.outLocation.file);
+            // do like a print for bugtesting
+        } else {
+            builder.setOutputLocation(sendclientserver.outLocation.print);
+        }
+
+        sendclientserver request = builder.build();
+        System.out.println(request); // this is cool
 
         try {
             // Make the RPC call and get the response
