@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+message WriteOutputRequest {
+  optional int32 computedInteger = 1;
+  optional string outputFile = 2;
+  optional OutputType outputType = 3;
+
+}
+
+message WriteOutputResponse {
+  optional ResponseCode responseCode = 1;
+}
+
+enum OutputType {
+  CONSOLE = 0;
+  CSV = 1;
+  TEXT = 2;
+  JSON = 3;
+}
+
+enum ResponseCode {
+  SUCCESS = 0;
+  FAILURE = 1;
+}
+
+service WriteFile {
+  rpc WriteIntegerToFile(WriteOutputRequest) returns (WriteOutputResponse);
+}
+
