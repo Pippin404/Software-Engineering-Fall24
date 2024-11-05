@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+message ReadFileRequest {
+  optional string inputFile = 1;
+  optional InputType inputType = 2;
+  optional Delimiter delimiter = 3;
+
+}
+
+message ReadFileResponse {
+  repeated int32 parsedIntegers = 1;
+  optional int32 parsedInteger = 2;
+  optional ResponseCode responseCode = 3;
+}
+
+enum InputType {
+  CONSOLE = 0;
+  CSV = 1;
+  TEXT = 2;
+  JSON = 3;
+}
+
+
+enum Delimiter {
+  COMMA = 0;
+  SEMICOLON = 1;
+  TAB = 2;
+  PIPE = 3;
+}
+
+enum ResponseCode {
+  SUCCESS = 0;
+  FAILURE = 1;
+}
+
+service ReadFile {
+  rpc ParseInputFile(ReadFileRequest) returns (ReadFileResponse);
+}
+
