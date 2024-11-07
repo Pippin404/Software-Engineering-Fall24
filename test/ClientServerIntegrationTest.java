@@ -60,5 +60,6 @@ class ClientServerIntegrationTest {
 
         // Verify the response message
         assertEquals("File accepted. Output Type: print.", response.getMessage());
+        System.out.println("Hello is this thing working?");
     }
 }
