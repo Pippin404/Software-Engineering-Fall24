@@ -13,7 +13,7 @@ import server.ClientServer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ClientServerTest {
+class ClientServerIntegrationTest {
 
     private ManagedChannel channel;
     private io.grpc.Server server;
