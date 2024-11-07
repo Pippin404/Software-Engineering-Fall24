@@ -1,4 +1,4 @@
-package assignment7;
+package test;
 
 import io.grpc.ManagedChannel;
 import io.grpc.inprocess.InProcessChannelBuilder;
