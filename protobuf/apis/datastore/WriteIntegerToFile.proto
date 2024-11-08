@@ -1,4 +1,7 @@
 syntax = "proto3";
+package datastore;
+
+import "CommonEnums.proto";
 
 service WriteOutput {
   rpc writeIntegerOutputService(WriteIntegerServiceRequest) returns (WriteIntegerServiceResponse);
@@ -13,16 +16,4 @@ message WriteIntegerServiceRequest {
 
 message WriteIntegerServiceResponse {
   optional ResponseCode responseCode = 1;
-}
-
-enum OutputType {
-  CONSOLE = 0;
-  CSV = 1;
-  TEXT = 2;
-  JSON = 3;
-}
-
-enum ResponseCode {
-  SUCCESS = 0;
-  FAILURE = 1;
 }

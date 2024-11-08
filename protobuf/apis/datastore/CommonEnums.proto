@@ -1,0 +1,21 @@
+syntax = "proto3";
+package datastore;
+
+enum InputType {
+  CONSOLE = 0;
+  CSV = 1;
+  TEXT = 2;
+  JSON = 3;
+}
+
+enum OutputType {
+  CONSOLE = 0;
+  CSV = 1;
+  TEXT = 2;
+  JSON = 3;
+}
+
+enum ResponseCode {
+  SUCCESS = 0;
+  FAILURE = 1;
+}

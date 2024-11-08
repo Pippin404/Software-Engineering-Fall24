@@ -1,4 +1,7 @@
 syntax = "proto3";
+package datastore;
+
+import "CommonEnums.proto";
 
 service ParseFile {
   rpc parseInputFileService(ParseFileServiceRequest) returns (ParseFileServiceResponse);
@@ -14,24 +17,5 @@ message ParseFileServiceResponse {
   repeated int32 parsedIntegers = 1;
   optional int32 parsedInteger = 2;
   optional ResponseCode responseCode = 4;
-}
-
-enum InputType {
-  CONSOLE = 0;
-  CSV = 1;
-  TEXT = 2;
-  JSON = 3;
-}
-
-enum Delimiter {
-  COMMA = 0;
-  SEMICOLON = 1;
-  TAB = 2;
-  PIPE = 3;
-}
-
-enum ResponseCode {
-  SUCCESS = 0;
-  FAILURE = 1;
 }
 
