@@ -1,16 +1,16 @@
 syntax = "proto3";
 
 service ParseFile {
-  rpc ParseInputFile(ParseFileRequest) returns (ParseFileResponse);
+  rpc ParseInputFile(ParseFileServiceRequest) returns (ParseFileServiceResponse);
 }
 
-message ParseFileRequest {
+message ParseFileServiceRequest {
   optional string inputFile = 1;
   optional InputType inputType = 2;
   optional Delimiter delimiter = 3;
 }
 
-message ParseFileResponse {
+message ParseFileServiceResponse {
   repeated int32 parsedIntegers = 1;
   optional int32 parsedInteger = 2;
   optional ResponseCode responseCode = 4;

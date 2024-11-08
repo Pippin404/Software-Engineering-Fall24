@@ -7,7 +7,7 @@ public class DataStorePrototype {
         StartPrototypeResponse startPrototype = dataStoreInterface.startPrototype(new StartPrototypeRequest());
 
 //        parse the input file into raw integers
-        ParseInputFileResponse parseInputFile = dataStoreInterface.parseInputFile(new ParseInputFileRequest(null, null));
+        FileParseResponse parseInputFile = dataStoreInterface.internalInputParse(new FileParseRequest(null, null));
 
 //        write those integers into the output file
         WriteListToFileResponse writeListToFileResponse = dataStoreInterface.writeListToFile(new WriteListToFileRequest(null, null));

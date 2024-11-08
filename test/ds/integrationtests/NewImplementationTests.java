@@ -2,8 +2,8 @@ package ds.integrationtests;
 
 
 import apis.ds.DataStore;
-import apis.ds.ParseInputFileRequest;
-import apis.ds.ParseInputFileResponse;
+import apis.ds.FileParseRequest;
+import apis.ds.FileParseResponse;
 import apis.ds.WriteIntegerToFileRequest;
 import inputoutput.Delimiter;
 import inputoutput.InputConfig;
@@ -33,9 +33,9 @@ public class NewImplementationTests {
 
         InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
 
-        ParseInputFileRequest request = new ParseInputFileRequest(inputConfig, Delimiter.COMMA);
+        FileParseRequest request = new FileParseRequest(inputConfig, Delimiter.COMMA);
 
-        ParseInputFileResponse response = ds.parseInputFile(request);
+        FileParseResponse response = ds.parseInputFile(request);
 
         List<Integer> parsedResult = response.getParsedIntegers();
 

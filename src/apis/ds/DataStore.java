@@ -31,29 +31,29 @@ public class DataStore implements DataStoreInterface {
     }
 
     @Override
-    public ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest) {
+    public FileParseResponse internalInputParse(FileParseRequest fileParseRequest) {
         try {
 //            FIX: this should be switching on inputType not delimiter
-            InputType inputType = parseInputFileRequest.getInputConfig().getInputType();
+            InputType inputType = fileParseRequest.getInputConfig().getInputType();
             switch (inputType.getValue()) {
                 case "CONSOLE":
                     break;
                 case "CSV":
 //                this is only instantiated to be easier to read
-                    InputConfig inputConfig = parseInputFileRequest.getInputConfig();
+                    InputConfig inputConfig = fileParseRequest.getInputConfig();
 
-                    Delimiter delimiter = parseInputFileRequest.getDelimiter();
+                    Delimiter delimiter = fileParseRequest.getDelimiter();
 
 
                     File inputFile = inputConfig.getInputFile();
 
-                    FileResponseCode fileResponseCode = parseInputFileRequest.getParseInputFileResponseCode();
-                    ParameterResponseCode parameterResponseCode = parseInputFileRequest.getBasicResponseCode();
+                    FileResponseCode fileResponseCode = fileParseRequest.getParseInputFileResponseCode();
+                    ParameterResponseCode parameterResponseCode = fileParseRequest.getBasicResponseCode();
 
                     List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
 
 //                returns the parsed integers to the CE
-                    return new ParseInputFileResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
+                    return new FileParseResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
                 case "TEXT":
                     break;
                 case "JSON":
@@ -67,7 +67,7 @@ public class DataStore implements DataStoreInterface {
             e.printStackTrace();
         }
 //        TODO: This is causing a bug where the ParseInputFileResponse is always empty, find a way to have it be returned in the try catch only
-        return new ParseInputFileResponse();
+        return new FileParseResponse();
     }
 
 

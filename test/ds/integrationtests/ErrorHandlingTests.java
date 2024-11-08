@@ -2,8 +2,8 @@ package ds.integrationtests;
 
 
 import apis.ds.DataStore;
-import apis.ds.ParseInputFileRequest;
-import apis.ds.ParseInputFileResponse;
+import apis.ds.FileParseRequest;
+import apis.ds.FileParseResponse;
 import apis.ds.WriteIntegerToFileRequest;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
@@ -34,7 +34,7 @@ public class ErrorHandlingTests {
     @Test
     public void parseFileWithInvalidPath() {
         DataStore dataStore = new DataStore();
-        ParseInputFileRequest parseInputFileRequest = new ParseInputFileRequest(new InputConfig(new File("wombo"), InputType.CSV), Delimiter.COMMA);
+        FileParseRequest fileParseRequest = new FileParseRequest(new InputConfig(new File("wombo"), InputType.CSV), Delimiter.COMMA);
 
         exception.expect(FileNotFoundException.class);
 
@@ -49,11 +49,11 @@ public class ErrorHandlingTests {
     public void parseFileWithValidPath() {
 //        Test should fail as it should not trigger the exception
         DataStore dataStore = new DataStore();
-        ParseInputFileRequest parseInputFileRequest = new ParseInputFileRequest(new InputConfig(new File("test/ds/iotests/csvTest.txt"), InputType.CSV), Delimiter.COMMA);
+        FileParseRequest fileParseRequest = new FileParseRequest(new InputConfig(new File("test/ds/iotests/csvTest.txt"), InputType.CSV), Delimiter.COMMA);
 
 
 
-        ParseInputFileResponse response = dataStore.parseInputFile(parseInputFileRequest);
+        FileParseResponse response = dataStore.internalInputParse(fileParseRequest);
 
         Assert.assertNotNull(response.getParsedIntegers());
 //        List<Integer> parsedIntegers = response.getParsedIntegers();

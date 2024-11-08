@@ -13,8 +13,8 @@ import java.util.concurrent.ExecutionException;
 
 import apis.ce.InternalComputeEngine;
 import apis.ds.DataStore;
-import apis.ds.ParseInputFileRequest;
-import apis.ds.ParseInputFileResponse;
+import apis.ds.FileParseRequest;
+import apis.ds.FileParseResponse;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
 import inputoutput.Delimiter;
@@ -65,10 +65,10 @@ public class UScomputerEngineConstructer {
             // Create InputConfig and ParseInputFileRequest for DataStore
             InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
             Delimiter delimiter = Delimiter.COMMA;
-            ParseInputFileRequest request = new ParseInputFileRequest(inputConfig, delimiter);
+            FileParseRequest request = new FileParseRequest(inputConfig, delimiter);
 
             // Parse the file using DataStore
-            ParseInputFileResponse response = dataStore.parseInputFile(request);
+            FileParseResponse response = dataStore.parseInputFile(request);
             data = response.getParsedIntegers();
             System.out.println("Numbers read from file in coordinator: " + data);
             
