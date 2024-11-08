@@ -1,13 +1,17 @@
 syntax = "proto3";
 
-message WriteOutputRequest {
+service WriteOutput {
+  rpc writeIntegerOutputService(WriteIntegerServiceRequest) returns (WriteIntegerServiceResponse);
+}
+
+message WriteIntegerServiceRequest {
   optional int32 computedInteger = 1;
   optional string outputFile = 2;
   optional OutputType outputType = 3;
 
 }
 
-message WriteOutputResponse {
+message WriteIntegerServiceResponse {
   optional ResponseCode responseCode = 1;
 }
 
@@ -22,8 +26,3 @@ enum ResponseCode {
   SUCCESS = 0;
   FAILURE = 1;
 }
-
-service WriteFile {
-  rpc WriteIntegerToFile(WriteOutputRequest) returns (WriteOutputResponse);
-}
-

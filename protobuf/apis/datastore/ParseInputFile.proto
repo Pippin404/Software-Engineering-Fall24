@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 service ParseFile {
-  rpc ParseInputFile(ParseFileServiceRequest) returns (ParseFileServiceResponse);
+  rpc parseInputFileService(ParseFileServiceRequest) returns (ParseFileServiceResponse);
 }
 
 message ParseFileServiceRequest {

@@ -31,7 +31,7 @@ public class DataStore implements DataStoreInterface {
     }
 
     @Override
-    public FileParseResponse internalInputParse(FileParseRequest fileParseRequest) {
+    public FileParseResponse internalParseInput(FileParseRequest fileParseRequest) {
         try {
 //            FIX: this should be switching on inputType not delimiter
             InputType inputType = fileParseRequest.getInputConfig().getInputType();
@@ -139,11 +139,11 @@ public class DataStore implements DataStoreInterface {
 
 
     @Override
-    public WriteIntegerToFileResponse writeIntegerToFile(WriteIntegerToFileRequest writeIntegerToFileRequest) {
+    public WriteIntegerResponse internalWriteInteger(WriteIntegerRequest writeIntegerRequest) {
         try {
             //        instantiated to be more readable
-            OutputConfig outputConfig = writeIntegerToFileRequest.getOutputConfig();
-            int computedInteger = writeIntegerToFileRequest.getComputedInteger();
+            OutputConfig outputConfig = writeIntegerRequest.getOutputConfig();
+            int computedInteger = writeIntegerRequest.getComputedInteger();
 
             switch (outputConfig.getOutputType()) {
                 case CSV: {
@@ -169,10 +169,10 @@ public class DataStore implements DataStoreInterface {
             e.printStackTrace();
         }
         //        TODO: bad, unfinished, add implementation
-        return new WriteIntegerToFileResponse(BasicResponseCode.FAILURE);
+        return new WriteIntegerResponse(BasicResponseCode.FAILURE);
     }
 
-    private WriteIntegerToFileResponse writeToTextHandler(String outputFilePath, int computedInteger) {
+    private WriteIntegerResponse writeToTextHandler(String outputFilePath, int computedInteger) {
         File file = new File(outputFilePath);
         FileWriter writer = null;
         try {
@@ -193,7 +193,7 @@ public class DataStore implements DataStoreInterface {
             }
         }
 
-        return new WriteIntegerToFileResponse(BasicResponseCode.SUCCESS);
+        return new WriteIntegerResponse(BasicResponseCode.SUCCESS);
     }
 
     @Override
