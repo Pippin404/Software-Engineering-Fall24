@@ -1,13 +1,16 @@
 syntax = "proto3";
 
-message ReadFileRequest {
+service ParseFile {
+  rpc ParseInputFile(ParseFileRequest) returns (ParseFileResponse);
+}
+
+message ParseFileRequest {
   optional string inputFile = 1;
   optional InputType inputType = 2;
   optional Delimiter delimiter = 3;
-
 }
 
-message ReadFileResponse {
+message ParseFileResponse {
   repeated int32 parsedIntegers = 1;
   optional int32 parsedInteger = 2;
   optional ResponseCode responseCode = 4;
@@ -20,7 +23,6 @@ enum InputType {
   JSON = 3;
 }
 
-
 enum Delimiter {
   COMMA = 0;
   SEMICOLON = 1;
@@ -31,9 +33,5 @@ enum Delimiter {
 enum ResponseCode {
   SUCCESS = 0;
   FAILURE = 1;
-}
-
-service ReadFile {
-  rpc ParseInputFile(ReadFileRequest) returns (ReadFileResponse);
 }
 
