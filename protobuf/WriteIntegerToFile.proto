@@ -10,7 +10,7 @@ service WriteOutput {
 message WriteIntegerServiceRequest {
   optional int32 computedInteger = 1;
   optional string outputFile = 2;
-  optional OutputType outputType = 3;
+  optional InputOutputType outputType = 3;
 
 }
 

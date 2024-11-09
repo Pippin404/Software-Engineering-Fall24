@@ -1,18 +1,18 @@
 syntax = "proto3";
 package datastore;
 
-enum InputType {
+enum InputOutputType {
   CONSOLE = 0;
   CSV = 1;
   TEXT = 2;
   JSON = 3;
 }
 
-enum OutputType {
-  CONSOLE = 0;
-  CSV = 1;
-  TEXT = 2;
-  JSON = 3;
+enum Delimiter {
+  COMMA = 0;
+  SEMICOLON = 1;
+  TAB = 2;
+  PIPE = 3;
 }
 
 enum ResponseCode {
