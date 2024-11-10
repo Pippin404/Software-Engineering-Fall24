@@ -1,5 +1,5 @@
 syntax = "proto3";
-package datastore;
+package protobuf.datastore;
 
 enum InputOutputType {
   CONSOLE = 0;
@@ -8,7 +8,7 @@ enum InputOutputType {
   JSON = 3;
 }
 
-enum Delimiter {
+enum ExternalDelimiter {
   COMMA = 0;
   SEMICOLON = 1;
   TAB = 2;

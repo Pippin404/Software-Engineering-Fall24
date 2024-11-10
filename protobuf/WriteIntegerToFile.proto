@@ -1,5 +1,5 @@
 syntax = "proto3";
-package datastore;
+package protobuf.datastore;
 
 import "CommonEnums.proto";
 

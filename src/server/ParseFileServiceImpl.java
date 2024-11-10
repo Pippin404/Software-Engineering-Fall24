@@ -1,15 +1,24 @@
 package server;
 
 import apis.ds.DataStore;
-import datastore.CommonEnums;
-import datastore.ParseFileGrpc;
-import datastore.ParseInputFile;
+import protobuf.datastore.CommonEnums;
+import protobuf.datastore.ParseFileGrpc;
+import protobuf.datastore.ParseInputFile;
+import protobuf.datastore.ParseInputFile.ParseFileServiceRequest;
+import protobuf.datastore.ParseInputFile.ParseFileServiceResponse;
 import inputoutput.InputType;
 import io.grpc.stub.StreamObserver;
 import apis.ds.FileParseRequest;
 import apis.ds.FileParseResponse;
 import inputoutput.InputConfig;
 import inputoutput.Delimiter;
+import protobuf.datastore.CommonEnums;
+
+import protobuf.datastore.CommonEnums.ExternalDelimiter;
+import protobuf.datastore.CommonEnums.InputOutputType;
+import protobuf.datastore.CommonEnums.ResponseCode;
+
+
 
 import statuscodes.FileResponseCode;
 import statuscodes.ParameterResponseCode;
@@ -19,7 +28,7 @@ import java.io.File;
 //TODO: These types are so ugly
 public class ParseFileServiceImpl extends ParseFileGrpc.ParseFileImplBase {
     @Override
-    public void parseInputFileService(ParseInputFile.ParseFileServiceRequest serviceRequest, StreamObserver<ParseInputFile.ParseFileServiceResponse> serviceResponseObserver) {
+    public void parseInputFileService(ParseFileServiceRequest serviceRequest, StreamObserver<ParseFileServiceResponse> serviceResponseObserver) {
         super.parseInputFileService(serviceRequest, serviceResponseObserver);
 
         //Proto ParseFileServiceRequest -> DataStore internalFileParseRequest to use the internal DataStore logic
@@ -31,7 +40,7 @@ public class ParseFileServiceImpl extends ParseFileGrpc.ParseFileImplBase {
         FileParseResponse internalFileParseResponse = dataStore.internalParseInput(internalFileParseRequest);
 
         //DataStore internalFileParseResponse -> Proto ParseFileServiceResponse to be sent back out through proto
-        ParseInputFile.ParseFileServiceResponse response = convertToProtoResponse(internalFileParseResponse);
+        ParseFileServiceResponse response = convertToProtoResponse(internalFileParseResponse);
 
         //Send out new proto response
         serviceResponseObserver.onNext(response);
@@ -39,7 +48,7 @@ public class ParseFileServiceImpl extends ParseFileGrpc.ParseFileImplBase {
 
     }
 
-    private FileParseRequest convertToInternalRequest(ParseInputFile.ParseFileServiceRequest serviceRequest) {
+    private FileParseRequest convertToInternalRequest(ParseFileServiceRequest serviceRequest) {
         //Converts the proto response message to the internal request class
         File inputFile = new File(serviceRequest.getInputFile());
 
@@ -51,53 +60,41 @@ public class ParseFileServiceImpl extends ParseFileGrpc.ParseFileImplBase {
         return new FileParseRequest(inputConfig, delimiter);
     }
 
-    private ParseInputFile.ParseFileServiceResponse convertToProtoResponse(FileParseResponse internalResponse) {
-        ParseInputFile.ParseFileServiceResponse.Builder responseBuilder = ParseInputFile.ParseFileServiceResponse.newBuilder()
+    private ParseFileServiceResponse convertToProtoResponse(FileParseResponse internalResponse) {
+        ParseFileServiceResponse.Builder responseBuilder = ParseFileServiceResponse.newBuilder()
                 .addAllParsedIntegers(internalResponse.getParsedIntegers())
                 .setResponseCode(mapFileResponseCode(internalResponse.getParseInputFileResponseCode()));
 
         return responseBuilder.build();
     }
 
-    private Delimiter mapToInternalDelimiter(CommonEnums.Delimiter externalDelimiter) {
-        switch (externalDelimiter) {
-            case COMMA:
-                return Delimiter.COMMA;
-            case SEMICOLON:
-                return Delimiter.SEMICOLON;
-            case TAB:
-                return Delimiter.TAB;
-            case PIPE:
-                return Delimiter.PIPE;
-            default:
-                throw new IllegalArgumentException("Unknown Delimiter: " + externalDelimiter);
-        }
+    private Delimiter mapToInternalDelimiter(ExternalDelimiter externalDelimiter) {
+        return switch (externalDelimiter) {
+            case COMMA -> Delimiter.COMMA;
+            case SEMICOLON -> Delimiter.SEMICOLON;
+            case TAB -> Delimiter.TAB;
+            case PIPE -> Delimiter.PIPE;
+            default -> throw new IllegalArgumentException("Unknown Delimiter: " + externalDelimiter);
+        };
     }
 
-    private InputType mapToInternalInputType(CommonEnums.InputOutputType inputOutputType) {
-        switch (inputOutputType) {
-            case CONSOLE:
-                return InputType.CONSOLE;
-            case CSV:
-                return InputType.CSV;
-            case TEXT:
-                return InputType.TEXT;
-            case JSON:
-                return InputType.JSON;
-            default:
-                throw new IllegalArgumentException("Unknown InputOutputType: " + inputOutputType);
-        }
+    private InputType mapToInternalInputType(InputOutputType inputOutputType) {
+        return switch (inputOutputType) {
+            case CONSOLE -> InputType.CONSOLE;
+            case CSV -> InputType.CSV;
+            case TEXT -> InputType.TEXT;
+            case JSON -> InputType.JSON;
+            default -> throw new IllegalArgumentException("Unknown InputOutputType: " + inputOutputType);
+        };
     }
 
-    private CommonEnums.ResponseCode mapFileResponseCode(FileResponseCode internalCode) {
-        switch (internalCode) {
-            case VALID_FILE:
-                return CommonEnums.ResponseCode.SUCCESS;
-            case INVALID_FILE:
-                return CommonEnums.ResponseCode.FAILURE;
-            default:
-                return CommonEnums.ResponseCode.FAILURE;
-        }
+    // TODO: This shouldn't repeat a response code
+    private ResponseCode mapFileResponseCode(FileResponseCode internalCode) {
+        return switch (internalCode) {
+            case VALID_FILE -> ResponseCode.SUCCESS;
+            case INVALID_FILE -> ResponseCode.FAILURE;
+            default -> ResponseCode.FAILURE;
+        };
     }
 
 

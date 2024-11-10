@@ -1,5 +1,5 @@
 syntax = "proto3";
-package datastore;
+package protobuf.datastore;
 
 import "CommonEnums.proto";
 
@@ -10,7 +10,7 @@ service ParseFile {
 message ParseFileServiceRequest {
   optional string inputFile = 1;
   optional InputOutputType inputType = 2;
-  optional Delimiter delimiter = 3;
+  optional ExternalDelimiter delimiter = 3;
 }
 
 message ParseFileServiceResponse {
