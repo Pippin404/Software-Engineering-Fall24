@@ -139,11 +139,11 @@ public class DataStore implements DataStoreInterface {
 
 
     @Override
-    public WriteIntegerResponse internalWriteInteger(WriteIntegerRequest writeIntegerRequest) {
+    public InternalWriteIntegerResponse internalWriteInteger(InternalWriteIntegerRequest internalWriteIntegerRequest) {
         try {
             //        instantiated to be more readable
-            OutputConfig outputConfig = writeIntegerRequest.getOutputConfig();
-            int computedInteger = writeIntegerRequest.getComputedInteger();
+            OutputConfig outputConfig = internalWriteIntegerRequest.getOutputConfig();
+            int computedInteger = internalWriteIntegerRequest.getComputedInteger();
 
             switch (outputConfig.getOutputType()) {
                 case CSV: {
@@ -169,10 +169,10 @@ public class DataStore implements DataStoreInterface {
             e.printStackTrace();
         }
         //        TODO: bad, unfinished, add implementation
-        return new WriteIntegerResponse(BasicResponseCode.FAILURE);
+        return new InternalWriteIntegerResponse(BasicResponseCode.FAILURE);
     }
 
-    private WriteIntegerResponse writeToTextHandler(String outputFilePath, int computedInteger) {
+    private InternalWriteIntegerResponse writeToTextHandler(String outputFilePath, int computedInteger) {
         File file = new File(outputFilePath);
         FileWriter writer = null;
         try {
@@ -193,7 +193,7 @@ public class DataStore implements DataStoreInterface {
             }
         }
 
-        return new WriteIntegerResponse(BasicResponseCode.SUCCESS);
+        return new InternalWriteIntegerResponse(BasicResponseCode.SUCCESS);
     }
 
     @Override

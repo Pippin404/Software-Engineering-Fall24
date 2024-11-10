@@ -4,7 +4,7 @@ package ds.integrationtests;
 import apis.ds.DataStore;
 import apis.ds.FileParseRequest;
 import apis.ds.FileParseResponse;
-import apis.ds.WriteIntegerRequest;
+import apis.ds.InternalWriteIntegerRequest;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
 import inputoutput.OutputConfig;
@@ -23,9 +23,9 @@ public class ErrorHandlingTests {
 //        I'm not sure how to use junit to test this so I'm just using main for now
         DataStore dataStore = new DataStore();
         OutputConfig outputConfig = new OutputConfig("C:\\Users\\eribr\\Desktop\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\iotests\\OutputText.txt", OutputType.TEXT);
-        WriteIntegerRequest writeIntegerRequest = new WriteIntegerRequest(outputConfig, 5);
+        InternalWriteIntegerRequest internalWriteIntegerRequest = new InternalWriteIntegerRequest(outputConfig, 5);
 
-        dataStore.internalWriteInteger(writeIntegerRequest);
+        dataStore.internalWriteInteger(internalWriteIntegerRequest);
 
     }
     @Rule

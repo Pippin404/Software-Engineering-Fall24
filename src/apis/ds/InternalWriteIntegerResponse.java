@@ -3,11 +3,11 @@ package apis.ds;
 import statuscodes.BasicResponseCode;
 import statuscodes.ParameterResponseCode;
 
-public class WriteIntegerResponse {
+public class InternalWriteIntegerResponse {
     private ParameterResponseCode parameterResponseCode;
     private BasicResponseCode basicResponseCode;
 
-    public WriteIntegerResponse(BasicResponseCode basicResponseCode) {
+    public InternalWriteIntegerResponse(BasicResponseCode basicResponseCode) {
         try {
             if (parameterResponseCode == null) {
                 parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;

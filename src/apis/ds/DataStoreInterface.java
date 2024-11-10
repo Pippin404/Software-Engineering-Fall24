@@ -6,7 +6,7 @@ public interface DataStoreInterface {
 
     WriteListToFileResponse writeListToFile(WriteListToFileRequest writeListToFileRequest);
 
-    WriteIntegerResponse internalWriteInteger(WriteIntegerRequest writeIntegerRequest);
+    InternalWriteIntegerResponse internalWriteInteger(InternalWriteIntegerRequest internalWriteIntegerRequest);
 
     StartPrototypeResponse startPrototype(StartPrototypeRequest startPrototypeRequest);
 

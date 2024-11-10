@@ -4,7 +4,7 @@ package ds.integrationtests;
 import apis.ds.DataStore;
 import apis.ds.FileParseRequest;
 import apis.ds.FileParseResponse;
-import apis.ds.WriteIntegerRequest;
+import apis.ds.InternalWriteIntegerRequest;
 import inputoutput.Delimiter;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
@@ -54,7 +54,7 @@ public class NewImplementationTests {
 
         OutputConfig outputConfig = new OutputConfig("D:\\New Desktop on Hard drive\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\test.txt", OutputType.TEXT);
 
-        WriteIntegerRequest request = new WriteIntegerRequest(outputConfig, 5);
+        InternalWriteIntegerRequest request = new InternalWriteIntegerRequest(outputConfig, 5);
 
         ds.internalWriteInteger(request);
 
