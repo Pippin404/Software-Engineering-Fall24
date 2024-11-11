@@ -15,6 +15,7 @@ public class ClientMain {
         System.out.println("Hey this is the client!");
         String inputLocation = "";
         String outputLocation = "";
+        String outputPath = "";
 
         System.out.println("Welcome to our Software Project");
         System.out.println("This program takes in an int N as a file, and then returns fibonacci to the Nth");
@@ -50,7 +51,8 @@ public class ClientMain {
         System.out.println("You choose to get the data from " + inputLocation);
         if (outputLocation.equalsIgnoreCase("F")) {
             System.out.println("You choose to print to a File!");
-            // TODO Do something with the enums here
+            System.out.println("Enter the output file path:");
+            outputPath = scanner.nextLine();
         } else if (outputLocation.equalsIgnoreCase("P")) {
             System.out.println("You choose to print to the Printline!");
             // TODO Do something with the enums here
@@ -80,6 +82,7 @@ public class ClientMain {
         // INPUT LOCATION GOES
         if (outputLocation.equalsIgnoreCase("F")) {
             builder.setOutputLocation(sendclientserver.outLocation.file);
+            builder.setOutputPath(outputPath);
             // do like a print for bugtesting
         } else {
             builder.setOutputLocation(sendclientserver.outLocation.print);

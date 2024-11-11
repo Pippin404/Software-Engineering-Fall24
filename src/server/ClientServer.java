@@ -36,6 +36,7 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
   
     String fileLocation = request.getFileLocation();
     sendclientserver.outLocation outputLocation = request.getOutputLocation();
+    String outputPath = request.getOutputPath();
 
     // Initialize necessary components (DataStore, InternalComputeEngine, etc.)
     DataStore dataStore = new DataStore();
@@ -51,6 +52,14 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
     List<Integer> result = coordinator.runInternalCompute(coordinator.getData());
     dataStore.setData(result);
 
+    
+    if (outputLocation == sendclientserver.outLocation.print) {
+        System.out.println("Computed Results: " + result);
+    } else {
+        coordinator.writeComputedResultsToFile(result, outputPath);
+    }
+    
+    
     // Create and send a response
     sendresponse response = sendresponse.newBuilder()
                         // Need to add other responses for errors
