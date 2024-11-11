@@ -21,7 +21,7 @@ public class InternalWriteIntegerResponse {
         }
     }
 
-    public ParameterResponseCode getBasicResponseCode() {
-        return parameterResponseCode;
+    public BasicResponseCode getBasicResponseCode() {
+        return basicResponseCode;
     }
 }
