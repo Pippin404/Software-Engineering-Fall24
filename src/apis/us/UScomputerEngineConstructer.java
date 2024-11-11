@@ -19,10 +19,23 @@ import inputoutput.InputConfig;
 import inputoutput.InputType;
 import inputoutput.Delimiter;
 
+import io.grpc.Channel;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import protobuf.datastore.ParseFileGrpc;
+import protobuf.datastore.ParseFileGrpc.ParseFileBlockingStub;
+import protobuf.datastore.ParseInputFile.ParseFileServiceResponse;
+import protobuf.datastore.ParseInputFile.ParseFileServiceRequest;
+import protobuf.datastore.WriteIntegerGrpc;
+import protobuf.datastore.WriteIntegerGrpc.WriteIntegerBlockingStub;
+
 
 public class UScomputerEngineConstructer {
 
-        //Make an "InternalComputeEngine" to pass the data to the CE
+    private final Channel channel;
+    private final ParseFileBlockingStub parseFileStub;
+    private final WriteIntegerBlockingStub writeIntegerStub;
+    //Make an "InternalComputeEngine" to pass the data to the CE
         private InternalComputeEngine computeEngine;
         private DataStore dataStore;
         private UserCommunicatorImpl commHandler=null;
@@ -37,8 +50,18 @@ public class UScomputerEngineConstructer {
            throw new IllegalArgumentException("Data cannot be null");
         }
         this.computeEngine=computeEngine;
+        //Keeping this dataStore so it doesn't break everything else that uses this class
         this.dataStore = dataStore;    
         this.threadPool = Executors.newFixedThreadPool(MAX_THREADS); // Initialize fixed thread pool
+
+            //gRPC channel for the DataStoreServer
+            //TODO: This probably shouldn't be hardcoded like this
+            this.channel = ManagedChannelBuilder.forAddress("localhost", 50052)
+                    //TODO: PlainText probably shouldn't be used
+                    .usePlaintext()
+                    .build();
+            this.parseFileStub = ParseFileGrpc.newBlockingStub(channel);
+            this.writeIntegerStub = WriteIntegerGrpc.newBlockingStub(channel);
         }
 
         public void setInputFile(File file) {
@@ -59,24 +82,31 @@ public class UScomputerEngineConstructer {
                 this.commHandler=new UserCommunicatorImpl();
             }
 
+            // Create a ServiceRequest for the DataStoreServer
+                //InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
+                //Delimiter delimiter = Delimiter.COMMA;
+                //FileParseRequest request = new FileParseRequest(inputConfig, delimiter);
 
+                //TODO: InputType is hardcoded to be CSV
+            ParseFileServiceRequest request = ParseFileServiceRequest.newBuilder()
+                    .setInputFile(inputFile.getAbsolutePath())
+                    .setInputType(protobuf.datastore.CommonEnums.InputOutputType.CSV)
+                    .setDelimiter(protobuf.datastore.CommonEnums.ExternalDelimiter.COMMA)
+                    .build();
 
-            // Create InputConfig and ParseInputFileRequest for DataStore
-            InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
-            Delimiter delimiter = Delimiter.COMMA;
-            FileParseRequest request = new FileParseRequest(inputConfig, delimiter);
+            // Send the request to the server
+            // This parses the file using DataStore
+                //FileParseResponse response = dataStore.internalParseInput(request);
+            ParseFileServiceResponse response = parseFileStub.parseInputFileService(request);
 
-            // Parse the file using DataStore
-            FileParseResponse response = dataStore.internalParseInput(request);
-            data = response.getParsedIntegers();
-            System.out.println("Numbers read from file in coordinator: " + data);
-            
-            
             // Default to [1, 2, 3] if the file is empty
-            if (data.isEmpty()) {
+            if (response.getParsedIntegersList().isEmpty()) {
                 data = Arrays.asList(1, 2, 3);
+            } else {
+                data = response.getParsedIntegersList();
             }
 
+            System.out.println("Numbers read from file in coordinator: " + data);
         }
 
         public List<Integer> getData() {
