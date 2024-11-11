@@ -1,5 +1,7 @@
 package protobuf;
 
+//TODO: There's no way to send an output path to the Coordinator!!
+
 message sendclientserver{
 	optional string fileLocation=1; //this string has id 1!	
 

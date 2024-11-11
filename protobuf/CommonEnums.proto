@@ -1,0 +1,21 @@
+syntax = "proto3";
+package protobuf.datastore;
+
+enum InputOutputType {
+  CONSOLE = 0;
+  CSV = 1;
+  TEXT = 2;
+  JSON = 3;
+}
+
+enum ExternalDelimiter {
+  COMMA = 0;
+  SEMICOLON = 1;
+  TAB = 2;
+  PIPE = 3;
+}
+
+enum ResponseCode {
+  SUCCESS = 0;
+  FAILURE = 1;
+}

@@ -5,7 +5,7 @@ import inputoutput.InputConfig;
 import statuscodes.ParameterResponseCode;
 import statuscodes.FileResponseCode;
 
-public class ParseInputFileRequest  {
+public class FileParseRequest {
 //    should include an input config with the file path and the delimiters
     private Delimiter delimiter;
     private InputConfig inputConfig;
@@ -30,7 +30,7 @@ public class ParseInputFileRequest  {
         return fileResponseCode;
     }
 
-    public ParseInputFileRequest(InputConfig inputConfig, Delimiter delimiter) {
+    public FileParseRequest(InputConfig inputConfig, Delimiter delimiter) {
         try {
             if (inputConfig == null) {
                 parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;

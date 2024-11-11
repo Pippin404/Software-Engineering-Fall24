@@ -1,0 +1,21 @@
+syntax = "proto3";
+package protobuf.datastore;
+
+import "CommonEnums.proto";
+
+service ParseFile {
+  rpc parseInputFileService(ParseFileServiceRequest) returns (ParseFileServiceResponse);
+}
+
+message ParseFileServiceRequest {
+  optional string inputFile = 1;
+  optional InputOutputType inputType = 2;
+  optional ExternalDelimiter delimiter = 3;
+}
+
+message ParseFileServiceResponse {
+  repeated int32 parsedIntegers = 1;
+  optional int32 parsedInteger = 2;
+  optional ResponseCode responseCode = 4;
+}
+

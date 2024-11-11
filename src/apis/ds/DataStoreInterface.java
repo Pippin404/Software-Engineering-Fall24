@@ -2,11 +2,11 @@ package apis.ds;
 
 public interface DataStoreInterface {
 
-    ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest);
+    FileParseResponse internalParseInput(FileParseRequest fileParseRequest);
 
     WriteListToFileResponse writeListToFile(WriteListToFileRequest writeListToFileRequest);
 
-    WriteIntegerToFileResponse writeIntegerToFile(WriteIntegerToFileRequest writeIntegerToFileRequest);
+    InternalWriteIntegerResponse internalWriteInteger(InternalWriteIntegerRequest internalWriteIntegerRequest);
 
     StartPrototypeResponse startPrototype(StartPrototypeRequest startPrototypeRequest);
 

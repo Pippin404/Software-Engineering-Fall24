@@ -3,14 +3,14 @@ package apis.ds;
 import inputoutput.OutputConfig;
 import statuscodes.ParameterResponseCode;
 
-public class WriteIntegerToFileRequest {
+public class InternalWriteIntegerRequest {
     private OutputConfig outputConfig;
 
     private int computedInteger;
 
     private ParameterResponseCode parameterResponseCode;
 
-    public WriteIntegerToFileRequest(OutputConfig outputConfig, int computedInteger) {
+    public InternalWriteIntegerRequest(OutputConfig outputConfig, int computedInteger) {
         try {
             if (outputConfig == null) {
                 parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
