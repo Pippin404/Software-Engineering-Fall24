@@ -3,8 +3,8 @@ package protobuf.datastore;
 
 import "CommonEnums.proto";
 
-service WriteOutput {
-  rpc writeIntegerOutputService(WriteIntegerServiceRequest) returns (WriteIntegerServiceResponse);
+service WriteInteger {
+  rpc writeIntegerService(WriteIntegerServiceRequest) returns (WriteIntegerServiceResponse);
 }
 
 message WriteIntegerServiceRequest {
