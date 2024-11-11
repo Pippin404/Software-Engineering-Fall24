@@ -80,7 +80,7 @@ public class ClientMain {
         // INPUT LOCATION GOES
         if (outputLocation.equalsIgnoreCase("F")) {
             builder.setOutputLocation(sendclientserver.outLocation.file);
-            // do like a print for bugtesting
+            .setOutputPath(outputPath);
         } else {
             builder.setOutputLocation(sendclientserver.outLocation.print);
         }
