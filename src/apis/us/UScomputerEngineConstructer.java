@@ -22,12 +22,17 @@ import inputoutput.Delimiter;
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import protobuf.datastore.CommonEnums;
 import protobuf.datastore.ParseFileGrpc;
 import protobuf.datastore.ParseFileGrpc.ParseFileBlockingStub;
 import protobuf.datastore.ParseInputFile.ParseFileServiceResponse;
 import protobuf.datastore.ParseInputFile.ParseFileServiceRequest;
 import protobuf.datastore.WriteIntegerGrpc;
 import protobuf.datastore.WriteIntegerGrpc.WriteIntegerBlockingStub;
+import protobuf.datastore.WriteIntegerToFile.WriteIntegerServiceResponse;
+import protobuf.datastore.WriteIntegerToFile.WriteIntegerServiceRequest;
+import protobuf.datastore.CommonEnums.InputOutputType;
+import protobuf.datastore.CommonEnums.ResponseCode;
 
 
 public class UScomputerEngineConstructer {
@@ -40,7 +45,12 @@ public class UScomputerEngineConstructer {
         private DataStore dataStore;
         private UserCommunicatorImpl commHandler=null;
         private List<Integer> data;
+        //I think it makes more sense to store the results in here to be used later
+        //TODO: this list of results should probably be gotten through a network call, maybe
+        private List<Integer> results;
         private File inputFile;  // Store the file as a file object
+        //TODO: There's no way to send an output path to the Coordinator!!
+        private String outputFile;
         private final ExecutorService threadPool;
         private static final int MAX_THREADS = 3;  // Define upper limit for threads
 
@@ -55,9 +65,9 @@ public class UScomputerEngineConstructer {
         this.threadPool = Executors.newFixedThreadPool(MAX_THREADS); // Initialize fixed thread pool
 
             //gRPC channel for the DataStoreServer
-            //TODO: This probably shouldn't be hardcoded like this
+                //TODO: This probably shouldn't be hardcoded like this
             this.channel = ManagedChannelBuilder.forAddress("localhost", 50052)
-                    //TODO: PlainText probably shouldn't be used
+                        //TODO: PlainText probably shouldn't be used
                     .usePlaintext()
                     .build();
             this.parseFileStub = ParseFileGrpc.newBlockingStub(channel);
@@ -73,6 +83,17 @@ public class UScomputerEngineConstructer {
         // get method for file
         public File getInputFile() {
             return this.inputFile;
+        }
+
+        public void setOutputFile(String file) {
+            this.outputFile = file;
+            System.out.println("Writing data to : " + this.outputFile);
+            // ^ conformation message for file setting (remove if you want)
+        }
+
+        // get method for file
+        public String getOutputFile() {
+            return this.outputFile;
         }
 
 
@@ -120,6 +141,8 @@ public class UScomputerEngineConstructer {
                 int result = computeEngine.computeNthFibonacci(number);
                 results.add(result);
             }
+            //TODO: bandaid solution to not have to make another network call to DataStore
+            this.results = results;
             return results;
         }
 
@@ -142,7 +165,8 @@ public class UScomputerEngineConstructer {
                         e.printStackTrace();
                     }
                 }
-        return results;
+            this.results = results;
+            return results;
         }
 
 
@@ -150,7 +174,27 @@ public class UScomputerEngineConstructer {
                 threadPool.shutdown();  // Shutdown thread pool after computations
         }
 
+        //TODO: right now there's only support for writing all the integers at once, there should be support for writing a single integer so we can do it over a stream
+        public void writeComputedResultsToFile(List<Integer> results, String outputPath) {
+            // Send WriteInteger gRPC request after computation
+            //TODO: repeatedly making network calls like this in a for loop might be abysmal for performance but who knows
+            for (int result : results) {
+                WriteIntegerServiceRequest request = WriteIntegerServiceRequest.newBuilder()
+                        .setComputedInteger(result)
+                        .setOutputFile(outputPath)
+                        //TODO: hardcoded to csv for now
+                        .setOutputType(InputOutputType.CSV)
+                        .build();
 
+                WriteIntegerServiceResponse response = writeIntegerStub.writeIntegerService(request);
+
+                if (response.getResponseCode() == ResponseCode.SUCCESS) {
+                    System.out.println("Successfully wrote " + result + " to " + outputPath);
+                } else {
+                    System.err.println("Failed to write " + result + " to " + outputPath);
+                }
+            }
+        }
 
 
 
