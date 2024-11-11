@@ -53,7 +53,6 @@ public class UScomputerEngineConstructer {
         }
 
 
-        //  TODO: That is a crazy solution to a null pointer problem we should not do this lmao
         public void setData() {
             
             if(this.commHandler==null) {
