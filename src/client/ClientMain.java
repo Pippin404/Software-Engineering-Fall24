@@ -79,7 +79,7 @@ public class ClientMain {
         builder.setFileLocation(inputLocation);
         // INPUT LOCATION GOES
         if (outputLocation.equalsIgnoreCase("F")) {
-            builder.setOutputLocation(sendclientserver.outLocation.file);
+            builder.setOutputLocation(sendclientserver.outLocation.file)
             .setOutputPath(outputPath);
         } else {
             builder.setOutputLocation(sendclientserver.outLocation.print);
