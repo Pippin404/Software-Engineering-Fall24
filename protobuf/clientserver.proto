@@ -9,6 +9,7 @@ message sendclientserver{
 	}
 	
 	optional outLocation outputLocation=4;
+ 	optional string outputPath = 5;
 
 }
 
