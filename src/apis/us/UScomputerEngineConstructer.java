@@ -68,7 +68,7 @@ public class UScomputerEngineConstructer {
             FileParseRequest request = new FileParseRequest(inputConfig, delimiter);
 
             // Parse the file using DataStore
-            FileParseResponse response = dataStore.parseInputFile(request);
+            FileParseResponse response = dataStore.internalParseInput(request);
             data = response.getParsedIntegers();
             System.out.println("Numbers read from file in coordinator: " + data);
             
