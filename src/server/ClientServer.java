@@ -57,6 +57,10 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
             .setMessage("File accepted. Output Type: "+ outputLocation +".")
             .build();
 
+    if (outputLocation == sendclientserver.outLocation.print) {
+        System.out.println("Computed results: " + result);  // Print results to the console
+    }
+    
     responseObserver.onNext(response);
     responseObserver.onCompleted();
 
