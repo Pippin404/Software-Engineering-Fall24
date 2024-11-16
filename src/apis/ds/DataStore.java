@@ -74,6 +74,8 @@ public class DataStore implements DataStoreInterface {
 
 //    Handler methods are private because they should only be called by other methods in the class. They rely on processed information that should only be passed if the requests pass certain checks
 
+    // TODO Assignment 8: Make sure that buffered reader is the right library to use. another one might be better for performance
+    // TODO: Assignment 8: This should also probably be handled by a stream
     private List<Integer> csvHandler(File inputFile, Delimiter delimiter) {
         List<Integer> parsedIntegers = new ArrayList<>();
 
@@ -172,6 +174,7 @@ public class DataStore implements DataStoreInterface {
         return new InternalWriteIntegerResponse(BasicResponseCode.FAILURE);
     }
 
+    // TODO Assignment 8: This should be done through a stream, and FileWriter might be better off as BufferedWriter
     private InternalWriteIntegerResponse writeToTextHandler(String outputFilePath, int computedInteger) {
         File file = new File(outputFilePath);
         FileWriter writer = null;
