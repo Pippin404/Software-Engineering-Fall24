@@ -6,6 +6,7 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
+    private Map<Integer, Integer> memo = new HashMap<>();
     
 
     @Override
@@ -22,12 +23,24 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     @Override
     public int computeNthFibonacci(int i) {
+        validateData(i);
+        if (memo.containsKey(i)) {
+            return memo.get(i);
+        }
+        
+        int result = computeFib(i);
+        memo.put(i, result);
+        return result;
+    }
+    
+    
+    public int computeFib(int i) {
 	validateData(i);
     	int firstfib = 0;
     	int secondfib = 1;
     	while (i != 0) {
-	    int placeholder = firstfib;
-	    firstfib = secondfib;
+    		int placeholder = firstfib;
+    		firstfib = secondfib;
             secondfib = placeholder + secondfib;
             i--;
     	}
