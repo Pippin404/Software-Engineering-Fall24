@@ -21,8 +21,21 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     return 0;
     }
 
-    @Override
     public int computeNthFibonacci(int i) {
+    	validateData(i);
+    	int firstfib = 0;
+    	int secondfib = 1;
+    	while (i != 0) {
+	    int placeholder = firstfib;
+	    firstfib = secondfib;
+            secondfib = placeholder + secondfib;
+            i--;
+    	}
+	return firstfib;
+    }
+
+	
+   public int betterComputeNthFibonacci(int i) {
         validateData(i);
         if (memo.containsKey(i)) {
             return memo.get(i);
@@ -32,7 +45,6 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
         memo.put(i, result);
         return result;
     }
-    
     
     public int computeFib(int i) {
 	validateData(i);
