@@ -73,9 +73,9 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
 
     
     if (outputLocation == sendclientserver.outLocation.print) {
-        System.out.println("Computed Results: " + result);
+        System.out.println("Computed Results: " + result2);
     } else {
-        coordinator.writeComputedResultsToFile(result, outputPath);
+        coordinator.writeComputedResultsToFile(result2, outputPath);
     }
     
     
