@@ -29,7 +29,6 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     //TODO Assignment 8: see if anything can be factored out of the while loop
     @Override
 >>>>>>> main
-    //TODO Assignment 8: see if anything can be factored out of the while loop
     @Override
     public int computeNthFibonacci(int i) {
     	validateData(i);
