@@ -6,7 +6,7 @@ public class Speedtest {
 
     @SuppressWarnings("unused")
     @Test
-    public static void TestCodeSpeed() {
+    public static void testCodeSpeed() {
 
         // TODO: Make 2 methods, one faster one slower
 
