@@ -23,9 +23,10 @@ public class Testuser {
 		this.coordinator = coordinator;
 	}
 
+
 	public void run(String outputPath) {
 		char delimiter = '.';
-		String inputPath = "test" + File.separatorChar + "testInputFile.test";
+		String inputPath = "C:\\Users\\eribr\\Desktop\\Software Engineering\\Software-Engineering-Fall24\\test\\ testInputFile.test";
 
 		// TODO 6.C.4: Call the appropriate method(s) on the coordinator to get it to
 		// run the compute job specified by inputPath, outputPath, and delimiter

@@ -1,0 +1,19 @@
+syntax = "proto3";
+package protobuf.datastore;
+
+import "CommonEnums.proto";
+
+service WriteInteger {
+  rpc writeIntegerService(WriteIntegerServiceRequest) returns (WriteIntegerServiceResponse);
+}
+
+message WriteIntegerServiceRequest {
+  optional int32 computedInteger = 1;
+  optional string outputFile = 2;
+  optional InputOutputType outputType = 3;
+
+}
+
+message WriteIntegerServiceResponse {
+  optional ResponseCode responseCode = 1;
+}

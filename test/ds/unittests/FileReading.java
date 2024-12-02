@@ -1,6 +1,6 @@
 package ds.unittests;
 
-import apis.ds.ParseInputFileRequest;
+import apis.ds.FileParseRequest;
 import inputoutput.Delimiter;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
@@ -8,8 +8,6 @@ import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
-import org.junit.jupiter.api.Assertions;
-
 
 
 import java.io.File;
@@ -23,7 +21,7 @@ public class FileReading {
     public void invalidDelimiter() {
 //        mock everything else to just test putting in a null InputConfig
         InputConfig mockInputConfig = Mockito.mock(InputConfig.class);
-        ParseInputFileRequest parseInputFileRequest = new ParseInputFileRequest(mockInputConfig, null);
+        FileParseRequest fileParseRequest = new FileParseRequest(mockInputConfig, null);
 
         exception.expect(IllegalArgumentException.class);
     }
@@ -31,7 +29,7 @@ public class FileReading {
     @Test
     public void invalidInputConfig() {
         Delimiter delimiter = Mockito.mock(Delimiter.class);
-        ParseInputFileRequest parseInputFileRequest = new ParseInputFileRequest(null, delimiter);
+        FileParseRequest fileParseRequest = new FileParseRequest(null, delimiter);
 
         exception.expect(IllegalArgumentException.class);
     }

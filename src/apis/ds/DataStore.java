@@ -31,29 +31,29 @@ public class DataStore implements DataStoreInterface {
     }
 
     @Override
-    public ParseInputFileResponse parseInputFile(ParseInputFileRequest parseInputFileRequest) {
+    public FileParseResponse internalParseInput(FileParseRequest fileParseRequest) {
         try {
 //            FIX: this should be switching on inputType not delimiter
-            InputType inputType = parseInputFileRequest.getInputConfig().getInputType();
+            InputType inputType = fileParseRequest.getInputConfig().getInputType();
             switch (inputType.getValue()) {
                 case "CONSOLE":
                     break;
                 case "CSV":
 //                this is only instantiated to be easier to read
-                    InputConfig inputConfig = parseInputFileRequest.getInputConfig();
+                    InputConfig inputConfig = fileParseRequest.getInputConfig();
 
-                    Delimiter delimiter = parseInputFileRequest.getDelimiter();
+                    Delimiter delimiter = fileParseRequest.getDelimiter();
 
 
                     File inputFile = inputConfig.getInputFile();
 
-                    FileResponseCode fileResponseCode = parseInputFileRequest.getParseInputFileResponseCode();
-                    ParameterResponseCode parameterResponseCode = parseInputFileRequest.getBasicResponseCode();
+                    FileResponseCode fileResponseCode = fileParseRequest.getParseInputFileResponseCode();
+                    ParameterResponseCode parameterResponseCode = fileParseRequest.getBasicResponseCode();
 
                     List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
 
 //                returns the parsed integers to the CE
-                    return new ParseInputFileResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
+                    return new FileParseResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
                 case "TEXT":
                     break;
                 case "JSON":
@@ -67,13 +67,15 @@ public class DataStore implements DataStoreInterface {
             e.printStackTrace();
         }
 //        TODO: This is causing a bug where the ParseInputFileResponse is always empty, find a way to have it be returned in the try catch only
-        return new ParseInputFileResponse();
+        return new FileParseResponse();
     }
 
 
 
 //    Handler methods are private because they should only be called by other methods in the class. They rely on processed information that should only be passed if the requests pass certain checks
 
+    // TODO Assignment 8: Make sure that buffered reader is the right library to use. another one might be better for performance
+    // TODO: Assignment 8: This should also probably be handled by a stream
     private List<Integer> csvHandler(File inputFile, Delimiter delimiter) {
         List<Integer> parsedIntegers = new ArrayList<>();
 
@@ -139,11 +141,11 @@ public class DataStore implements DataStoreInterface {
 
 
     @Override
-    public WriteIntegerToFileResponse writeIntegerToFile(WriteIntegerToFileRequest writeIntegerToFileRequest) {
+    public InternalWriteIntegerResponse internalWriteInteger(InternalWriteIntegerRequest internalWriteIntegerRequest) {
         try {
             //        instantiated to be more readable
-            OutputConfig outputConfig = writeIntegerToFileRequest.getOutputConfig();
-            int computedInteger = writeIntegerToFileRequest.getComputedInteger();
+            OutputConfig outputConfig = internalWriteIntegerRequest.getOutputConfig();
+            int computedInteger = internalWriteIntegerRequest.getComputedInteger();
 
             switch (outputConfig.getOutputType()) {
                 case CSV: {
@@ -169,10 +171,11 @@ public class DataStore implements DataStoreInterface {
             e.printStackTrace();
         }
         //        TODO: bad, unfinished, add implementation
-        return new WriteIntegerToFileResponse(BasicResponseCode.FAILURE);
+        return new InternalWriteIntegerResponse(BasicResponseCode.FAILURE);
     }
 
-    private WriteIntegerToFileResponse writeToTextHandler(String outputFilePath, int computedInteger) {
+    // TODO Assignment 8: This should be done through a stream, and FileWriter might be better off as BufferedWriter
+    private InternalWriteIntegerResponse writeToTextHandler(String outputFilePath, int computedInteger) {
         File file = new File(outputFilePath);
         FileWriter writer = null;
         try {
@@ -193,7 +196,7 @@ public class DataStore implements DataStoreInterface {
             }
         }
 
-        return new WriteIntegerToFileResponse(BasicResponseCode.SUCCESS);
+        return new InternalWriteIntegerResponse(BasicResponseCode.SUCCESS);
     }
 
     @Override
