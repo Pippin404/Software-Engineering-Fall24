@@ -1,16 +1,12 @@
 package ds.integrationtests;
 
-
+import apis.ds.*;
 import apis.ds.DataStore;
-import apis.ds.ParseInputFileRequest;
-import apis.ds.ParseInputFileResponse;
-import apis.ds.WriteIntegerToFileRequest;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
 import inputoutput.OutputConfig;
 import inputoutput.OutputType;
 import inputoutput.Delimiter;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +48,7 @@ public class ErrorHandlingTests {
 
         ParseInputFileResponse response = dataStore.parseInputFile(parseInputFileRequest);
 
-        Assert.assertNotNull(response.getParsedIntegers());
+        Assertions.assertNotNull(response.getParsedIntegers());
 //        List<Integer> parsedIntegers = response.getParsedIntegers();
 //        System.out.println(parsedIntegers);
 
