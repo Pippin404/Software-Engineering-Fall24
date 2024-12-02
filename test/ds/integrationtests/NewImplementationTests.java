@@ -10,6 +10,7 @@ import inputoutput.InputConfig;
 import inputoutput.InputType;
 import inputoutput.OutputConfig;
 import inputoutput.OutputType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -19,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.junit.Assert.assertEquals;
 
 public class NewImplementationTests {
     public static void main(String[] args) throws FileNotFoundException {
@@ -43,7 +43,7 @@ public class NewImplementationTests {
         List<Integer> expectedResult = new ArrayList<Integer>(
           Arrays.asList(1, 2, 3, 4, 5)
         );
-        assertEquals(parsedResult, expectedResult);
+        Assertions.assertEquals(parsedResult, expectedResult);
 
         System.out.println(parsedResult);
 
@@ -68,7 +68,7 @@ public class NewImplementationTests {
             System.out.println(data);
         }
         myReader.close();
-        assertEquals(data, "5");
+        Assertions.assertEquals(data, "5");
 
     }
 }

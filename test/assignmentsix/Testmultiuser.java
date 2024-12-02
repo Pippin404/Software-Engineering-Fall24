@@ -4,7 +4,7 @@ package assignmentsix;
 import apis.ce.InternalComputeEngine;
 import apis.ds.DataStore;
 import apis.us.UScomputerEngineConstructer;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -84,7 +84,7 @@ public class Testmultiuser {
 		// Check that the output is the same for multi-threaded and single-threaded
 		List<String> singleThreaded = loadAllOutput(singleThreadFilePrefix, numThreads);
 		List<String> multiThreaded = loadAllOutput(multiThreadFilePrefix, numThreads);
-		Assert.assertEquals(singleThreaded, multiThreaded);
+		Assertions.assertEquals(singleThreaded, multiThreaded);
 	}
 
 	private List<String> loadAllOutput(String prefix, int numThreads) throws IOException {

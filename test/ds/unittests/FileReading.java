@@ -4,11 +4,9 @@ import apis.ds.ParseInputFileRequest;
 import inputoutput.Delimiter;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.junit.jupiter.api.Assertions;
 
@@ -58,7 +56,7 @@ public class FileReading {
         InputType mockInputType = Mockito.mock(InputType.class);
 //        InputConfig inputConfig = new InputConfig(inputFile, mockInputType);
 
-        Assert.assertTrue(inputFile.exists());
+        Assertions.assertTrue(inputFile.exists());
 
     }
 
