@@ -36,7 +36,7 @@ public class FileReading {
     }
 
     // TODO This one isnt working
-    // @Test
+    @Test
     public void invalidFileTest() {
 //        mock everything but the input file in InputConfig, have it be a fake file
 //        inputConfig isn't mocked because i'm testing the constructor for it
@@ -49,7 +49,7 @@ public class FileReading {
     }
 
     // TODO THIS ONE ALSO DOESNT WORK
-    // @Test
+    @Test
     public void validFileTest() {
 //        mock everything but the input file in InputConfig, have it be a fake file
 //        inputConfig isn't mocked because i'm testing the constructor for it

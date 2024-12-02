@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import io.grpc.ManagedChannel;
 import io.grpc.inprocess.InProcessChannelBuilder;
@@ -42,7 +43,7 @@ class ServerTest {
     }
 
     // TODO: THIS ONE IS FAILING
-    // @Test
+    @Test
     void testClientServerCommunication() {
         // Create a blocking stub to make synchronous gRPC calls
         SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(channel);

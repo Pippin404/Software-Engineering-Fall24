@@ -11,6 +11,7 @@ import java.util.concurrent.Future;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import apis.ce.InternalComputeEngine;
 import apis.ds.DataStore;
@@ -43,7 +44,7 @@ public class Testmultiuser {
     }
 
     // THIS TEST ALSO DOES NOT WORK
-    // @Test
+    @Test
     public void compareMultiAndSingleThreaded() throws Exception {
         int numThreads = 4;
         List<Testuser> testUsers = new ArrayList<>();

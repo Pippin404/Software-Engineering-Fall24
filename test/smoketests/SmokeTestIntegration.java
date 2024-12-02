@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import apis.ce.InternalComputeEngine;
 import apis.ds.DataStore;
@@ -12,7 +13,7 @@ import apis.us.UScomputerEngineConstructer;
 public class SmokeTestIntegration {
 
     // TODO THIS ONE DOESNT WORK
-    // @Test
+    @Test
     public void mainTests() {
         // Initializing template datastore
         DataStore dataStore = new DataStore();
