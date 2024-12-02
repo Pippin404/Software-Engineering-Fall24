@@ -11,9 +11,8 @@ import inputoutput.OutputConfig;
 import inputoutput.OutputType;
 import inputoutput.Delimiter;
 import org.junit.Assert;
-import org.junit.Rule;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,15 +27,13 @@ public class ErrorHandlingTests {
         dataStore.writeIntegerToFile(writeIntegerToFileRequest);
 
     }
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
 
     @Test
     public void parseFileWithInvalidPath() {
         DataStore dataStore = new DataStore();
         ParseInputFileRequest parseInputFileRequest = new ParseInputFileRequest(new InputConfig(new File("wombo"), InputType.CSV), Delimiter.COMMA);
 
-        exception.expect(FileNotFoundException.class);
+        Assertions.assertThrows(FileNotFoundException.class);
 
 //        ParseInputFileResponse response = dataStore.parseInputFile(parseInputFileRequest);
 //
