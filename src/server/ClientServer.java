@@ -36,6 +36,7 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
   
     String fileLocation = request.getFileLocation();
     sendclientserver.outLocation outputLocation = request.getOutputLocation();
+    String outputPath = request.getOutputPath();
 
     // Initialize necessary components (DataStore, InternalComputeEngine, etc.)
     DataStore dataStore = new DataStore();
@@ -47,10 +48,37 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
     coordinator.setInputFile(inputFile);
     coordinator.setData();
 
-    // Perform computation
-    List<Integer> result = coordinator.runInternalCompute(coordinator.getData());
-    dataStore.setData(result);
+    // test speed
+    long startTime1 = System.nanoTime();
+    List<Integer> result1 = coordinator.runInternalCompute(coordinator.getData());
+    long endTime1 = System.nanoTime();
+    long duration1 = endTime1 - startTime1;
+    System.out.println(duration1);
+    
+    long startTime2 = System.nanoTime();
+    List<Integer> result2 = coordinator.runInternalComputev2(coordinator.getData());
+    long endTime2 = System.nanoTime();
+    long duration2 = endTime2 - startTime2;
+    System.out.println(duration2);
 
+    if (duration2 > duration1*1.1) {
+        System.out.println("New Method is Faster");
+    } else {
+      System.out.println("New Method is Not Faster");
+    }
+    
+    dataStore.setData(result2);
+
+    
+
+    
+    if (outputLocation == sendclientserver.outLocation.print) {
+        System.out.println("Computed Results: " + result2);
+    } else {
+        coordinator.writeComputedResultsToFile(result2, outputPath);
+    }
+    
+    
     // Create and send a response
     sendresponse response = sendresponse.newBuilder()
                         // Need to add other responses for errors

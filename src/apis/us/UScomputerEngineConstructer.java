@@ -143,6 +143,19 @@ public class UScomputerEngineConstructer {
             }
             //TODO: bandaid solution to not have to make another network call to DataStore
             this.results = results;
+
+            return results;
+        }
+
+        // single thread
+        public List<Integer> runInternalComputev2(List<Integer> numbers) {
+            List<Integer> results = new ArrayList<>();
+            for (int number : numbers) {
+                int result = computeEngine.betterComputeNthFibonacci(number);
+                results.add(result);
+            }
+            //TODO: bandaid solution to not have to make another network call to DataStore
+            this.results = results;
             return results;
         }
 
