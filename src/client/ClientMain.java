@@ -1,6 +1,7 @@
 package client;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 import io.grpc.ManagedChannel;
@@ -28,18 +29,24 @@ public class ClientMain {
         // Verifies if file exists
         while (true) {
             // give me a filename thru scanner
-            System.out.println("Input a csv file name. No need for the .csv extension");
+            System.out.println("Input a csv file name. No need for the .csv extension. Remember to use capitals?");
             System.out.println("Each entry will be handled seperatly"); // WILL IT??? idk says pippin
             inputLocation = scanner.nextLine();
             inputLocation.toString();
 
             // NEED TO TEST THIS
-            boolean exists = new File(inputLocation).exists();
-            if (exists) {
+            boolean Alreadyexists = true;
+            try {
+                Alreadyexists = new File(inputLocation).createNewFile();// SHOULD BE FALSE
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            if (Alreadyexists == false) {
                 System.out.println("File accepted!");
                 break;
             } else {
-                System.out.println("File NOTaccepted! please try again");
+                System.out.println("File NOT accepted! please try again");
 
             }
         }
