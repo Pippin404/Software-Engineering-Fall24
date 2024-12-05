@@ -35,14 +35,14 @@ public class ClientMain {
             inputLocation.toString();
 
             // NEED TO TEST THIS
-            boolean Alreadyexists = true;
+            boolean alreadyExists = true;
             try {
-                Alreadyexists = new File(inputLocation).createNewFile();// SHOULD BE FALSE
+                alreadyExists = new File(inputLocation).createNewFile();// SHOULD BE FALSE
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            if (Alreadyexists == false) {
+            if (alreadyExists == false) {
                 System.out.println("File accepted!");
                 break;
             } else {
