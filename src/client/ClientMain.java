@@ -33,7 +33,7 @@ public class ClientMain {
             inputLocation = scanner.nextLine();
             inputLocation.toString();
 
-            // WHAT why wont this work??
+            // NEED TO TEST THIS
             boolean exists = new File(inputLocation).exists();
             if (exists) {
                 System.out.println("File accepted!");
