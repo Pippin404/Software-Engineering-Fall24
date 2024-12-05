@@ -1,5 +1,6 @@
 package client;
 
+import java.io.File;
 import java.util.Scanner;
 
 import io.grpc.ManagedChannel;
@@ -22,11 +23,26 @@ public class ClientMain {
         System.out.println("You can choose to put this number in a file, or return it to the println");
         System.out.println("");
 
-        // give me a filename thru scanner
-        System.out.println("Input a csv file name. No need for the .csv extension");
-        System.out.println("Each entry will be handled seperatly"); // WILL IT??? idk says pippin
         Scanner scanner = new Scanner(System.in);
-        inputLocation = scanner.nextLine();
+
+        // Verifies if file exists
+        while (true) {
+            // give me a filename thru scanner
+            System.out.println("Input a csv file name. No need for the .csv extension");
+            System.out.println("Each entry will be handled seperatly"); // WILL IT??? idk says pippin
+            inputLocation = scanner.nextLine();
+            inputLocation.toString();
+
+            // WHAT why wont this work??
+            boolean exists = new File(inputLocation).exists();
+            if (exists) {
+                System.out.println("File accepted!");
+                break;
+            } else {
+                System.out.println("File NOTaccepted! please try again");
+
+            }
+        }
 
         System.out.println("Do you want to output to a file or print? F for file, P for print)");
 
@@ -67,6 +83,8 @@ public class ClientMain {
 
         // ASK: Send enum with correct location? HOW TO?
         // ASK:
+
+        // CHECK FOR REAL FILENAME
 
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext() // Disable TLS for
                                                                                                      // simplicity
