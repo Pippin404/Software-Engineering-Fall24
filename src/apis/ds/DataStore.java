@@ -1,25 +1,27 @@
 package apis.ds;
 
-import inputoutput.Delimiter;
-import inputoutput.InputConfig;
-import inputoutput.InputType;
-import inputoutput.OutputConfig;
-import statuscodes.BasicResponseCode;
-import statuscodes.ParameterResponseCode;
-import statuscodes.FileResponseCode;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import inputoutput.Delimiter;
+import inputoutput.InputConfig;
+import inputoutput.InputType;
+import inputoutput.OutputConfig;
+import statuscodes.BasicResponseCode;
+import statuscodes.FileResponseCode;
+import statuscodes.ParameterResponseCode;
+
 public class DataStore implements DataStoreInterface {
 
-    //    the implementation of other apis might handle the passing of data differently and need to access it like this
+    // the implementation of other apis might handle the passing of data differently
+    // and need to access it like this
     private List<Integer> data;
 
     public List<Integer> getData() {
@@ -36,30 +38,31 @@ public class DataStore implements DataStoreInterface {
 //            FIX: this should be switching on inputType not delimiter
             InputType inputType = fileParseRequest.getInputConfig().getInputType();
             switch (inputType.getValue()) {
-                case "CONSOLE":
-                    break;
-                case "CSV":
+            case "CONSOLE":
+                break;
+            case "CSV":
 //                this is only instantiated to be easier to read
-                    InputConfig inputConfig = fileParseRequest.getInputConfig();
+                InputConfig inputConfig = fileParseRequest.getInputConfig();
 
-                    Delimiter delimiter = fileParseRequest.getDelimiter();
+                Delimiter delimiter = fileParseRequest.getDelimiter();
 
+                File inputFile = inputConfig.getInputFile();
 
-                    File inputFile = inputConfig.getInputFile();
+                // this response code is throwing null pointers 100% of the time
+                FileResponseCode fileResponseCode = fileParseRequest.getParseInputFileResponseCode();
+                ParameterResponseCode parameterResponseCode = fileParseRequest.getBasicResponseCode();
 
-                    FileResponseCode fileResponseCode = fileParseRequest.getParseInputFileResponseCode();
-                    ParameterResponseCode parameterResponseCode = fileParseRequest.getBasicResponseCode();
-
-                    List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
+                List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
 
 //                returns the parsed integers to the CE
-                    return new FileParseResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
-                case "TEXT":
-                    break;
-                case "JSON":
-                    break;
-                default:
-                    break;
+                // or maybe this one
+                return new FileParseResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
+            case "TEXT":
+                break;
+            case "JSON":
+                break;
+            default:
+                break;
             }
 
         } catch (Exception e) {
@@ -70,11 +73,10 @@ public class DataStore implements DataStoreInterface {
         return new FileParseResponse();
     }
 
-
-
 //    Handler methods are private because they should only be called by other methods in the class. They rely on processed information that should only be passed if the requests pass certain checks
 
-    // TODO Assignment 8: Make sure that buffered reader is the right library to use. another one might be better for performance
+    // TODO Assignment 8: Make sure that buffered reader is the right library to
+    // use. another one might be better for performance
     // TODO: Assignment 8: This should also probably be handled by a stream
     private List<Integer> csvHandler(File inputFile, Delimiter delimiter) {
         List<Integer> parsedIntegers = new ArrayList<>();
@@ -88,8 +90,7 @@ public class DataStore implements DataStoreInterface {
 //                        convert to doubles
                         .map(Double::parseDouble)
 //                        convert to ints
-                        .map(Double::intValue)
-                        .toList();
+                        .map(Double::intValue).toList();
                 parsedIntegers.addAll(intValues);
             }
             return parsedIntegers;
@@ -110,24 +111,24 @@ public class DataStore implements DataStoreInterface {
             OutputConfig outputConfig = writeListToFileRequest.getOutputConfig();
 
             switch (outputConfig.getOutputType()) {
-                case CSV: {
-                    break;
-                }
-                case JSON: {
-                    break;
-                }
-                case TEXT: {
-                    break;
-                }
-                case CONSOLE: {
-                    break;
-                }
-                default: {
-                    break;
-                }
+            case CSV: {
+                break;
+            }
+            case JSON: {
+                break;
+            }
+            case TEXT: {
+                break;
+            }
+            case CONSOLE: {
+                break;
+            }
+            default: {
+                break;
+            }
 
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Uncaught exception in API boundary.");
             e.printStackTrace();
         }
@@ -135,47 +136,47 @@ public class DataStore implements DataStoreInterface {
         return null;
     }
 
-    private WriteListToFileResponse writeToTextHandler(Path outputFilePath, String outputFileName, List<Integer> computedIntegers) {
+    private WriteListToFileResponse writeToTextHandler(Path outputFilePath, String outputFileName,
+            List<Integer> computedIntegers) {
         return null;
     }
-
 
     @Override
     public InternalWriteIntegerResponse internalWriteInteger(InternalWriteIntegerRequest internalWriteIntegerRequest) {
         try {
-            //        instantiated to be more readable
+            // instantiated to be more readable
             OutputConfig outputConfig = internalWriteIntegerRequest.getOutputConfig();
             int computedInteger = internalWriteIntegerRequest.getComputedInteger();
 
             switch (outputConfig.getOutputType()) {
-                case CSV: {
-                    break;
-                }
-                case JSON: {
-                    break;
-                }
-                case TEXT: {
-                    writeToTextHandler(outputConfig.getOutputPath(), computedInteger);
-                    break;
-                }
-                case CONSOLE: {
-                    break;
-                }
-                default: {
-                    break;
-                }
+            case CSV: {
+                break;
+            }
+            case JSON: {
+                break;
+            }
+            case TEXT: {
+                writeToTextHandler(outputConfig.getOutputPath(), computedInteger);
+                break;
+            }
+            case CONSOLE: {
+                break;
+            }
+            default: {
+                break;
+            }
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Uncaught exception in API boundary.");
             e.printStackTrace();
         }
-        //        TODO: bad, unfinished, add implementation
+        // TODO: bad, unfinished, add implementation
         return new InternalWriteIntegerResponse(BasicResponseCode.FAILURE);
     }
 
-
-    // TODO Assignment 8: This should be done through a stream, and FileWriter might be better off as BufferedWriter
+    // TODO Assignment 8: This should be done through a stream, and FileWriter might
+    // be better off as BufferedWriter
     private InternalWriteIntegerResponse writeToTextHandler(String outputFilePath, int computedInteger) {
         File file = new File(outputFilePath);
         FileWriter writer = null;
@@ -206,6 +207,5 @@ public class DataStore implements DataStoreInterface {
 
         };
     }
-
 
 }
