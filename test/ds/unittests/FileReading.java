@@ -25,6 +25,7 @@ public class FileReading {
         FileParseRequest fileParseRequest = new FileParseRequest(mockInputConfig, null);
 
         exception.expect(IllegalArgumentException.class);
+
     }
 
     @Test
@@ -33,6 +34,7 @@ public class FileReading {
         FileParseRequest fileParseRequest = new FileParseRequest(null, delimiter);
 
         exception.expect(IllegalArgumentException.class);
+        // How do we throw if they are supposted to fail? Assertions.assert.equals?
     }
 
     // TODO This one isnt working

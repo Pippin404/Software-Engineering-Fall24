@@ -40,6 +40,7 @@ public class Testmultiuser {
 
         // Initialize Coordinator with InternalComputeEngine
         coordinator = new UScomputerEngineConstructer(computeEngine, dataStore);
+        // this shouldnt connect to grpc
 
     }
 
