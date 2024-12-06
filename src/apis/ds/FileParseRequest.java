@@ -50,54 +50,38 @@ public class FileParseRequest {
         private InputType inputType;
 
         public Builder delimiter(Delimiter delimiter) {
-            try {
-                if (delimiter != null) {
-                    this.delimiter = delimiter;
-                } else {
-                    throw new IllegalArgumentException("Delimiter type cannot be null.");
-                }
-
-            } catch(IllegalArgumentException e) {
-                e.printStackTrace();
+            if (delimiter == null) {
+                throw new IllegalArgumentException("Delimiter type cannot be null.");
             }
+            this.delimiter = delimiter;
             return this;
         }
 
         public Builder inputFile(File inputFile) {
-            try {
-                if(inputFile == null) {
-                    throw new IllegalArgumentException("Input file cannot be null.");
-                } else if(inputFile.exists()) {
-                    this.inputFile = inputFile;
-                } else {
-                    throw new FileNotFoundException("Invalid input file. File path: " + inputFile.getAbsolutePath());
-                }
-
-            } catch(FileNotFoundException e) {
-                e.printStackTrace();
-            } catch(IllegalArgumentException e) {
-                e.printStackTrace();
+            if (inputFile == null) {
+                throw new IllegalArgumentException("Input file cannot be null.");
+            } else if (!inputFile.exists()) {
+                throw new IllegalArgumentException("Invalid input file. File path: " + inputFile.getAbsolutePath());
             }
-
+            this.inputFile = inputFile;
             return this;
         }
 
         public Builder inputType(InputType inputType) {
             if (inputType == null) {
                 throw new IllegalArgumentException("Input type cannot be null.");
-            } else {
-                this.inputType = inputType;
             }
+            this.inputType = inputType;
             return this;
         }
 
         public FileParseRequest build() {
-            if(delimiter == null) {
-                throw new IllegalStateException("Delimiter is required");
+            if (delimiter == null) {
+                throw new IllegalStateException("Delimiter is required.");
             } else if (inputFile == null) {
-                throw new IllegalStateException("inputFile is required");
+                throw new IllegalStateException("Input file is required.");
             } else if (inputType == null) {
-                throw new IllegalStateException("inputType is required");
+                throw new IllegalStateException("Input type is required.");
             }
             return new FileParseRequest(this);
         }
