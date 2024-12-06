@@ -92,6 +92,13 @@ public class FileParseRequest {
         }
 
         public FileParseRequest build() {
+            if(delimiter == null) {
+                throw new IllegalStateException("Delimiter is required");
+            } else if (inputFile == null) {
+                throw new IllegalStateException("inputFile is required");
+            } else if (inputType == null) {
+                throw new IllegalStateException("inputType is required");
+            }
             return new FileParseRequest(this);
         }
 
