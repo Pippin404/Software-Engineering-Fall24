@@ -8,12 +8,10 @@ import java.util.List;
 public class FileParseResponse {
     private List<Integer> parsedIntegers;
     private FileResponseCode fileResponseCode;
-    private ParameterResponseCode parameterResponseCode;
 
-    private FileParseResponse(List<Integer> parsedIntegers, FileResponseCode fileResponseCode, ParameterResponseCode parameterResponseCode) {
+    private FileParseResponse(List<Integer> parsedIntegers, FileResponseCode fileResponseCode) {
         this.parsedIntegers = parsedIntegers;
         this.fileResponseCode = fileResponseCode;
-        this.parameterResponseCode = parameterResponseCode;
     }
 
     public List<Integer> getParsedIntegers() {
@@ -24,15 +22,10 @@ public class FileParseResponse {
         return fileResponseCode;
     }
 
-    public ParameterResponseCode getBasicResponseCode() {
-        return parameterResponseCode;
-    }
-
     // Builder class for FileParseResponse
     public static class Builder {
         private List<Integer> parsedIntegers;
         private FileResponseCode fileResponseCode;
-        private ParameterResponseCode parameterResponseCode;
 
         public Builder parsedIntegers(List<Integer> parsedIntegers) {
             if (parsedIntegers == null) {
@@ -57,7 +50,7 @@ public class FileParseResponse {
             if (fileResponseCode == null) {
                 throw new IllegalStateException("File response code is required.");
             }
-            return new FileParseResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
+            return new FileParseResponse(parsedIntegers, fileResponseCode);
         }
     }
 
