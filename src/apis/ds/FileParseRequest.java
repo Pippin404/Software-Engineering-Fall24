@@ -20,6 +20,14 @@ public class FileParseRequest {
         return delimiter;
     }
 
+    public File getInputFile() {
+        return inputFile;
+    }
+
+    public InputType getInputType() {
+        return inputType;
+    }
+
     public InputConfig getInputConfig() {
         return inputConfig;
     }
