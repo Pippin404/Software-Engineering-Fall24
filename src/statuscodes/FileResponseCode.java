@@ -5,7 +5,9 @@ public enum FileResponseCode implements Success {
     INVALID_FILE(false),
     VALID_PATH(true),
     INVALID_PATH(false),
-    INVALID_DELIMITERS(false);
+    INVALID_DELIMITERS(false),
+    INTEGER_NOT_WRITTEN(false),
+    INTEGER_WRITTEN(true);
 
     private boolean success;
 

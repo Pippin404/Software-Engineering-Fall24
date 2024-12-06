@@ -1,9 +1,6 @@
 package apis.ds;
 
-import inputoutput.Delimiter;
-import inputoutput.InputConfig;
-import inputoutput.InputType;
-import inputoutput.OutputConfig;
+import inputoutput.*;
 import statuscodes.BasicResponseCode;
 import statuscodes.ParameterResponseCode;
 import statuscodes.FileResponseCode;
@@ -31,29 +28,22 @@ public class DataStore implements DataStoreInterface {
     }
 
     @Override
-    public FileParseResponse internalParseInput(FileParseRequest fileParseRequest) {
+    public FileParseResponse internalParseInput(FileParseRequest request) {
         try {
 //            FIX: this should be switching on inputType not delimiter
-            InputType inputType = fileParseRequest.getInputConfig().getInputType();
+            InputType inputType = request.getInputType();
             switch (inputType.getValue()) {
                 case "CONSOLE":
                     break;
                 case "CSV":
 //                this is only instantiated to be easier to read
-                    InputConfig inputConfig = fileParseRequest.getInputConfig();
-
-                    Delimiter delimiter = fileParseRequest.getDelimiter();
-
-
-                    File inputFile = inputConfig.getInputFile();
-
-                    FileResponseCode fileResponseCode = fileParseRequest.getParseInputFileResponseCode();
-                    ParameterResponseCode parameterResponseCode = fileParseRequest.getBasicResponseCode();
+                    Delimiter delimiter = request.getDelimiter();
+                    File inputFile = request.getInputFile();
 
                     List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
 
-//                returns the parsed integers to the CE
-                    return new FileParseResponse(parsedIntegers, fileResponseCode, parameterResponseCode);
+                    //returns the parsed integers to the CE
+                    return FileParseResponse.builder().parsedIntegers(parsedIntegers).fileResponseCode(FileResponseCode.VALID_FILE).build();
                 case "TEXT":
                     break;
                 case "JSON":
@@ -67,7 +57,7 @@ public class DataStore implements DataStoreInterface {
             e.printStackTrace();
         }
 //        TODO: This is causing a bug where the ParseInputFileResponse is always empty, find a way to have it be returned in the try catch only
-        return new FileParseResponse();
+        return FileParseResponse.builder().parsedIntegers(null).fileResponseCode(FileResponseCode.INVALID_DELIMITERS).build();
     }
 
 
@@ -105,11 +95,11 @@ public class DataStore implements DataStoreInterface {
     }
 
     @Override
-    public WriteListToFileResponse writeListToFile(WriteListToFileRequest writeListToFileRequest) {
+    public WriteListToFileResponse writeListToFile(WriteListToFileRequest request) {
         try {
-            OutputConfig outputConfig = writeListToFileRequest.getOutputConfig();
+            OutputType outputType = request.getOutputType();
 
-            switch (outputConfig.getOutputType()) {
+            switch (outputType) {
                 case CSV: {
                     break;
                 }
@@ -141,13 +131,14 @@ public class DataStore implements DataStoreInterface {
 
 
     @Override
-    public InternalWriteIntegerResponse internalWriteInteger(InternalWriteIntegerRequest internalWriteIntegerRequest) {
+    public InternalWriteIntegerResponse internalWriteInteger(InternalWriteIntegerRequest request) {
         try {
-            //        instantiated to be more readable
-            OutputConfig outputConfig = internalWriteIntegerRequest.getOutputConfig();
-            int computedInteger = internalWriteIntegerRequest.getComputedInteger();
+            //instantiated to be more readable
+            OutputType outputType = request.getOutputType();
+            String outputPath = request.getOutputPath();
+            int computedInteger = request.getComputedInteger();
 
-            switch (outputConfig.getOutputType()) {
+            switch (outputType) {
                 case CSV: {
                     break;
                 }
@@ -155,7 +146,7 @@ public class DataStore implements DataStoreInterface {
                     break;
                 }
                 case TEXT: {
-                    writeToTextHandler(outputConfig.getOutputPath(), computedInteger);
+                    writeToTextHandler(outputPath, computedInteger);
                     break;
                 }
                 case CONSOLE: {
@@ -170,8 +161,7 @@ public class DataStore implements DataStoreInterface {
             System.out.println("Uncaught exception in API boundary.");
             e.printStackTrace();
         }
-        //        TODO: bad, unfinished, add implementation
-        return new InternalWriteIntegerResponse(BasicResponseCode.FAILURE);
+        return InternalWriteIntegerResponse.builder().fileResponseCode(FileResponseCode.INTEGER_NOT_WRITTEN).build();
     }
 
 
@@ -197,7 +187,7 @@ public class DataStore implements DataStoreInterface {
             }
         }
 
-        return new InternalWriteIntegerResponse(BasicResponseCode.SUCCESS);
+        return InternalWriteIntegerResponse.builder().fileResponseCode(FileResponseCode.INTEGER_WRITTEN).build();
     }
 
     @Override
