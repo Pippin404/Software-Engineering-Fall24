@@ -39,7 +39,7 @@ public class WriteIntegerServiceImpl extends WriteIntegerGrpc.WriteIntegerImplBa
 
     private WriteIntegerServiceResponse convertToProtoResponse(InternalWriteIntegerResponse internalWriteResponse) {
         WriteIntegerServiceResponse.Builder responseBuilder = WriteIntegerServiceResponse.newBuilder()
-                .setResponseCode(mapResponseCode(internalWriteResponse.getBasicResponseCode()));
+                .setResponseCode(mapResponseCode(internalWriteResponse.getFileResponseCode()));
 
         return responseBuilder.build();
     }
@@ -48,9 +48,8 @@ public class WriteIntegerServiceImpl extends WriteIntegerGrpc.WriteIntegerImplBa
         int computedInteger = serviceRequest.getComputedInteger();
         String outputPath = serviceRequest.getOutputFile();
         OutputType outputType = mapToInternalInputType(serviceRequest.getOutputType());
-        OutputConfig outputConfig = new OutputConfig(outputPath, outputType);
 
-        return new InternalWriteIntegerRequest(outputConfig, computedInteger);
+        return InternalWriteIntegerRequest.builder().computedInteger(computedInteger).outputPath(outputPath).outputType(outputType).build();
     }
 
     private OutputType mapToInternalInputType(CommonEnums.InputOutputType inputOutputType) {
@@ -64,13 +63,13 @@ public class WriteIntegerServiceImpl extends WriteIntegerGrpc.WriteIntegerImplBa
         };
     }
 
-    private ResponseCode mapResponseCode(BasicResponseCode internalResponseCode) {
+    private ResponseCode mapResponseCode(FileResponseCode internalResponseCode) {
         // Maps the internal response code to the Proto ResponseCode
-        return switch (internalResponseCode) {
-            case SUCCESS -> ResponseCode.SUCCESS;
-            case FAILURE -> ResponseCode.FAILURE;
-            default -> ResponseCode.FAILURE;
-        };
+        if (internalResponseCode.success()) {
+            return ResponseCode.SUCCESS;
+        } else {
+            return ResponseCode.FAILURE;
+        }
     }
 
 }
