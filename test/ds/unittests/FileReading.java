@@ -21,22 +21,34 @@ public class FileReading {
     @Test
     public void invalidDelimiter() {
 //        mock everything else to just test putting in a null InputConfig
-        InputConfig mockInputConfig = Mockito.mock(InputConfig.class);
-        FileParseRequest fileParseRequest = new FileParseRequest(mockInputConfig, null);
+        File mockInputFile = Mockito.mock(File.class);
+        InputType mockInputType = Mockito.mock(InputType.class);
+//        FileParseRequest fileParseRequest = new FileParseRequest(mockInputConfig, null);
+        FileParseRequest fileParseRequest = FileParseRequest.builder()
+                                                            .inputFile(mockInputFile)
+                                                            .inputType(mockInputType)
+                                                            .delimiter(null)
+                                                            .build();
 
         exception.expect(IllegalArgumentException.class);
     }
 
     @Test
-    public void invalidInputConfig() {
+    public void invalidInputType() {
         Delimiter delimiter = Mockito.mock(Delimiter.class);
-        FileParseRequest fileParseRequest = new FileParseRequest(null, delimiter);
+        File mockInputFile = Mockito.mock(File.class);
+        FileParseRequest fileParseRequest = FileParseRequest.builder()
+                                                            .inputType(null)
+                                                            .delimiter(delimiter)
+                                                            .inputFile(mockInputFile)
+                                                            .build();
 
         exception.expect(IllegalArgumentException.class);
     }
 
     @Test
     public void invalidFileTest() {
+        // TODO: This should be testing builder logic now
 //        mock everything but the input file in InputConfig, have it be a fake file
 //        inputConfig isn't mocked because i'm testing the constructor for it
         File inputFile = new File("wobungus/blungus");
@@ -49,6 +61,7 @@ public class FileReading {
 
     @Test
     public void validFileTest() {
+        // TODO: This should be testing builder logic now
 //        mock everything but the input file in InputConfig, have it be a fake file
 //        inputConfig isn't mocked because i'm testing the constructor for it
         File inputFile = new File("C:\\Users\\eribr\\Desktop\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\iotests\\csvTest.txt");
