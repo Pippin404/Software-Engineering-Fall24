@@ -2,54 +2,88 @@ package apis.ds;
 
 import inputoutput.Delimiter;
 import inputoutput.InputConfig;
+import inputoutput.InputType;
 import statuscodes.ParameterResponseCode;
 import statuscodes.FileResponseCode;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class FileParseRequest {
 //    should include an input config with the file path and the delimiters
     private Delimiter delimiter;
     private InputConfig inputConfig;
-
-//    status codes for error handling
-    private ParameterResponseCode parameterResponseCode;
-    private FileResponseCode fileResponseCode;
+    private File inputFile;
+    private InputType inputType;
 
     public Delimiter getDelimiter() {
         return delimiter;
+    }
+
+    public File getInputFile() {
+        return inputFile;
+    }
+
+    public InputType getInputType() {
+        return inputType;
     }
 
     public InputConfig getInputConfig() {
         return inputConfig;
     }
 
-    public ParameterResponseCode getBasicResponseCode() {
-        return parameterResponseCode;
+
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public FileResponseCode getParseInputFileResponseCode() {
-        return fileResponseCode;
+    private FileParseRequest(Builder builder) {
+        this.inputFile = builder.inputFile;
+        this.inputType = builder.inputType;
+        this.delimiter = builder.delimiter;
     }
 
-    public FileParseRequest(InputConfig inputConfig, Delimiter delimiter) {
-        try {
-            if (inputConfig == null) {
-                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
-                throw new IllegalArgumentException("Input config cannot be null.");
-            } else {
-                this.inputConfig = inputConfig;
-            }
+    public static class Builder {
+        private Delimiter delimiter;
+        private InputConfig inputConfig;
+        private File inputFile;
+        private InputType inputType;
 
-//            delimiter cannot be null
-            if (delimiter != null) {
-                this.delimiter = delimiter;
-            } else {
-                parameterResponseCode = ParameterResponseCode.NULL_PARAMETER;
+        public Builder delimiter(Delimiter delimiter) {
+            if (delimiter == null) {
                 throw new IllegalArgumentException("Delimiter type cannot be null.");
             }
-            parameterResponseCode = ParameterResponseCode.VALID_PARAMETERS;
+            this.delimiter = delimiter;
+            return this;
+        }
 
-        } catch(IllegalArgumentException e) {
-            e.printStackTrace();
+        public Builder inputFile(File inputFile) {
+            if (inputFile == null) {
+                throw new IllegalArgumentException("Input file cannot be null.");
+            } else if (!inputFile.exists()) {
+                throw new IllegalArgumentException("Invalid input file. File path: " + inputFile.getAbsolutePath());
+            }
+            this.inputFile = inputFile;
+            return this;
+        }
+
+        public Builder inputType(InputType inputType) {
+            if (inputType == null) {
+                throw new IllegalArgumentException("Input type cannot be null.");
+            }
+            this.inputType = inputType;
+            return this;
+        }
+
+        public FileParseRequest build() {
+            if (delimiter == null) {
+                throw new IllegalStateException("Delimiter is required.");
+            } else if (inputFile == null) {
+                throw new IllegalStateException("Input file is required.");
+            } else if (inputType == null) {
+                throw new IllegalStateException("Input type is required.");
+            }
+            return new FileParseRequest(this);
         }
 
     }

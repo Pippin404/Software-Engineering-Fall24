@@ -50,11 +50,10 @@ public class ParseFileServiceImpl extends ParseFileGrpc.ParseFileImplBase {
         File inputFile = new File(serviceRequest.getInputFile());
 
         InputType inputType = mapToInternalInputType(serviceRequest.getInputType());
-        InputConfig inputConfig = new InputConfig(inputFile, inputType);
 
         Delimiter delimiter = mapToInternalDelimiter(serviceRequest.getDelimiter());
 
-        return new FileParseRequest(inputConfig, delimiter);
+        return FileParseRequest.builder().inputFile(inputFile).inputType(inputType).delimiter(delimiter).build();
     }
 
     private ParseFileServiceResponse convertToProtoResponse(FileParseResponse internalResponse) {
@@ -87,11 +86,13 @@ public class ParseFileServiceImpl extends ParseFileGrpc.ParseFileImplBase {
 
     // TODO: This shouldn't repeat a response code
     private ResponseCode mapFileResponseCode(FileResponseCode internalCode) {
-        return switch (internalCode) {
-        case VALID_FILE -> ResponseCode.SUCCESS;
-        case INVALID_FILE -> ResponseCode.FAILURE;
-        default -> ResponseCode.FAILURE;
-        };
+
+        if (internalCode.success()) {
+            return ResponseCode.SUCCESS;
+        } else {
+            return ResponseCode.FAILURE;
+        }
+
     }
 
 }

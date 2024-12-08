@@ -143,6 +143,7 @@ public class UScomputerEngineConstructer {
             }
             //TODO: bandaid solution to not have to make another network call to DataStore
             this.results = results;
+
             return results;
         }
 

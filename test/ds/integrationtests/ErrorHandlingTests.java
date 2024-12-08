@@ -23,7 +23,12 @@ public class ErrorHandlingTests {
 //        I'm not sure how to use junit to test this so I'm just using main for now
         DataStore dataStore = new DataStore();
         OutputConfig outputConfig = new OutputConfig("C:\\Users\\eribr\\Desktop\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\iotests\\OutputText.txt", OutputType.TEXT);
-        InternalWriteIntegerRequest internalWriteIntegerRequest = new InternalWriteIntegerRequest(outputConfig, 5);
+        String outputPath = "C:\\Users\\eribr\\Desktop\\Software Engineering\\Software-Engineering-Fall24\\test\\ds\\iotests\\OutputText.txt";
+        OutputType outputType = OutputType.TEXT;
+        InternalWriteIntegerRequest internalWriteIntegerRequest = InternalWriteIntegerRequest.builder()
+                                                                                            .outputPath(outputPath)
+                                                                                            .outputType(outputType)
+                                                                                            .build();
 
         dataStore.internalWriteInteger(internalWriteIntegerRequest);
 
@@ -34,7 +39,11 @@ public class ErrorHandlingTests {
     @Test
     public void parseFileWithInvalidPath() {
         DataStore dataStore = new DataStore();
-        FileParseRequest fileParseRequest = new FileParseRequest(new InputConfig(new File("wombo"), InputType.CSV), Delimiter.COMMA);
+        FileParseRequest fileParseRequest = FileParseRequest.builder()
+                                                            .inputFile(new File("wombo"))
+                                                            .inputType(InputType.CSV)
+                                                            .delimiter(Delimiter.COMMA)
+                                                            .build();
 
         exception.expect(FileNotFoundException.class);
 
@@ -49,8 +58,12 @@ public class ErrorHandlingTests {
     public void parseFileWithValidPath() {
 //        Test should fail as it should not trigger the exception
         DataStore dataStore = new DataStore();
-        FileParseRequest fileParseRequest = new FileParseRequest(new InputConfig(new File("test/ds/iotests/csvTest.txt"), InputType.CSV), Delimiter.COMMA);
-
+//        FileParseRequest fileParseRequest = new FileParseRequest(new InputConfig(new File("test/ds/iotests/csvTest.txt"), InputType.CSV), Delimiter.COMMA);
+        FileParseRequest fileParseRequest = FileParseRequest.builder()
+                                                            .inputFile(new File("test/ds/iotests/csvTest.txt"))
+                                                            .inputType(InputType.CSV)
+                                                            .delimiter(Delimiter.COMMA)
+                                                            .build();
 
 
         FileParseResponse response = dataStore.internalParseInput(fileParseRequest);
