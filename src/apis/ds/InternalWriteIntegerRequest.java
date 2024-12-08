@@ -61,8 +61,7 @@ public class InternalWriteIntegerRequest {
         public InternalWriteIntegerRequest build() {
             if (outputType == null) {
                 throw new IllegalArgumentException("Output type cannot be null.");
-            }
-            else if (outputPath == null || outputPath.trim().isEmpty()) {
+            } else if (outputPath == null || outputPath.trim().isEmpty()) {
                 throw new IllegalArgumentException("Output path cannot be null or empty.");
             }
             return new InternalWriteIntegerRequest(this);

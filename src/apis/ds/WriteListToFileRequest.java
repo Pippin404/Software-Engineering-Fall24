@@ -75,11 +75,9 @@ public class WriteListToFileRequest {
         public WriteListToFileRequest build() {
             if (outputPath == null) {
                 throw new IllegalStateException("outputPath is required.");
-            }
-            else if (outputType == null) {
+            } else if (outputType == null) {
                 throw new IllegalArgumentException("Output type cannot be null.");
-            }
-            else if (parsedIntegerList == null) {
+            } else if (parsedIntegerList == null) {
                 throw new IllegalStateException("ParsedIntegerList is required.");
             }
             return new WriteListToFileRequest(this);
