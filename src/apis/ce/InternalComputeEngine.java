@@ -9,9 +9,10 @@ import java.util.List;
 
 public class InternalComputeEngine implements InternalComputeEngineInterface {
 
-    // Placeholder Values
     private Integer data = null;
     private Map<Integer, Integer> memo = new HashMap<>();
+    private int[] memoArray = new int[50];
+    private int maxComputed = 1; 
     
 
     @Override
