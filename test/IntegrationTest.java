@@ -29,13 +29,13 @@ public class IntegrationTest {
 	
 	
 	
-	InternalComputeEngine computeEngine1 = new InternalComputeEngine();
+	InternalComputeEngine computeEngine = new InternalComputeEngine();
 	InternalComputeEngine2 computeEngine2 = new InternalComputeEngine2();
 	
 	// Measure time for computeNthFibonacci
     long startTime1 = System.nanoTime();
     for (int value : testValues) {
-        computeEngine1.computeNthFibonacci(value);
+        computeEngine.computeNthFibonacci(value);
     }
     long endTime1 = System.nanoTime();
     long duration1 = endTime1 - startTime1;
