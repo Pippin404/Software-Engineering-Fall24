@@ -1,5 +1,6 @@
 package apis.ds;
 
+
 import inputoutput.Delimiter;
 import inputoutput.InputType;
 import inputoutput.OutputType;
@@ -49,14 +50,9 @@ public class DataStore implements DataStoreInterface {
                 break;
             case "CSV":
 //                this is only instantiated to be easier to read
-
                     Delimiter delimiter = request.getDelimiter();
                     File inputFile = request.getInputFile();
-
-
-                List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
-
-
+                    List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
                     //returns the parsed integers to the CE
                     return FileParseResponse.builder().parsedIntegers(parsedIntegers).fileResponseCode(FileResponseCode.VALID_FILE).build();
                 case "TEXT":
@@ -112,8 +108,6 @@ public class DataStore implements DataStoreInterface {
     public WriteListToFileResponse writeListToFile(WriteListToFileRequest request) {
         try {
             OutputType outputType = request.getOutputType();
-
-
             switch (outputType) {
                 case CSV: {
                     break;
@@ -149,11 +143,11 @@ public class DataStore implements DataStoreInterface {
     @Override
     public InternalWriteIntegerResponse internalWriteInteger(InternalWriteIntegerRequest request) {
         try {
-
             //instantiated to be more readable
             OutputType outputType = request.getOutputType();
             String outputPath = request.getOutputPath();
             int computedInteger = request.getComputedInteger();
+
 
             switch (outputType) {
                 case CSV: {
@@ -179,9 +173,7 @@ public class DataStore implements DataStoreInterface {
             System.out.println("Uncaught exception in API boundary.");
             e.printStackTrace();
         }
-
         return InternalWriteIntegerResponse.builder().fileResponseCode(FileResponseCode.INTEGER_NOT_WRITTEN).build();
-
     }
 
     // TODO Assignment 8: This should be done through a stream, and FileWriter might
