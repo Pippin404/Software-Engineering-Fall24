@@ -1,34 +1,70 @@
-import java.util.List;
-import java.util.Arrays;
-import testutils.Coordinator;
-import ce.InternalComputeEngineTest;
-import ds.DataStore;
+import org.junit.jupiter.api.Test;
+import apis.ce.InternalComputeEngine;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 
 public class IntegrationTest {
 
-    public static void main(String[] args) {
-        // Start by Initializing DataStore 
-        ds.DataStore dataStore = new ds.DataStore();
+	@Test
+	public void integrationTesting() {
+		  
+	int x = 1000; // number of values
+	int y = 0;    // minimum value
+	int z = 100;  // maximum value
+	Random random = new Random();
 
-        // Initialize InternalComputeEngineTest with DataStore
-        ce.InternalComputeEngineTest computeEngine = new ce.InternalComputeEngineTest(dataStore);
-
-        // Initialize Coordinator with InternalComputeEngine
-        Coordinator coordinator = new Coordinator(computeEngine);
-
-        // Set data in Coordinator
-        List<Integer> dataList = Arrays.asList(1, 10, 25);
-        coordinator.setData(dataList);
-        System.out.println("Coordinator: Data set to " + dataList);
-
-        // Start the data flow
-        coordinator.sendDataToComputeEngine();
-
-        // Retrieve data from DataStore
-        int finalResult = dataStore.getStoredData();
-        System.out.println("Integration Test: Final result in Data Store is " + finalResult);
+	List<Integer> testValues = new ArrayList<>(x);
+	for (int i = 0; i < x; i++) {
+	    testValues.add(random.nextInt(z - y + 1) + y);
+	}
+	
+	
+	
+	InternalComputeEngine computeEngine = new InternalComputeEngine();
+	
+	// Measure time for computeNthFibonacci
+    long startTime1 = System.nanoTime();
+    for (int value : testValues) {
+        computeEngine.computeNthFibonacci(value);
     }
-}
+    long endTime1 = System.nanoTime();
+    long duration1 = endTime1 - startTime1;
+    System.out.println("Total time for computeNthFibonacci: " + duration1 + " ns");
+    
+ // Measure time for betterComputeNthFibonacci
+    long startTime2 = System.nanoTime();
+    for (int value : testValues) {
+        computeEngine.betterComputeNthFibonacci(value);
+    }
+    long endTime2 = System.nanoTime();
+    long duration2 = endTime2 - startTime2;
+    System.out.println("Total time for betterComputeNthFibonacci: " + duration2 + " ns");
+    
+    
+    
+    if (duration2 < duration1) {
+        System.out.println("betterComputeNthFibonacci is faster by " + (duration1 - duration2) + " ns.");
+        System.out.println("betterComputeNthFibonacci is faster by " + 100*((double)duration1/(double)duration2) + "%");
+    } else if (duration1 < duration2) {
+        System.out.println("computeNthFibonacci is faster by " + (duration2 - duration1) + " ns.");
+        System.out.println("computeNthFibonacci is faster by " + 100*((double)duration2/(double)duration1));
+    } else {
+        System.out.println("Both methods have the same execution time.");
+    }
+    
+	}
 
+
+
+
+
+
+}
