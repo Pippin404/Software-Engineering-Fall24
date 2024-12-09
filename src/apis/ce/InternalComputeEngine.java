@@ -3,6 +3,8 @@ package apis.ce;
 import apis.ds.DataStore;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+
 
 
 public class InternalComputeEngine implements InternalComputeEngineInterface {
@@ -40,30 +42,24 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
     }
 
 	
-   public int betterComputeNthFibonacci(int i) {
-        validateData(i);
-        if (memo.containsKey(i)) {
-            return memo.get(i);
-        }
+   public int betterComputeNthFibonacci(int n) {
+        validateData(n);
         
-        int result = computeFib(i);
-        memo.put(i, result);
-        return result;
-    }
-    
-    public int computeFib(int i) {
-	validateData(i);
-    	int firstfib = 0;
-    	int secondfib = 1;
-    	while (i != 0) {
-    		int placeholder = firstfib;
-    		firstfib = secondfib;
-            secondfib = placeholder + secondfib;
-            i--;
-    	}
-	return firstfib;
-    }
+        // Expand array if needed
+        while (n >= memoArray.length) {
+            int[] newArray = new int[memoArray.length * 2];
+            System.arraycopy(memoArray, 0, newArray, 0, memoArray.length);
+            memoArray = newArray;
+        }
 
+        // If not computed yet, fill up to n
+        for (int i = maxComputed + 1; i <= n; i++) {
+            memoArray[i] = (i <= 1) ? i : memoArray[i-1] + memoArray[i-2];
+        }
+        maxComputed = Math.max(maxComputed, n);
+
+        return memoArray[n];
+    }
 
     private void validateData(Integer i) {
         if (i == null) {
