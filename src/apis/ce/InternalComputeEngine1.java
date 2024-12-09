@@ -6,15 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 
 
+public class InternalComputeEngine1 implements InternalComputeEngineInterface {
 
-public class InternalComputeEngine implements InternalComputeEngineInterface {
-
+    // Placeholder Values
     private Integer data = null;
-    private Map<Integer, Integer> memo = new HashMap<>();
-    private int[] memoArray = new int[50];
+    private int[] memoArray = new int[25];
     private int maxComputed = 1; 
-    
 
+        
+
+    
+    
     @Override
     public void setData(int i) {
         validateData(i);
@@ -42,25 +44,6 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
 	return firstfib;
     }
 
-	
-   public int betterComputeNthFibonacci(int n) {
-        validateData(n);
-        
-        // Expand array if needed
-        while (n >= memoArray.length) {
-            int[] newArray = new int[memoArray.length * 2];
-            System.arraycopy(memoArray, 0, newArray, 0, memoArray.length);
-            memoArray = newArray;
-        }
-
-        // If not computed yet, fill up to n
-        for (int i = maxComputed + 1; i <= n; i++) {
-            memoArray[i] = (i <= 1) ? i : memoArray[i-1] + memoArray[i-2];
-        }
-        maxComputed = Math.max(maxComputed, n);
-
-        return memoArray[n];
-    }
 
     private void validateData(Integer i) {
         if (i == null) {
@@ -70,6 +53,9 @@ public class InternalComputeEngine implements InternalComputeEngineInterface {
             throw new IllegalArgumentException("Data cannot be negative");
         }
     }
+     
+    
+    
 
 
 }
