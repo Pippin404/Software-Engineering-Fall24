@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import apis.ce.InternalComputeEngine;
+import apis.ce.InternalComputeEngine2;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,7 +19,7 @@ public class IntegrationTest {
 		  
 	int x = 1000; // number of values
 	int y = 0;    // minimum value
-	int z = 100;  // maximum value
+	int z = 50;  // maximum value
 	Random random = new Random();
 
 	List<Integer> testValues = new ArrayList<>(x);
@@ -28,12 +29,13 @@ public class IntegrationTest {
 	
 	
 	
-	InternalComputeEngine computeEngine = new InternalComputeEngine();
+	InternalComputeEngine computeEngine1 = new InternalComputeEngine();
+	InternalComputeEngine2 computeEngine2 = new InternalComputeEngine2();
 	
 	// Measure time for computeNthFibonacci
     long startTime1 = System.nanoTime();
     for (int value : testValues) {
-        computeEngine.computeNthFibonacci(value);
+        computeEngine1.computeNthFibonacci(value);
     }
     long endTime1 = System.nanoTime();
     long duration1 = endTime1 - startTime1;
@@ -42,7 +44,7 @@ public class IntegrationTest {
  // Measure time for betterComputeNthFibonacci
     long startTime2 = System.nanoTime();
     for (int value : testValues) {
-        computeEngine.betterComputeNthFibonacci(value);
+    	computeEngine2.computeNthFibonacci(value);
     }
     long endTime2 = System.nanoTime();
     long duration2 = endTime2 - startTime2;
