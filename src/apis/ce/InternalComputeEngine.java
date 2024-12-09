@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class InternalComputeEngine1 implements InternalComputeEngineInterface {
+public class InternalComputeEngine implements InternalComputeEngineInterface {
 
     // Placeholder Values
     private Integer data = null;
