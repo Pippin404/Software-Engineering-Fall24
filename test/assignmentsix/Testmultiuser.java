@@ -45,6 +45,7 @@ public class Testmultiuser {
     }
 
     // THIS TEST ALSO DOES NOT WORK
+    // TODO: MAKE THIS NOT USE GRPC
     @Test
     public void compareMultiAndSingleThreaded() throws Exception {
         int numThreads = 4;
