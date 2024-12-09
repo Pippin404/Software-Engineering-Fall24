@@ -145,7 +145,7 @@ public class UScomputerEngineConstructer {
     public List<Integer> runInternalComputev2(List<Integer> numbers) {
         List<Integer> results = new ArrayList<>();
         for (int number : numbers) {
-            int result = computeEngine.betterComputeNthFibonacci(number);
+            int result = computeEngine.computeNthFibonacci(number);
             results.add(result);
         }
         // TODO: bandaid solution to not have to make another network call to DataStore
