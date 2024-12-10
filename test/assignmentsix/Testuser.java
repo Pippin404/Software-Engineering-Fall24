@@ -24,6 +24,7 @@ public class Testuser {
     }
 
     public void run(String outputPath) {
+    
         char delimiter = '.';
         String inputPath = "test/testInputFile.test";
 
@@ -45,7 +46,7 @@ public class Testuser {
         // added methods to get List<Integer> from file and send it to internal compute
         File inputFile = new File(inputPath);
         coordinator.setInputFile(inputFile);
-        coordinator.setData();
+        coordinator.setData2();
         List<Integer> computedResults = coordinator.runInternalComputeWithThreading(coordinator.getData());
 
         writeResultsToFile(computedResults, outputPath);
@@ -68,3 +69,4 @@ public class Testuser {
     }
 
 }
+
