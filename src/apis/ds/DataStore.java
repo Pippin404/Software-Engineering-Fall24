@@ -81,7 +81,7 @@ public class DataStore implements DataStoreInterface {
     // TODO Assignment 8: Make sure that buffered reader is the right library to
     // use. another one might be better for performance
     // TODO: Assignment 8: This should also probably be handled by a stream
-    private List<Integer> csvHandler(File inputFile, Delimiter delimiter) {
+    public List<Integer> csvHandler(File inputFile, Delimiter delimiter) {
         List<Integer> parsedIntegers = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
