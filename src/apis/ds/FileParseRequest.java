@@ -1,13 +1,10 @@
 package apis.ds;
 
+import java.io.File;
+
 import inputoutput.Delimiter;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
-import statuscodes.ParameterResponseCode;
-import statuscodes.FileResponseCode;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 
 public class FileParseRequest {
 //    should include an input config with the file path and the delimiters
@@ -31,7 +28,6 @@ public class FileParseRequest {
     public InputConfig getInputConfig() {
         return inputConfig;
     }
-
 
     public static Builder builder() {
         return new Builder();
@@ -68,6 +64,7 @@ public class FileParseRequest {
         }
 
         public Builder inputType(InputType inputType) {
+
             if (inputType == null) {
                 throw new IllegalArgumentException("Input type cannot be null.");
             }
