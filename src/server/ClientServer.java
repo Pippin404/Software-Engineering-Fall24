@@ -56,7 +56,7 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
     System.out.println(duration1);
     
     long startTime2 = System.nanoTime();
-    List<Integer> result2 = coordinator.runInternalComputev2(coordinator.getData());
+    List<Integer> result2 = coordinator.runInternalCompute(coordinator.getData());
     long endTime2 = System.nanoTime();
     long duration2 = endTime2 - startTime2;
     System.out.println(duration2);
