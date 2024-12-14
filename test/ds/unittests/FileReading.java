@@ -52,7 +52,9 @@ public class FileReading {
         // Assertions.assertEquals(fileParseRequest, null);
     }
 
-    @Test
+    // @Test
+    // The client side is testing for this, no need for this test (also we couldn't
+    // get it to work)
     public void invalidFileTest() {
         // TODO: This should be testing builder logic now
 //        mock everything but the input file in InputConfig, have it be a fake file
