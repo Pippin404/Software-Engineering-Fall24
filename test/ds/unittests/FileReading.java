@@ -1,84 +1,109 @@
 package ds.unittests;
 
-import java.io.File;
-
-import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
 import apis.ds.FileParseRequest;
 import inputoutput.Delimiter;
-import inputoutput.InputConfig;
 import inputoutput.InputType;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class FileReading {
+import java.io.File;
+import java.io.IOException;
 
-    @Test
-    public void invalidDelimiter() {
-//        mock everything else to just test putting in a null InputConfig
-        File mockInputFile = Mockito.mock(File.class);
-        InputType mockInputType = Mockito.mock(InputType.class);
-//        FileParseRequest fileParseRequest = new FileParseRequest(mockInputConfig, null);
+import static org.junit.jupiter.api.Assertions.*;
 
-        try {
-            FileParseRequest fileParseRequest = FileParseRequest.builder().inputFile(mockInputFile)
-                    .inputType(mockInputType).delimiter(null).build();
-        } catch (Exception e) {
+class FileReading {
 
-            System.out.println("Yay an error was found!");
+    private static final String VALID_FILE_PATH = "test/ds/iotests/csvTest.txt";
+    private static final String INVALID_FILE_PATH = "aaa";
+    private static final File VALID_FILE = new File(VALID_FILE_PATH);
+    private static final File INVALID_FILE = new File(INVALID_FILE_PATH);
 
-        }
-        // throws if not equal
+    private Delimiter validDelimiter;
+    private InputType validInputType;
 
-        // System.out.println(fileParseRequest.getDelimiter());
-        // Assertions.assertEquals(fileParseRequest.getDelimiter(), null);
-
+    @BeforeEach
+    void setUp() {
+        validDelimiter = Delimiter.COMMA;
+        validInputType = InputType.CSV;
     }
 
     @Test
-    public void invalidInputType() {
-        Delimiter delimiter = Mockito.mock(Delimiter.class);
-        File mockInputFile = Mockito.mock(File.class);
+    void successfulBuild() {
+        FileParseRequest request = FileParseRequest.builder()
+                .delimiter(validDelimiter)
+                .inputFile(VALID_FILE)
+                .inputType(validInputType)
+                .build();
 
-        try {
-            FileParseRequest fileParseRequest = FileParseRequest.builder().inputType(null).delimiter(delimiter)
-                    .inputFile(mockInputFile).build();
-        } catch (Exception e) {
-
-            System.out.print("Yay invalidInputType caught an error");
-        }
-        // throws if not equal
-        // Assertions.assertEquals(fileParseRequest, null);
+        assertNotNull(request);
+        assertEquals(validDelimiter, request.getDelimiter());
+        assertEquals(VALID_FILE, request.getInputFile());
+        assertEquals(validInputType, request.getInputType());
     }
 
-    // @Test
-    // The client side is testing for this, no need for this test (also we couldn't
-    // get it to work)
-    public void invalidFileTest() {
-        // TODO: This should be testing builder logic now
-//        mock everything but the input file in InputConfig, have it be a fake file
-//        inputConfig isn't mocked because i'm testing the constructor for it
-        File inputFile = new File("wobungus/blungus");
-        InputType mockInputType = Mockito.mock(InputType.class);
-        InputConfig inputConfig = new InputConfig(inputFile, mockInputType);
+    @Test
+    void nullDelimiter() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            FileParseRequest.builder()
+                    .delimiter(null)
+                    .inputFile(VALID_FILE)
+                    .inputType(validInputType)
+                    .build();
+        });
 
-        Assertions.assertEquals(inputFile, null);
-
+        assertEquals("Delimiter type cannot be null.", thrown.getMessage());
     }
 
-    // The client checks for a valid file, no need for this test
-    // @Test
-    public void validFileTest() {
-        // TODO: This should be testing builder logic now
-//        mock everything but the input file in InputConfig, have it be a fake file
-//        inputConfig isn't mocked because i'm testing the constructor for it
-        File inputFile = new File("/csvTest.txt");
-        InputType mockInputType = Mockito.mock(InputType.class);
-//        InputConfig inputConfig = new InputConfig(inputFile, mockInputType);
+    @Test
+    void nullInputFile() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            FileParseRequest.builder()
+                    .delimiter(validDelimiter)
+                    .inputFile(null)
+                    .inputType(validInputType)
+                    .build();
+        });
 
-        Assert.assertTrue(inputFile.exists());
-
+        assertEquals("Input file cannot be null.", thrown.getMessage());
     }
 
+    @Test
+    void nonExistingFile() {
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            FileParseRequest.builder()
+                    .delimiter(validDelimiter)
+                    .inputFile(INVALID_FILE)
+                    .inputType(validInputType)
+                    .build();
+        });
+
+        assertTrue(thrown.getMessage().contains("Invalid input file"));
+    }
+
+    @Test
+    void nullInputType() {
+        // Test when input type is null
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            FileParseRequest.builder()
+                    .delimiter(validDelimiter)
+                    .inputFile(VALID_FILE)
+                    .inputType(null)
+                    .build();
+        });
+
+        assertEquals("Input type cannot be null.", thrown.getMessage());
+    }
+
+    @Test
+    void missingInputType() {
+        IllegalStateException thrown = assertThrows(IllegalStateException.class, () -> {
+            FileParseRequest.builder()
+                    .delimiter(validDelimiter)
+                    .inputFile(VALID_FILE)
+                    .build();
+        });
+
+        assertEquals("Input type is required.", thrown.getMessage());
+    }
 }
+
