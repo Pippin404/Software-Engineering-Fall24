@@ -7,11 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileReading {
+class ParseFileBuilding {
 
     private static final String VALID_FILE_PATH = "test/ds/iotests/csvTest.txt";
     private static final String INVALID_FILE_PATH = "aaa";
