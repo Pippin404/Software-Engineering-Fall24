@@ -41,39 +41,26 @@ public class DataStore implements DataStoreInterface {
     }
 
     @Override
-    public InternalWriteIntegerResponse internalWriteInteger(InternalWriteIntegerRequest request) {
+    public FileParseResponse internalParseInput(FileParseRequest request) {
         try {
-            //instantiated to be more readable
-            OutputType outputType = request.getOutputType();
-            String outputPath = request.getOutputPath();
-            int computedInteger = request.getComputedInteger();
-
-
-            switch (outputType) {
-            case CSV: {
-                try (FileWriter writer = new FileWriter(outputPath, true)) {
-                    writer.write(computedInteger + "\n"); // Write integer followed by newline
-                    return InternalWriteIntegerResponse.builder()
-                            .fileResponseCode(FileResponseCode.INTEGER_WRITTEN)
-                            .build();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//            FIX: this should be switching on inputType not delimiter
+            InputType inputType = request.getInputType();
+            switch (inputType.getValue()) {
+            case "CONSOLE":
                 break;
-            }
-                case JSON: {
+            case "CSV":
+//                this is only instantiated to be easier to read
+                    Delimiter delimiter = request.getDelimiter();
+                    File inputFile = request.getInputFile();
+                    List<Integer> parsedIntegers = csvHandler(inputFile, delimiter);
+                    //returns the parsed integers to the CE
+                    return FileParseResponse.builder().parsedIntegers(parsedIntegers).fileResponseCode(FileResponseCode.VALID_FILE).build();
+                case "TEXT":
                     break;
-                }
-                case TEXT: {
-                    writeToTextHandler(outputPath, computedInteger);
+                case "JSON":
                     break;
-                }
-                case CONSOLE: {
+                default:
                     break;
-                }
-                default: {
-                    break;
-                }
 
             }
 
@@ -81,7 +68,8 @@ public class DataStore implements DataStoreInterface {
             System.out.println("Uncaught exception in API boundary.");
             e.printStackTrace();
         }
-        return InternalWriteIntegerResponse.builder().fileResponseCode(FileResponseCode.INTEGER_NOT_WRITTEN).build();
+//        TODO: This is causing a bug where the ParseInputFileResponse is always empty, find a way to have it be returned in the try catch only
+        return FileParseResponse.builder().parsedIntegers(null).fileResponseCode(FileResponseCode.INVALID_DELIMITERS).build();
     }
 
 //    Handler methods are private because they should only be called by other methods in the class. They rely on processed information that should only be passed if the requests pass certain checks
@@ -118,7 +106,7 @@ public class DataStore implements DataStoreInterface {
 
     @Override
     public WriteListToFileResponse writeListToFile(WriteListToFileRequest request) {
-        try {
+    	try {
             OutputType outputType = request.getOutputType();
             switch (outputType) {
                 case CSV: {
@@ -162,9 +150,17 @@ public class DataStore implements DataStoreInterface {
 
 
             switch (outputType) {
-                case CSV: {
-                    break;
+            case CSV: {
+                try (FileWriter writer = new FileWriter(outputPath, true)) {
+                    writer.write(computedInteger + "\n"); // Write integer followed by newline
+                    return InternalWriteIntegerResponse.builder()
+                            .fileResponseCode(FileResponseCode.INTEGER_WRITTEN)
+                            .build();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                break;
+            }
                 case JSON: {
                     break;
                 }
