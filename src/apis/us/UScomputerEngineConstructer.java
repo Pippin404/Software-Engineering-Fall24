@@ -19,6 +19,9 @@ import apis.ds.FileParseResponse;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
 import inputoutput.Delimiter;
+import io.grpc.inprocess.InProcessChannelBuilder;
+
+
 
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
@@ -67,13 +70,14 @@ public class UScomputerEngineConstructer {
 
             //gRPC channel for the DataStoreServer
                 //TODO: This probably shouldn't be hardcoded like this
-            this.channel = ManagedChannelBuilder.forAddress("localhost", 50052)
-                        //TODO: PlainText probably shouldn't be used
-                    .usePlaintext()
-                    .build();
+            this.channel = InProcessChannelBuilder.forName("parseFileServer")
+                .directExecutor()
+                .build();
             this.parseFileStub = ParseFileGrpc.newBlockingStub(channel);
             this.writeIntegerStub = WriteIntegerGrpc.newBlockingStub(channel);
         }
+        
+
 
         public void setInputFile(File file) {
             this.inputFile = file;
@@ -120,6 +124,7 @@ public class UScomputerEngineConstructer {
                     .setInputType(protobuf.datastore.CommonEnums.InputOutputType.CSV)
                     .setDelimiter(protobuf.datastore.CommonEnums.ExternalDelimiter.COMMA)
                     .build();
+            
 
             // Send the request to the server
             // This parses the file using DataStore
@@ -211,3 +216,4 @@ public class UScomputerEngineConstructer {
 
         
 }
+
