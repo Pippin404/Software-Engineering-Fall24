@@ -1,6 +1,7 @@
 package apis.us;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,7 @@ import apis.ds.FileParseResponse;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
 import inputoutput.Delimiter;
-import io.grpc.inprocess.InProcessChannelBuilder;
+//import io.grpc.inprocess.InProcessChannelBuilder;
 
 
 
@@ -41,9 +42,9 @@ import protobuf.datastore.CommonEnums.ResponseCode;
 
 public class UScomputerEngineConstructer {
 
-    private final Channel channel;
-    private final ParseFileBlockingStub parseFileStub;
-    private final WriteIntegerBlockingStub writeIntegerStub;
+    private Channel channel;
+    private ParseFileBlockingStub parseFileStub;
+    private WriteIntegerBlockingStub writeIntegerStub;
     //Make an "InternalComputeEngine" to pass the data to the CE
         private InternalComputeEngine computeEngine;
         private DataStore dataStore;
@@ -70,11 +71,12 @@ public class UScomputerEngineConstructer {
 
             //gRPC channel for the DataStoreServer
                 //TODO: This probably shouldn't be hardcoded like this
-            this.channel = InProcessChannelBuilder.forName("parseFileServer")
-                .directExecutor()
-                .build();
-            this.parseFileStub = ParseFileGrpc.newBlockingStub(channel);
-            this.writeIntegerStub = WriteIntegerGrpc.newBlockingStub(channel);
+        this.channel = ManagedChannelBuilder.forAddress("localhost", 50052)
+        	    .usePlaintext()
+        	    .build();
+        	this.parseFileStub = ParseFileGrpc.newBlockingStub(channel);
+        	this.writeIntegerStub = WriteIntegerGrpc.newBlockingStub(channel);
+
         }
         
 
@@ -108,33 +110,41 @@ public class UScomputerEngineConstructer {
 
 
         public void setData() {
-            
-            if(this.commHandler==null) {
-                this.commHandler=new UserCommunicatorImpl();
+            if (this.commHandler == null) {
+                this.commHandler = new UserCommunicatorImpl();
             }
 
-            // Create a ServiceRequest for the DataStoreServer
-                //InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
-                //Delimiter delimiter = Delimiter.COMMA;
-                //FileParseRequest request = new FileParseRequest(inputConfig, delimiter);
+            // Start the ParseFile server on a fixed port (50052) if it's not already running
+            // If it's already running externally, this step might not be needed.
+            try {
+                io.grpc.Server parseFileServer = io.grpc.ServerBuilder.forPort(50052)
+                    .addService(new server.ParseFileServiceImpl())
+                    .build()
+                    .start();
+                System.out.println("ParseFile server started on port 50052");
+            } catch (IOException e) {
+                System.err.println("Failed to start ParseFile server: " + e.getMessage());
+                e.printStackTrace();
+                return;
+            }
 
-                //TODO: InputType is hardcoded to be CSV
+            // Create the channel and stubs here
+            this.channel = ManagedChannelBuilder.forAddress("localhost", 50052)
+                .usePlaintext()
+                .build();
+            this.parseFileStub = ParseFileGrpc.newBlockingStub(channel);
+            this.writeIntegerStub = WriteIntegerGrpc.newBlockingStub(channel);
+
             ParseFileServiceRequest request = ParseFileServiceRequest.newBuilder()
                     .setInputFile(inputFile.getAbsolutePath())
                     .setInputType(protobuf.datastore.CommonEnums.InputOutputType.CSV)
                     .setDelimiter(protobuf.datastore.CommonEnums.ExternalDelimiter.COMMA)
                     .build();
-            
 
-            // Send the request to the server
-            // This parses the file using DataStore
-                //FileParseResponse response = dataStore.internalParseInput(request);
-            
             System.out.println(request);
-            
+
             ParseFileServiceResponse response = parseFileStub.parseInputFileService(request);
-            
-            // Default to [1, 2, 3] if the file is empty
+
             if (response.getParsedIntegersList().isEmpty()) {
                 data = Arrays.asList(1, 2, 3);
             } else {
@@ -143,7 +153,8 @@ public class UScomputerEngineConstructer {
 
             System.out.println("Numbers read from file in coordinator: " + data);
         }
-
+        
+        
         public List<Integer> getData() {
             return data;
         }
@@ -216,4 +227,5 @@ public class UScomputerEngineConstructer {
 
         
 }
+
 
