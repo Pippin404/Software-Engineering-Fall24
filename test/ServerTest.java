@@ -1,8 +1,10 @@
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import io.grpc.ManagedChannel;
 import io.grpc.inprocess.InProcessChannelBuilder;
@@ -11,55 +13,71 @@ import protobuf.Clientserver.sendclientserver;
 import protobuf.Clientserver.sendresponse;
 import protobuf.SenddataGrpc;
 import server.ClientServer;
+import server.ParseFileServiceImpl;
 
-class ServerTest {
+public class ServerTest {
 
     private ManagedChannel channel;
-    private io.grpc.Server server;
+    private ManagedChannel clientChannel;
+    private io.grpc.Server clientServer;
+    private io.grpc.Server parseFileServer;
 
     @BeforeEach
     void setup() throws Exception {
-        // Create a unique in-process server name to avoid conflicts
-        String serverName = InProcessServerBuilder.generateName();
+        String parseFileServerName = "parseFileServer";
+        String clientServerName = "clientServer";
 
-        // Start the in-process gRPC server with ClientServer as the service
-        server = InProcessServerBuilder.forName(serverName).directExecutor() // Synchronous execution
-                .addService(new ClientServer()).build().start();
+        parseFileServer = InProcessServerBuilder.forName(parseFileServerName)
+                .directExecutor()
+                .addService(new ParseFileServiceImpl())
+                .build()
+                .start();
 
-        // Create the channel to connect to the in-process server
-        channel = InProcessChannelBuilder.forName(serverName).directExecutor().build();
+        clientServer = InProcessServerBuilder.forName(clientServerName)
+                .directExecutor()
+                .addService(new ClientServer())
+                .build()
+                .start();
+
+        channel = InProcessChannelBuilder.forName(parseFileServerName).directExecutor().build();
+        this.clientChannel = InProcessChannelBuilder.forName(clientServerName).directExecutor().build();
     }
 
     @AfterEach
     void tearDown() throws Exception {
-        // Shutdown the server and channel after each test
-        if (server != null) {
-            server.shutdownNow();
+        if (parseFileServer != null) {
+            parseFileServer.shutdownNow();
+            parseFileServer.awaitTermination(5, TimeUnit.SECONDS);
         }
+
+        if (clientServer != null) {
+            clientServer.shutdownNow();
+            clientServer.awaitTermination(5, TimeUnit.SECONDS);
+        }
+
         if (channel != null) {
             channel.shutdownNow();
+            channel.awaitTermination(5, TimeUnit.SECONDS);
+        }
+
+        if (clientChannel != null) {
+            clientChannel.shutdownNow();
+            clientChannel.awaitTermination(5, TimeUnit.SECONDS);
         }
     }
 
-    // @Test
-    // Sorry professor. We couldn't get this to work :(
+    @Test
     void testClientServerCommunication() {
-        // Create a blocking stub to make synchronous gRPC calls
-        SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(channel);
+        // Use the clientChannel for the ClientServer service
+        SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(clientChannel);
 
-        // Build a request for the test
-        sendclientserver request = sendclientserver.newBuilder().setFileLocation("test/testInputFile.test") // Specify
-                                                                                                            // your test
-                                                                                                            // file
-                                                                                                            // location
-                                                                                                            // here
-                .setOutputLocation(sendclientserver.outLocation.print) // or .file if you're testing file output
+        sendclientserver request = sendclientserver.newBuilder()
+                .setFileLocation("test/testInputFile.test")
+                .setOutputLocation(sendclientserver.outLocation.print)
                 .build();
-        System.out.println("works?");
-        // Send the request and get the response from the server
+
         sendresponse response = stub.senddatatoclient(request);
-        System.out.println("doesnt work?");
-        // Verify the response message
+
         assertEquals("File accepted. Output Type: print.", response.getMessage());
         System.out.println("Test passed: Received response - " + response.getMessage());
     }
