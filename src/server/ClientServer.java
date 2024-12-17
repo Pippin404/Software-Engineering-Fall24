@@ -10,6 +10,7 @@ import apis.ce.InternalComputeEngine;
 import apis.ds.DataStore;
 import apis.us.UScomputerEngineConstructer;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -43,11 +44,12 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
     InternalComputeEngine computeEngine = new InternalComputeEngine();
     UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine, dataStore);
 
+    
     // Set up the input file and process it
     File inputFile = new File(fileLocation);
-    coordinator.setInputFile(inputFile);
+    coordinator.setInputFile(inputFile);   
     coordinator.setData();
-
+    
     // test speed
     long startTime1 = System.nanoTime();
     List<Integer> result1 = coordinator.runInternalCompute(coordinator.getData());
