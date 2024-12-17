@@ -1,65 +1,67 @@
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import io.grpc.ManagedChannel;
-import io.grpc.inprocess.InProcessChannelBuilder;
-import io.grpc.inprocess.InProcessServerBuilder;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import protobuf.Clientserver.sendclientserver;
 import protobuf.Clientserver.sendresponse;
 import protobuf.SenddataGrpc;
 import server.ClientServer;
 
-class ServerTest {
+public class ServerTest {
 
-    private ManagedChannel channel;
-    private io.grpc.Server server;
+    private Server clientServer;
+    private ManagedChannel clientChannel;
+    private int clientPort;
 
     @BeforeEach
     void setup() throws Exception {
-        // Create a unique in-process server name to avoid conflicts
-        String serverName = InProcessServerBuilder.generateName();
+        // Start ClientServer on a random free port
+        clientServer = ServerBuilder.forPort(0)
+            .addService(new ClientServer())
+            .build()
+            .start();
+        
+        clientPort = clientServer.getPort();
 
-        // Start the in-process gRPC server with ClientServer as the service
-        server = InProcessServerBuilder.forName(serverName).directExecutor() // Synchronous execution
-                .addService(new ClientServer()).build().start();
-
-        // Create the channel to connect to the in-process server
-        channel = InProcessChannelBuilder.forName(serverName).directExecutor().build();
+        // Create a channel to the ClientServer
+        clientChannel = ManagedChannelBuilder.forAddress("localhost", clientPort)
+            .usePlaintext()
+            .build();
     }
 
     @AfterEach
     void tearDown() throws Exception {
-        // Shutdown the server and channel after each test
-        if (server != null) {
-            server.shutdownNow();
+        if (clientChannel != null) {
+            clientChannel.shutdownNow();
+            clientChannel.awaitTermination(5, TimeUnit.SECONDS);
         }
-        if (channel != null) {
-            channel.shutdownNow();
+
+        if (clientServer != null) {
+            clientServer.shutdownNow();
+            clientServer.awaitTermination(5, TimeUnit.SECONDS);
         }
     }
 
-    // @Test
-    // Sorry professor. We couldn't get this to work :(
+    @Test
     void testClientServerCommunication() {
-        // Create a blocking stub to make synchronous gRPC calls
-        SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(channel);
+        // Use the clientChannel for ClientServer calls
+        SenddataGrpc.SenddataBlockingStub stub = SenddataGrpc.newBlockingStub(clientChannel);
 
-        // Build a request for the test
-        sendclientserver request = sendclientserver.newBuilder().setFileLocation("test/testInputFile.test") // Specify
-                                                                                                            // your test
-                                                                                                            // file
-                                                                                                            // location
-                                                                                                            // here
-                .setOutputLocation(sendclientserver.outLocation.print) // or .file if you're testing file output
+        sendclientserver request = sendclientserver.newBuilder()
+                .setFileLocation("test/testInputFile.test")
+                .setOutputLocation(sendclientserver.outLocation.print)
                 .build();
-        System.out.println("works?");
-        // Send the request and get the response from the server
+
         sendresponse response = stub.senddatatoclient(request);
-        System.out.println("doesnt work?");
-        // Verify the response message
+
         assertEquals("File accepted. Output Type: print.", response.getMessage());
         System.out.println("Test passed: Received response - " + response.getMessage());
     }

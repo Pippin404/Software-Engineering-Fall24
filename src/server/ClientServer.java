@@ -10,6 +10,7 @@ import apis.ce.InternalComputeEngine;
 import apis.ds.DataStore;
 import apis.us.UScomputerEngineConstructer;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -43,40 +44,26 @@ public class ClientServer extends SenddataGrpc.SenddataImplBase {
     InternalComputeEngine computeEngine = new InternalComputeEngine();
     UScomputerEngineConstructer coordinator = new UScomputerEngineConstructer(computeEngine, dataStore);
 
+    
     // Set up the input file and process it
     File inputFile = new File(fileLocation);
-    coordinator.setInputFile(inputFile);
+    coordinator.setInputFile(inputFile);   
     coordinator.setData();
-
-    // test speed
-    long startTime1 = System.nanoTime();
+    
+   
     List<Integer> result1 = coordinator.runInternalCompute(coordinator.getData());
-    long endTime1 = System.nanoTime();
-    long duration1 = endTime1 - startTime1;
-    System.out.println(duration1);
     
-    long startTime2 = System.nanoTime();
-    List<Integer> result2 = coordinator.runInternalCompute(coordinator.getData());
-    long endTime2 = System.nanoTime();
-    long duration2 = endTime2 - startTime2;
-    System.out.println(duration2);
+    dataStore.setData(result1);
 
-    if (duration2 > duration1*1.1) {
-        System.out.println("New Method is Faster");
-    } else {
-      System.out.println("New Method is Not Faster");
-    }
-    
-    dataStore.setData(result2);
-
-    
+   
 
     
     if (outputLocation == sendclientserver.outLocation.print) {
-        System.out.println("Computed Results: " + result2);
+        System.out.println("Computed Results: " + result1);
     } else {
-        coordinator.writeComputedResultsToFile(result2, outputPath);
+        coordinator.writeComputedResultsToFile(result1, outputPath);
     }
+    System.out.println(outputPath);
     
     
     // Create and send a response

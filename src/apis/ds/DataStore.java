@@ -106,7 +106,7 @@ public class DataStore implements DataStoreInterface {
 
     @Override
     public WriteListToFileResponse writeListToFile(WriteListToFileRequest request) {
-        try {
+    	try {
             OutputType outputType = request.getOutputType();
             switch (outputType) {
                 case CSV: {
@@ -150,9 +150,17 @@ public class DataStore implements DataStoreInterface {
 
 
             switch (outputType) {
-                case CSV: {
-                    break;
+            case CSV: {
+                try (FileWriter writer = new FileWriter(outputPath, true)) {
+                    writer.write(computedInteger + "\n"); // Write integer followed by newline
+                    return InternalWriteIntegerResponse.builder()
+                            .fileResponseCode(FileResponseCode.INTEGER_WRITTEN)
+                            .build();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                break;
+            }
                 case JSON: {
                     break;
                 }

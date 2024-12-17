@@ -20,7 +20,7 @@ import java.io.File;
 public class WriteIntegerServiceImpl extends WriteIntegerGrpc.WriteIntegerImplBase {
     @Override
     public void writeIntegerService(WriteIntegerServiceRequest serviceRequest, StreamObserver<WriteIntegerServiceResponse> serviceResponseObserver) {
-        super.writeIntegerService(serviceRequest, serviceResponseObserver);
+        //super.writeIntegerService(serviceRequest, serviceResponseObserver);
 
         //External Proto request -> Internal Datastore request
         InternalWriteIntegerRequest internalWriteRequest = convertToInternalRequest(serviceRequest);
