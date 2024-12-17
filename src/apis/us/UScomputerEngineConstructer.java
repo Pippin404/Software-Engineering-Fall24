@@ -1,6 +1,7 @@
 package apis.us;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,10 @@ import apis.ds.FileParseResponse;
 import inputoutput.InputConfig;
 import inputoutput.InputType;
 import inputoutput.Delimiter;
+//import io.grpc.inprocess.InProcessChannelBuilder;
+
+
+
 
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
@@ -28,6 +33,7 @@ import protobuf.datastore.ParseFileGrpc;
 import protobuf.datastore.ParseFileGrpc.ParseFileBlockingStub;
 import protobuf.datastore.ParseInputFile.ParseFileServiceResponse;
 import protobuf.datastore.ParseInputFile.ParseFileServiceRequest;
+import server.WriteIntegerServiceImpl;
 import protobuf.datastore.WriteIntegerGrpc;
 import protobuf.datastore.WriteIntegerGrpc.WriteIntegerBlockingStub;
 import protobuf.datastore.WriteIntegerToFile.WriteIntegerServiceResponse;
@@ -38,13 +44,14 @@ import protobuf.datastore.CommonEnums.ResponseCode;
 
 public class UScomputerEngineConstructer {
 
-    private final Channel channel;
-    private final ParseFileBlockingStub parseFileStub;
-    private final WriteIntegerBlockingStub writeIntegerStub;
+    private Channel channel;
+    private ParseFileBlockingStub parseFileStub;
+    private WriteIntegerBlockingStub writeIntegerStub;
     //Make an "InternalComputeEngine" to pass the data to the CE
         private InternalComputeEngine computeEngine;
         private DataStore dataStore;
         private UserCommunicatorImpl commHandler=null;
+        private io.grpc.Server parseFileServer;
         private List<Integer> data;
         //I think it makes more sense to store the results in here to be used later
         //TODO: this list of results should probably be gotten through a network call, maybe
@@ -67,13 +74,15 @@ public class UScomputerEngineConstructer {
 
             //gRPC channel for the DataStoreServer
                 //TODO: This probably shouldn't be hardcoded like this
-            this.channel = ManagedChannelBuilder.forAddress("localhost", 50052)
-                        //TODO: PlainText probably shouldn't be used
-                    .usePlaintext()
-                    .build();
-            this.parseFileStub = ParseFileGrpc.newBlockingStub(channel);
-            this.writeIntegerStub = WriteIntegerGrpc.newBlockingStub(channel);
+        this.channel = ManagedChannelBuilder.forAddress("localhost", 50052)
+        	    .usePlaintext()
+        	    .build();
+        	this.parseFileStub = ParseFileGrpc.newBlockingStub(channel);
+        	this.writeIntegerStub = WriteIntegerGrpc.newBlockingStub(channel);
+
         }
+        
+
 
         public void setInputFile(File file) {
             this.inputFile = file;
@@ -92,7 +101,7 @@ public class UScomputerEngineConstructer {
             // ^ conformation message for file setting (remove if you want)
         }
 
-        // get method for file
+        // get method for filerun
         public String getOutputFile() {
             return this.outputFile;
         }
@@ -104,32 +113,42 @@ public class UScomputerEngineConstructer {
 
 
         public void setData() {
-            
-            if(this.commHandler==null) {
-                this.commHandler=new UserCommunicatorImpl();
+            if (this.commHandler == null) {
+                this.commHandler = new UserCommunicatorImpl();
             }
 
-            // Create a ServiceRequest for the DataStoreServer
-                //InputConfig inputConfig = new InputConfig(inputFile, InputType.CSV);
-                //Delimiter delimiter = Delimiter.COMMA;
-                //FileParseRequest request = new FileParseRequest(inputConfig, delimiter);
+            if (parseFileServer == null) {
+                try {
+                    parseFileServer = io.grpc.ServerBuilder.forPort(50052)
+                            .addService(new server.ParseFileServiceImpl())
+                            .addService(new server.WriteIntegerServiceImpl()) // ensure this class exists and is imported
+                            .build()
+                            .start();
+                    System.out.println("Server started on port 50052");
+                } catch (IOException e) {
+                    System.err.println("Failed to start server: " + e.getMessage());
+                    e.printStackTrace();
+                    return;
+                }
+            }
 
-                //TODO: InputType is hardcoded to be CSV
+            // Create the channel and stubs here
+            this.channel = ManagedChannelBuilder.forAddress("localhost", 50052)
+                .usePlaintext()
+                .build();
+            this.parseFileStub = ParseFileGrpc.newBlockingStub(channel);
+            this.writeIntegerStub = WriteIntegerGrpc.newBlockingStub(channel);
+
             ParseFileServiceRequest request = ParseFileServiceRequest.newBuilder()
                     .setInputFile(inputFile.getAbsolutePath())
                     .setInputType(protobuf.datastore.CommonEnums.InputOutputType.CSV)
                     .setDelimiter(protobuf.datastore.CommonEnums.ExternalDelimiter.COMMA)
                     .build();
 
-            // Send the request to the server
-            // This parses the file using DataStore
-                //FileParseResponse response = dataStore.internalParseInput(request);
-            
             System.out.println(request);
-            
+
             ParseFileServiceResponse response = parseFileStub.parseInputFileService(request);
-            
-            // Default to [1, 2, 3] if the file is empty
+
             if (response.getParsedIntegersList().isEmpty()) {
                 data = Arrays.asList(1, 2, 3);
             } else {
@@ -139,6 +158,8 @@ public class UScomputerEngineConstructer {
             System.out.println("Numbers read from file in coordinator: " + data);
         }
 
+        
+        
         public List<Integer> getData() {
             return data;
         }
@@ -189,14 +210,15 @@ public class UScomputerEngineConstructer {
         public void writeComputedResultsToFile(List<Integer> results, String outputPath) {
             // Send WriteInteger gRPC request after computation
             //TODO: repeatedly making network calls like this in a for loop might be abysmal for performance but who knows
-            for (int result : results) {
+            
+        	for (int result : results) {
                 WriteIntegerServiceRequest request = WriteIntegerServiceRequest.newBuilder()
                         .setComputedInteger(result)
                         .setOutputFile(outputPath)
                         //TODO: hardcoded to csv for now
                         .setOutputType(InputOutputType.CSV)
                         .build();
-
+                
                 WriteIntegerServiceResponse response = writeIntegerStub.writeIntegerService(request);
 
                 if (response.getResponseCode() == ResponseCode.SUCCESS) {
@@ -211,3 +233,5 @@ public class UScomputerEngineConstructer {
 
         
 }
+
+
